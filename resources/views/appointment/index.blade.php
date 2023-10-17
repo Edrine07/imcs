@@ -11,9 +11,7 @@
                 <thead>
                     <tr
                         class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                        <th class="px-4 py-3">Name</th>
-                        <th class="px-4 py-3">Contact</th>
-                        <th class="px-4 py-3">Address</th>
+                        <th class="px-4 py-3">Patient Name</th>
                         <th class="px-4 py-3">Date</th>
                         <th class="px-4 py-3">Time</th>
                         <th class="px-4 py-3">Status</th>
@@ -24,19 +22,16 @@
                     @forelse ($appointments as $appointment)
                     <tr class="text-gray-700 dark:text-gray-400">
                         <td class="px-4 py-3 text-sm">
-                            {{ $appointment->appointment_name }}
+                            {{ $appointment->patient->fullname }} test
                         </td>
                         <td class="px-4 py-3 text-sm">
-                            {{ $appointment->appointment_phone }}
+                            {{ $appointment->appointment_date }} text
                         </td>
                         <td class="px-4 py-3 text-sm">
-                            {{ $appointment->appointment_address }}
+                            {{ $appointment->appointment_time }} text
                         </td>
                         <td class="px-4 py-3 text-sm">
-                            {{ $appointment->appointment_date }}
-                        </td>
-                        <td class="px-4 py-3 text-sm">
-                            {{ $appointment->appointment_time }}
+                            {{ $appointment->appointment_status }} test
                         </td>
                         <td class="px-4 py-3 text-xs">
                             <span
