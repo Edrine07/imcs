@@ -69,8 +69,10 @@
     <div class="container-fluid" style="height: 100vh;">
         <form action="{{ route('appointment.reserve_appointment') }}" method="post">
             @csrf
-            <x-success></x-success>
             <div class="d-flex flex-wrap justify-content-center align-items-center" style="height: 100vh;">
+                <div class="col-md-12">
+                    <x-success></x-success>
+                </div>
                 <div class="col-md-4 me-3">
                     <div class="card">
                         <div class="card-header">
@@ -360,6 +362,7 @@
                     return 'selectable-date';
 
                 },
+                unselectAuto: false,
                 dayRender: function(arg) {
                     var today = new Date();
                     if (info.date.getDate() === today.getDate() && info.date.getMonth() === today
