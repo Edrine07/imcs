@@ -46,6 +46,11 @@
         .card {
             height: 550px;
         }
+
+        .unselectable-date {
+            background-color: rgb(211, 211, 211);
+            color: #eea0a0;
+        }
     </style>
 </head>
 
