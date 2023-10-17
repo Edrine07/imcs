@@ -16,33 +16,12 @@ class AppointmentController extends Controller
 
     public function MakeAppointment()
     {
-        // $datePeriod = CarbonPeriod::create(now(), now()->addDays(6));
 
-        // $appointments = [];
-        // foreach($datePeriod as $date)
-        // {
-        //     $dayName = $date->format('l');
-
-        //     $businessHour = BusinessHour::where('day', $dayName)->first()->TimesPeriod;
-
-        //     $currentAppointments = Appointment::where('date', $date->toDateString())->pluck('time')->map(function($time){
-        //         return $time->format('H:i');
-        //     })->toArray();
-
-        //     $availableHours = array_diff($businessHour, $currentAppointments);
-
-        //     $appointments[] = [
-        //         'day_name' => $dayName,
-        //         'date' => $date->format('d M'),
-        //         'full_date' => $date->format('Y-m-d'),
-        //         'available_hours' => $availableHours
-        //     ];
-        // }
 
         return view('appointment.reserve');
     }
 
-    public function ReserveAppointment (Request $request)
+    public function ReserveAppointmentStore (Request $request)
     {
         $validated = $request->validate([
             'patient_id' => 'required',
@@ -56,7 +35,7 @@ class AppointmentController extends Controller
         ]);
 
         $patient = Patient::create([
-            
+
         ]);
 
     }
@@ -64,7 +43,8 @@ class AppointmentController extends Controller
     public function Appointment()
     {
 
-        $appointments = Appointment::all();
+        $appointments = Appointment::where('appointment_status', 'Pending')->get();
+
         return view('appointment.index', compact('appointments'));
     }
 
