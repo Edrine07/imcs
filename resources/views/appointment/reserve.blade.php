@@ -11,37 +11,42 @@
     <script src="../assets/js/init-alpine.js"></script>
 
     <style>
-        .tab-button{
+        .tab-button {
             margin-right: 10px;
             margin-bottom: 10px;
             border: none;
         }
+
         .tab-button.active {
             background-color: #7e3af2;
-            padding:8px;
+            padding: 8px;
             color: #ffffff;
             border-radius: 5px;
         }
 
-        .tab-button:focus{
+        .tab-button:focus {
             outline: none;
         }
-
 
         .tab-content.hidden {
             display: none;
         }
 
-        .tab-content{
+        .tab-content {
             height: 440px;
         }
 
-        .fc-toolbar-title{
+        .fc-toolbar-title {
             font-size: 20px !important;
         }
 
-        .fc-button{
+        .fc-button {
             font-size: 10px !important;
+        }
+
+        .unselectable-date {
+            background-color: rgb(211, 211, 211);
+            color: #eea0a0;
         }
     </style>
 </head>
@@ -98,7 +103,6 @@
                                     placeholder="Phone" />
                             </label>
 
-
                             <!-- You should use a button here, as the anchor is only used for the example  -->
                             <button
                                 class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
@@ -115,12 +119,12 @@
                                     placeholder="Name" />
                             </label>
                             <div class="mt-4">
-                                <button class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                                  <span>Find ID</span>
+                                <button
+                                    class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                                    <span>Find ID</span>
                                 </button>
-                              </div>
+                            </div>
                         </div>
-
 
                     </div>
                 </div>
@@ -157,7 +161,6 @@
                                 </div>
                         @endforeach --}}
 
-
                     </div>
                 </div>
             </div>
@@ -166,15 +169,46 @@
 
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var today = new Date();
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                selectable: true,
+                selectOverlap: false,
+                select: function(info) {
 
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
+                },
+                selectAllow: function(info) {
+                    var today = new Date();
+                    var yesterday = new Date(today);
+                    yesterday.setDate(yesterday.getDate() - 1);
+                    var day = info.start.getDay();
+                    return day != 0 && info.start > yesterday;
+                },
+                selectMirror: false,
+                unselectAuto: false,
+                aspectRatio: 1.5,
+                contentHeight: 430,
+                dayCellClassNames: function(arg) {
+                    if (arg.isPast) {
+                        return 'unselectable-date';
+                    }
+                    if (arg.date.getDay() == 0) {
+                        return 'unselectable-date';
+                    }
+                },
+                headerToolbar: {
+                    start: 'prev',
+                    center: 'title',
+                    end: 'next'
+                },
+                windowResize: true,
+            });
+
+            calendar.select(today);
+            calendar.render();
         });
-        calendar.render();
-      });
-
     </script>
 
     <script>
