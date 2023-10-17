@@ -10,18 +10,22 @@ class Prescription extends Model
     use HasFactory;
 
     protected $fillble = [
-        // Date
-        'visit_date',
-        'symtoms',
-        // Vital Signs
-        'diagnosis',
-        'medicine_name',
-        'medicine_type',
-        'medicine_dose',
+        'bp',
+        'cr',
+        'rr',
+        't',
         'ht',
         'wt',
-        // Medicine
-        'medicine_unit',
-        'duration',
+        'symtoms',
+        'diagnosis',
+        
+        // 'medicine_name',
+        // 'medicine_type',
+        // 'medicine_dose',
+        // 'ht',
+        // 'wt',
+        // // Medicine
+        // 'medicine_unit',
+        // 'duration',
     ];
 }
