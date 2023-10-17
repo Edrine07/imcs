@@ -16,15 +16,13 @@ class AppointmentController extends Controller
 
     public function MakeAppointment()
     {
-
-
         return view('appointment.reserve');
     }
 
-    public function ReserveAppointmentStore (Request $request)
+    public function ReserveAppointmentStore(Request $request)
     {
         $validated = $request->validate([
-            'patient_id' => 'required',
+            'patient_id' => 'nullable',
             'firstname' => 'required',
             'lastname' => 'required',
             'birthdate' => 'required',
@@ -32,12 +30,28 @@ class AppointmentController extends Controller
             'gender' => 'required',
             'contact' => 'required',
             'address' => 'required',
+            'selectedDate' => 'required',
+            'time_appointment' => 'required',
         ]);
 
+        // dd($validated);
         $patient = Patient::create([
-
+            'firstname' => $validated['firstname'],
+            'lastname' => $validated['lastname'],
+            'birthdate' => $validated['birthdate'],
+            'age' => $validated['age'],
+            'gender' => $validated['gender'],
+            'contact' => $validated['contact'],
+            'address' => $validated['address'],
         ]);
 
+        $appointment = Appointment::create([
+            'patient_id' => $patient->id,
+            'appointment_date' => $validated['selectedDate'],
+            'appointment_time' => $validated['time_appointment'],
+        ]);
+
+        return redirect()->back()->with('success', 'Appointment set successfully. Please wait for confirmation.');
     }
 
     public function Appointment()

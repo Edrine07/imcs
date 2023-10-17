@@ -17,9 +17,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::prefix('appointment')->group(function () {
+    Route::get('/', [AppointmentController::class, 'MakeAppointment'])->name('appointment.reserve');
+    Route::post('/store', [AppointmentController::class, 'ReserveAppointmentStore'])->name('appointment.reserve_appointment');
+});
+
+
+
 Route::middleware(['auth', 'role:admin'])->group(function () {
-
-
     Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.dashboard');
 
     // Admin Logout
@@ -53,23 +58,22 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/print_pdf/{id}', [MedicalController::class, 'MedicalPDF'])->name('pdf.index');
     Route::get('/admin/medical', [MedicalController::class, 'SearchMedical'])->name('medical.index');
 
-     // Patient
-     Route::get('/admin/patient/create', [PatientController::class, 'CreatePatient'])->name('patient.create');
-     Route::get('/admin/patient', [PatientController::class, 'Patient'])->name('patient.index');
-     Route::get('/admin/patient/{id}', [PatientController::class, 'ShowPatient'])->name('patient.show');
-     Route::post('/admin/patient/store', [PatientController::class, 'StorePatient'])->name('patient.store');
-     Route::get('/admin/patient/edit/{id}', [PatientController::class, 'EditPatient'])->name('patient.edit');
-     Route::patch('/admin/patient/{id}', [PatientController::class, 'UpdatePatient'])->name('patient.update');
-     Route::delete('/admin/{id}', [PatientController::class, 'DestroyPatient'])->name('patient.destroy');
+    // Patient
+    Route::get('/admin/patient/create', [PatientController::class, 'CreatePatient'])->name('patient.create');
+    Route::get('/admin/patient', [PatientController::class, 'Patient'])->name('patient.index');
+    Route::get('/admin/patient/{id}', [PatientController::class, 'ShowPatient'])->name('patient.show');
+    Route::post('/admin/patient/store', [PatientController::class, 'StorePatient'])->name('patient.store');
+    Route::get('/admin/patient/edit/{id}', [PatientController::class, 'EditPatient'])->name('patient.edit');
+    Route::patch('/admin/patient/{id}', [PatientController::class, 'UpdatePatient'])->name('patient.update');
+    Route::delete('/admin/{id}', [PatientController::class, 'DestroyPatient'])->name('patient.destroy');
 
-     // Schedule
-     Route::get('/schedule', [BusinessHourController::class, 'BusinessHour'])->name('appointment.appointment_hours');
-     Route::post('/schedule/update', [BusinessHourController::class, 'BusinessHourUpdate'])->name('appointment_hours.update');
+    // Schedule
+    Route::get('/schedule', [BusinessHourController::class, 'BusinessHour'])->name('appointment.appointment_hours');
+    Route::post('/schedule/update', [BusinessHourController::class, 'BusinessHourUpdate'])->name('appointment_hours.update');
 
-     // Reserved
-     Route::get('/reserve', [AppointmentController::class, 'MakeAppointment'])->name('appointment.reserve');
-     Route::post('/reserve/appointent', [AppointmentController::class, 'ReserveAppointment'])->name('appointment.reserve_appointment');
-
+    // Reserved
+    // Route::get('/reserve', [AppointmentController::class, 'MakeAppointment'])->name('appointment.reserve');
+    // Route::post('/reserve/appointent', [AppointmentController::class, 'ReserveAppointment'])->name('appointment.reserve_appointment');
 }); // End Group Admin Middleware
 
 // Admin Login
@@ -77,7 +81,4 @@ Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->name('admin.
 Route::get('/appointment', [AppointmentController::class, 'Appoint'])->name('admin.appointment');
 Route::get('/appointments', [AppointmentsController::class, 'Appointments'])->name('appointments.index');
 
-require __DIR__.'/auth.php';
-
-
-
+require __DIR__ . '/auth.php';
