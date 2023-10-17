@@ -8,19 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Appointment extends Model
 {
     use HasFactory;
-    
-    protected $casts = [
-        'time' => 'datetime:H:i'
+    protected $fillable = [
+        'patient_id',
+        'appointment_date',
+        'appointment_time',
+        'appointment_status'
     ];
 
-    protected $guarded = [];
+    protected $casts = [
+        'time' => 'date'
+    ];
 
-    // protected $fillable = [
-    //     'appointment_name',
-    //     'appointment_phone',
-    //     'appointment_address',
-    //     'appointment_date',
-    //     'appointment_time'
-    // ];
 
 }
