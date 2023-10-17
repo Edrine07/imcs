@@ -25,4 +25,15 @@ class Patient extends Model
     protected $casts = [
         'birthdate' => 'date'
     ];
+
+    public function appointment()
+    {
+        return $this->belongsToMany(Appointment::class);
+    }
+
+    public function getFullNameAttribute()
+    {
+
+      return "{$this->firstname}, {$this->lastname}";
+    }
 }
