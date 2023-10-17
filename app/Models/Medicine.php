@@ -15,4 +15,9 @@ class Medicine extends Model
         'medicine_unit',
         'duration',
     ];
+
+    public function prescription()
+    {
+        return $this-> belongsTo(Prescription::class);
+    }
 }

@@ -10,6 +10,7 @@ class Prescription extends Model
     use HasFactory;
 
     protected $fillble = [
+        'appointment_id',
         'bp',
         'cr',
         'rr',
@@ -18,14 +19,16 @@ class Prescription extends Model
         'wt',
         'symtoms',
         'diagnosis',
-        
-        // 'medicine_name',
-        // 'medicine_type',
-        // 'medicine_dose',
-        // 'ht',
-        // 'wt',
-        // // Medicine
-        // 'medicine_unit',
-        // 'duration',
     ];
+
+
+    public function appointment()
+    {
+        return $this->belongsTo(Appointment::class);
+    }
+
+    public function medicine()
+    {
+        return $this->hasMany(Medicine::class, 'medicine_id');
+    }
 }

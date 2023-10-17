@@ -32,7 +32,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/vital_signs', [VitalController::class, 'VitalSigns'])->name('vital.index');
 
     // Consultation
-     Route::get('/consultation', [ConsultationController::class, 'Consultation'])->name('consultation.index');
+    Route::get('/consultation', [ConsultationController::class, 'Consultation'])->name('consultation.index');
 
     // Diagnosis
     Route::get('/diagnosis', [DiagnosisController::class, 'Diagnosis'])->name('diagnosis.index');

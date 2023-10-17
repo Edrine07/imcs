@@ -16,8 +16,19 @@ class Appointment extends Model
     ];
 
     protected $casts = [
-        'time' => 'date'
+        'appointment_date' => 'date'
     ];
 
+    public function patient()
+    {
+        return $this->belongsTo(Patient::class);
+    }
+
+    public function prescription()
+    {
+        return $this->hasOne(Prescription::class,'appointment_id');
+    }
+
+    
 
 }
