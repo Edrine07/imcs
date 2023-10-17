@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('t');
             $table->string('ht');
             $table->string('wt');
-            $table->string('symtoms');
+            $table->string('symptoms');
             $table->string('diagnosis');
 
             $table->timestamps();

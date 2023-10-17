@@ -2,21 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AppointmentRequest;
 use App\Models\Appointment;
-use App\Models\BusinessHour;
 use App\Models\Patient;
-use App\Services\AppointmentService;
-use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class AppointmentController extends Controller
 {
 
-    public function MakeAppointment()
+    public function Appoint()
     {
-        return view('appointment.reserve');
+        $appointments = Appointment::all();
+
+        return view('appointment.reserve', compact('appointments'));
+    }
+
+    public function Appointment()
+    {
+
+        $appointments = Appointment::whereIn('appointment_status', ['Pending', 'Approved'])
+        ->orderByRaw("FIELD(appointment_status, 'Pending') DESC")
+        ->orderBy('appointment_date', 'asc')
+        ->orderBy('appointment_time', 'asc')
+        ->get();
+
+        return view('appointment.index', compact('appointments'));
     }
 
     public function ReserveAppointmentStore(Request $request)
@@ -54,18 +63,22 @@ class AppointmentController extends Controller
         return redirect()->back()->with('success', 'Appointment set successfully. Please wait for confirmation.');
     }
 
-    public function Appointment()
+    public function approve(Appointment $appointment)
     {
+        $appointment->update([
+            'appointment_status' => "Approved"
+        ]);
 
-        $appointments = Appointment::where('appointment_status', 'Pending')->get();
-
-        return view('appointment.index', compact('appointments'));
+        return redirect()->back()->with('success', 'Appointment successfully approved!');
     }
 
-    public function Appoint()
+    public function cancel(Appointment $appointment)
     {
-        $appointments = Appointment::all();
+        $appointment->update([
+            'appointment_status' => "Cancelled"
+        ]);
 
-        return view('appointment.reserve', compact('appointments'));
+        return redirect()->back()->with('success', 'Appointment successfully cancelled!');
     }
+
 }

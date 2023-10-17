@@ -12,6 +12,8 @@ use App\Http\Controllers\DiagnosisController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\BusinessHourController;
+use App\Http\Controllers\TodayCheckupController;
+use App\Http\Controllers\MedicineListController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -33,6 +35,37 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // Admin Profile
     Route::get('/admin/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
 
+    // Prescription
+    Route::get('/prescription/create', [PrescriptionController::class, 'CreatePrescription'])->name('prescription.create');
+    Route::post('/prescription/store', [PrescriptionController::class, 'StorePrescription'])->name('prescription.store');
+    Route::get('/prescription', [PrescriptionController::class, 'Prescription'])->name('prescription.index');
+
+    // Appointment
+    Route::post('/admin/appointment/create', [AppointmentController::class, 'AppointmentStore'])->name('appointment.create');
+    Route::get('/admin/appointment', [AppointmentController::class, 'Appointment'])->name('appointment.index');
+    Route::get('/appointment/aprove/{appointment}', [AppointmentController::class, 'approve'])->name('appointment.approve');
+    Route::get('/appointment/cancel/{appointment}', [AppointmentController::class, 'cancel'])->name('appointment.cancel');
+
+    //Todays checkup
+    Route::get('/admin/today-checkup', [TodayCheckupController::class, 'index'])->name('checkup.index');
+    Route::get('/admin/today-checkup/consult/{appointment}', [TodayCheckupController::class, 'consult'])->name('checkup.consult');
+    Route::post('/admin/today-checkup/consult-store/{appointment}', [TodayCheckupController::class, 'storeConsult'])->name('checkup.store-consult');
+
+    //PATIENT
+    Route::get('/admin/patient', [PatientController::class, 'Patient'])->name('patient.index');
+    Route::get('/admin/patient/medical-history/{patient}', [PatientController::class, 'medHistory'])->name('patient.med-history');
+
+
+    //medicien list
+    Route::get('/admin/medicine-list', [MedicineListController::class, 'index'])->name('med-list.index');
+    Route::post('/admin/medicine-store', [MedicineListController::class, 'store'])->name('med-list.store');
+
+
+
+
+
+
+
     // Vital Signs
     Route::get('/vital_signs', [VitalController::class, 'VitalSigns'])->name('vital.index');
 
@@ -42,16 +75,11 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // Diagnosis
     Route::get('/diagnosis', [DiagnosisController::class, 'Diagnosis'])->name('diagnosis.index');
 
-    // Prescription
-    Route::get('/prescription/create', [PrescriptionController::class, 'CreatePrescription'])->name('prescription.create');
-    Route::post('/prescription/store', [PrescriptionController::class, 'StorePrescription'])->name('prescription.store');
-    Route::get('/prescription', [PrescriptionController::class, 'Prescription'])->name('prescription.index');
 
-    // Appointment
-    Route::post('/admin/appointment/create', [AppointmentController::class, 'AppointmentStore'])->name('appointment.create');
-    Route::get('/admin/appointment', [AppointmentController::class, 'Appointment'])->name('appointment.index');
-    Route::get('/appointment/aprove', [AppointmentController::class, 'AppoveAppointment'])->name('approve.appointment');
-    Route::get('/appointment/cancel', [AppointmentController::class, 'CancelAppointment'])->name('cancel.appointment');
+
+
+
+
 
     //  Medical
     Route::get('/admin/medical/{id}', [MedicalController::class, 'MedicalShow'])->name('medical.show');
@@ -59,8 +87,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/medical', [MedicalController::class, 'SearchMedical'])->name('medical.index');
 
     // Patient
+
+
     Route::get('/admin/patient/create', [PatientController::class, 'CreatePatient'])->name('patient.create');
-    Route::get('/admin/patient', [PatientController::class, 'Patient'])->name('patient.index');
     Route::get('/admin/patient/{id}', [PatientController::class, 'ShowPatient'])->name('patient.show');
     Route::post('/admin/patient/store', [PatientController::class, 'StorePatient'])->name('patient.store');
     Route::get('/admin/patient/edit/{id}', [PatientController::class, 'EditPatient'])->name('patient.edit');

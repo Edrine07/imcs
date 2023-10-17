@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Models\Patient;
 class PatientController extends Controller
 {
     public function Patient ()
     {
-        return view ('patient.index', [
-            'patients' => Patient::orderBy('updated_at', 'desc')->get()
-        ]);
+        $patients = Patient::orderBy('lastname', 'asc')->get();
+
+        return view ('patient.index', compact('patients'));
     }
 
     public function CreatePatient ()
@@ -109,6 +110,19 @@ class PatientController extends Controller
 
         notify()->emotify('success', 'Your data was successfully updated');
         return redirect(route('patient.index'));
+    }
+
+    public function medHistory(Patient $patient)
+    {
+
+        $appointments = Appointment::where('patient_id', $patient->id)
+        ->where('appointment_status', 'Completed')
+        ->orderBy('appointment_date', 'asc')
+        ->get();
+
+        // dd($appointments);
+
+        return view('patient.med-history', compact('patient', 'appointments'));
     }
 
 }

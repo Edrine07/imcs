@@ -1,12 +1,8 @@
 @extends('layouts.admin')
 @section('content')
 <div class="container grid px-6 mx-auto">
-
-    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-        Appointment
-    </h2>
     @if (session('success'))
-    <div id="alert-3" class="flex items-center pb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+    <div id="alert-3" class="flex items-center p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
         <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
           <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
         </svg>
@@ -22,6 +18,15 @@
         </button>
       </div>
     @endif
+    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+        Today's Checkup
+    </h2>
+
+    <div class="flex justify-end mb-4">
+        <div>
+            <a href="" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add Walk In Patient</a>
+        </div>
+    </div>
     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
         <div class="w-full overflow-x-auto">
             <table class="w-full whitespace-no-wrap">
@@ -51,12 +56,10 @@
                             {{ $appointment->appointment_status }}
                         </td>
                         <td class="px-4 py-3">
-                            @if($appointment->appointment_status != 'Approved')
                             <div class="flex items-center space-x-4 text-sm">
-                                <a href="{{ route('appointment.approve', $appointment->id) }}" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-1 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2 mr-1 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Approve</a>
-                                <a href="{{ route('appointment.cancel', $appointment->id) }}" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Cancel</a>
+                                <a href="{{ route('checkup.consult', $appointment->id) }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Consult</a>
+                                <a href="{{ route('appointment.cancel', $appointment->id) }}" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">No Show</a>
                             </div>
-                            @endif
                         </td>
                     </tr>
                     @empty
@@ -68,5 +71,6 @@
             </table>
         </div>
     </div>
+
 </div>
 @endsection
