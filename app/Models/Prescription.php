@@ -9,7 +9,7 @@ class Prescription extends Model
 {
     use HasFactory;
 
-    protected $fillble = [
+    protected $fillable = [
         'appointment_id',
         'bp',
         'cr',
@@ -17,7 +17,7 @@ class Prescription extends Model
         't',
         'ht',
         'wt',
-        'symtoms',
+        'symptoms',
         'diagnosis',
     ];
 

@@ -29,6 +29,6 @@ class Appointment extends Model
         return $this->hasOne(Prescription::class,'appointment_id');
     }
 
-    
+
 
 }
