@@ -11,7 +11,9 @@ class TodayCheckupController extends Controller
     public function index()
     {
 
-        $today = now()->addDay()->format('Y-m-d');
+        $today = now()->format('Y-m-d');
+
+        // dd($today);
 
         $appointments = Appointment::where('appointment_status', 'Approved')
             ->whereDate('appointment_date', $today)
@@ -65,7 +67,7 @@ class TodayCheckupController extends Controller
     {
         $appointment->delete();
 
-        
+
     }
 
 }

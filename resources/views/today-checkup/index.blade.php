@@ -64,7 +64,7 @@
                     </tr>
                     @empty
                     <tr>
-                       <td colspan="3" class="text-left text-gray-500 dark:text-gray-400 text-center py-3">No available data</td>
+                       <td colspan="5" class="text-left text-gray-500 dark:text-gray-400 text-center py-3">No available data</td>
                     </tr>
                    @endforelse
                 </tbody>
