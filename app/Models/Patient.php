@@ -5,10 +5,12 @@ namespace App\Models;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Notifiable;
 
 class Patient extends Model
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     use Searchable;
 
@@ -25,6 +27,11 @@ class Patient extends Model
     protected $casts = [
         'birthdate' => 'date'
     ];
+
+    public function routeNotificationForVonage(Notification $notification): string
+    {
+        return $this->contact;
+    }
 
     public function appointment()
     {

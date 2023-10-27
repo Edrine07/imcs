@@ -37,7 +37,7 @@
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                {{ $patient->patient_first_name }} {{ $patient->patient_last_name }} </td>
+                                                {{-- $patient->patient_first_name --}} {{-- $patient->patient_last_name --}} </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                 <a class="text-blue-500 hover:text-blue-700" href="#"></a>
                                             </td>
@@ -52,7 +52,7 @@
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                {{ $patient->patient_contact }}</td>
+                                                {{-- $patient->patient_contact --}}</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                 <a class="text-blue-500 hover:text-blue-700" href="#"></a>
                                             </td>
@@ -67,7 +67,7 @@
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                {{ $patient->patient_age }} </td>
+                                                {{-- $patient->patient_age --}} </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                 <a class="text-blue-500 hover:text-blue-700" href="#"></a>
                                             </td>
@@ -82,7 +82,7 @@
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                {{ $patient->patient_gender }}</td>
+                                                {{-- $patient->patient_gender --}}</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                 <a class="text-blue-500 hover:text-blue-700" href="#"></a>
                                             </td>
@@ -97,7 +97,7 @@
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                {{ $patient->patient_address }}</td>
+                                                {{-- $patient->patient_address --}}</td>
                                             <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                 <a class="text-blue-500 hover:text-blue-700" href="#"></a>
                                             </td>
@@ -143,7 +143,7 @@
                                                 </td>
                                                 <td
                                                     class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                    {{ $patient->patient_bp }}</td>
+                                                    {{-- $patient->patient_bp --}}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                     <a class="text-blue-500 hover:text-blue-700" href="#"></a>
                                                 </td>
@@ -167,7 +167,7 @@
                                                 </td>
                                                 <td
                                                     class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                    {{ $patient->patient_cr }}</td>
+                                                    {{-- $patient->patient_cr --}}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                     <a class="text-blue-500 hover:text-blue-700" href="#"></a>
                                                 </td>
@@ -185,7 +185,7 @@
                                                 </td>
                                                 <td
                                                     class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                    {{ $patient->patient_rr }}</td>
+                                                    {{-- $patient->patient_rr --}}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                     <a class="text-blue-500 hover:text-blue-700" href="#"></a>
                                                 </td>
@@ -209,7 +209,7 @@
                                                 </td>
                                                 <td
                                                     class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                    {{ $patient->patient_t }} </td>
+                                                    {{-- $patient->patient_t --}} </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                     <a class="text-blue-500 hover:text-blue-700" href="#"></a>
                                                 </td>
@@ -227,7 +227,7 @@
                                                 </td>
                                                 <td
                                                     class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                    {{ $patient->patient_wt }}</td>
+                                                    {{-- $patient->patient_wt --}}</td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                     <a class="text-blue-500 hover:text-blue-700" href="#"></a>
                                                 </td>
@@ -251,7 +251,7 @@
                                                 </td>
                                                 <td
                                                     class="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">
-                                                    {{ $patient->patient_wt }} </td>
+                                                    {{-- $patient->patient_wt --}} </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                     <a class="text-blue-500 hover:text-blue-700" href="#"></a>
                                                 </td>

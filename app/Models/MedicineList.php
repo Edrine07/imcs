@@ -13,4 +13,9 @@ class MedicineList extends Model
         'medicine_name',
         'medicine_type'
     ];
+
+    public function medTakeName()
+    {
+        return $this->belongsToMany(Medicine::class, 'medicine_id');
+    }
 }

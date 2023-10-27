@@ -67,8 +67,13 @@
 
 <body>
     <div class="container-fluid" style="height: 100vh;">
+        @if($patient)
+        <form action="{{ route('appointment.findPatient', [$patient]) }}" method="post">
+        @csrf
+        @else
         <form action="{{ route('appointment.reserve_appointment') }}" method="post">
             @csrf
+        @endif
             <div class="d-flex flex-wrap justify-content-center align-items-center" style="height: 100vh;">
                 <div class="col-md-12">
                     <x-success></x-success>
@@ -83,24 +88,24 @@
                         <div class="card-body">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+                                    <button class="nav-link  {{ !$patient ? 'active' : '' }}" id="home-tab" data-bs-toggle="tab"
                                         data-bs-target="#home-tab-pane" type="button" role="tab"
                                         aria-controls="home-tab-pane" aria-selected="true">New Patient</button>
                                 </li>
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                                    <button class="nav-link  {{ $patient ? ' active' : '' }}" id="profile-tab" data-bs-toggle="tab"
                                         data-bs-target="#profile-tab-pane" type="button" role="tab"
                                         aria-controls="profile-tab-pane" aria-selected="false">Existing Patient</button>
                                 </li>
                             </ul>
                             <div class="tab-content" id="myTabContent">
-                                <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel"
+                                <div class="tab-pane fade {{ !$patient ? 'show active' : '' }} " id="home-tab-pane" role="tabpanel"
                                     aria-labelledby="home-tab" tabindex="0">
                                     <div class="row mt-4">
                                         <div class="form-group col-md-6">
                                             <label class="form-label">First Name</label>
                                             <input type="text" name="firstname"
-                                                class="form-control @error('firstname') is-invalid @enderror"
+                                                class="form-control text-capitalize @error('firstname') is-invalid @enderror"
                                                 value="{{ old('firstname') }}">
                                             @error('firstname')
                                                 <span class="small text-danger">{{ $message }}</span>
@@ -109,7 +114,7 @@
                                         <div class="form-group col-md-6">
                                             <label class="form-label">Last Name</label>
                                             <input type="text" name="lastname"
-                                                class="form-control @error('lastname') is-invalid @enderror"
+                                                class="form-control text-capitalize @error('lastname') is-invalid @enderror"
                                                 placeholder="" value="{{ old('lastname') }}">
                                             @error('lastname')
                                                 <span class="small text-danger">{{ $message }}</span>
@@ -154,17 +159,47 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
+                                <form action="{{ route('appointment.find') }}">
+                                <div class="tab-pane fade  {{ $patient ? 'show active' : '' }}" id="profile-tab-pane" role="tabpanel"
                                     aria-labelledby="profile-tab" tabindex="0">
                                     <div class="row mt-4">
-                                        <div class="form-group">
-                                            <label class="form-label">Find Patient ID</label>
-                                            <input type="text" name="patient_Id" value="{{ old('patient_Id') }}"
-                                                class="form-control @error('patient_Id') is-invalid @enderror"
-                                                placeholder="Patient Id">
-                                            <P class="text-danger">Make this livewire or select2</P>
-                                            <button class="btn btn-primary mt-2">Find Patient ID</button>
+                                        <div class="form-group col-md-6">
+                                            <label class="form-label">First Name</label>
+                                            <input type="text" name="fname" value="{{ old('fname') }}"
+                                                class="form-control text-capitalize @error('fname') is-invalid @enderror"
+                                                placeholder="">
                                         </div>
+                                        <div class="form-group col-md-6">
+                                            <label class="form-label">Last Name</label>
+                                            <input type="text" name="lname" value="{{ old('lname') }}"
+                                                class="form-control text-capitalize @error('lname') is-invalid @enderror"
+                                                placeholder="">
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label class="form-label">BIRTHDATE</label>
+                                            <input type="date" name="bdate" value="{{ old('bdate') }}"
+                                                class="form-control @error('bdate') is-invalid @enderror"
+                                                placeholder="">
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <button class="btn btn-primary col-md-12">FIND MY RECORD</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                    <hr>
+                                    <div class="row">
+                                        @if($patient)
+                                        <div class="col-md-12">
+                                            <div class="card" style="height: 150px; padding: 10px;">
+                                                <h5>FOUND YOUR RECORD!</h5>
+                                                <div class="row">
+                                                <input type="text" name="{{ $patient->id }}" value="01">
+                                                <p class="text-uppercase mb-2">NAME: {{ $patient->full_name }}</p>
+                                                <p class="txt-uppercase">BIRTHDATE: {{ $patient->birthdate }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -241,7 +276,6 @@
                             </div>
                             <div class="row mt-2">
                                 <h6>AFTERNOON APPOINTMENT</h6>
-
                                 <div class="d-flex flex-wrap">
                                     <div class="form-check me-2">
                                         <input class="form-check-input" type="radio" name="time_appointment"
