@@ -24,7 +24,7 @@
                 <!-- Modal toggle -->
             </div>
             <div class="gap-6  pb-5 px-5 flex justify-start">
-                <div> 
+                <div>
                     <button data-modal-target="staticModal" data-modal-toggle="staticModal"
                         class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                         type="button">
@@ -152,7 +152,7 @@
                     </label>
                     <textarea name="symptoms" rows="4"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Write your thoughts here..."></textarea>
+                        placeholder="Type here..."></textarea>
 
                 </div>
                 <div class="grid gap-2 xl:grid-cols-1 pt-2 pb-2  px-5">
@@ -160,7 +160,7 @@
                     </label>
                     <textarea name="diagnosis" rows="4"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Write your thoughts here..."></textarea>
+                        placeholder="Type here..."></textarea>
                 </div>
 
                 <div class="pt-2 pb-5 px-5 flex justify-end">

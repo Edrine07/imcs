@@ -24,7 +24,7 @@
 
     <div class="flex justify-end mb-4">
         <div>
-            <a href="" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add Walk In Patient</a>
+            <a href="{{ route('walkin.create-patient') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Add Walk In Patient</a>
         </div>
     </div>
     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">

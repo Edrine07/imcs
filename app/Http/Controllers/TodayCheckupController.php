@@ -59,7 +59,7 @@ class TodayCheckupController extends Controller
             'diagnosis' => $validated['diagnosis']
         ]);
 
-        return redirect()->route('patient.index')->with('success', 'Consultation completed!');
+        return redirect()->route('patient.med-history', $appointment->patient_id)->with('success', 'Consultation completed!');
 
     }
 
