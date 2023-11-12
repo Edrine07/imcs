@@ -1,72 +1,90 @@
 @extends('layouts.admin')
 @section('content')
-<div class="container grid px-6 mx-auto">
-
-    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-        Appointment
-    </h2>
-    @if (session('success'))
-    <div id="alert-3" class="flex items-center pb-4 text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-        <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
-        </svg>
-        <span class="sr-only">Info</span>
-        <div class="ml-3 text-sm font-medium">
-            {{ session('success') }}
+    <div class="card mb-5 mb-xl-8">
+        <div class="card-header border-0 pt-5">
+            <h3 class="card-title align-items-start flex-column">
+                <span class="card-label fw-bolder fs-3 mb-1">Appointment List</span>
+            </h3>
+            <div class="card-toolbar">
+                <button type="button" class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary"
+                    data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                    <span class="svg-icon svg-icon-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                <rect x="5" y="5" width="5" height="5" rx="1" fill="#000000" />
+                                <rect x="14" y="5" width="5" height="5" rx="1" fill="#000000"
+                                    opacity="0.3" />
+                                <rect x="5" y="14" width="5" height="5" rx="1" fill="#000000"
+                                    opacity="0.3" />
+                                <rect x="14" y="14" width="5" height="5" rx="1" fill="#000000"
+                                    opacity="0.3" />
+                            </g>
+                        </svg>
+                    </span>
+                </button>
+                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px"
+                    data-kt-menu="true">
+                    <div class="menu-item px-3">
+                        <div class="menu-content fs-6 text-dark fw-bolder px-3 py-4">Quick Actions</div>
+                    </div>
+                    <div class="separator mb-3 opacity-75"></div>
+                    <div class="menu-item px-3">
+                        <a href="" class="menu-link px-3">Approve</a>
+                    </div>
+                    <div class="menu-item px-3">
+                        <a href="" class="menu-link px-3">Cancel</a>
+                    </div>
+                    <div class="menu-item px-3">
+                        <a href="" class="menu-link px-3">Pending</a>
+                    </div>
+                    <div class="separator mt-3 opacity-75"></div>
+                </div>
+            </div>
         </div>
-        <button type="button" class="ml-auto -mx-1.5 -my-1.5 bg-green-50 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex items-center justify-center h-8 w-8 dark:bg-gray-800 dark:text-green-400 dark:hover:bg-gray-700" data-dismiss-target="#alert-3" aria-label="Close">
-          <span class="sr-only">Close</span>
-          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-          </svg>
-        </button>
-      </div>
-    @endif
-    <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs">
-        <div class="w-full overflow-x-auto">
-            <table class="w-full whitespace-no-wrap">
+        <div class="card-body pt-0">
+            <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
                 <thead>
-                    <tr
-                        class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                        <th class="px-4 py-3">Patient Name</th>
-                        <th class="px-4 py-3">Date</th>
-                        <th class="px-4 py-3">Time</th>
-                        <th class="px-4 py-3">Status</th>
-                        <th class="px-4 py-3">Action</th>
+                    <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                        <th class="min-w-100px">Patient Id</th>
+                        <th class="min-w-120px">Patient Name</th>
+                        <th class="min-w-120px">Address</th>
+                        </th>
+                        <th class="min-w-100px">Contact No.</th>
+                        <th class="min-w-100px">Date</th>
+                        <th class="min-w-120px">Time</th>
+                        <th class="min-w-70px">Status</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                    @forelse ($appointments as $appointment)
-                    <tr class="text-gray-700 dark:text-gray-400">
-                        <td class="px-4 py-3 text-sm">
-                            {{ $appointment->patient->fullname }}
-                        </td>
-                        <td class="px-4 py-3 text-sm">
-                            {{ $appointment->appointment_date->format('F d, Y') }}
-                        </td>
-                        <td class="px-4 py-3 text-sm">
-                            {{ $appointment->appointment_time }}
-                        </td>
-                        <td class="px-4 py-3 text-sm">
-                            {{ $appointment->appointment_status }}
-                        </td>
-                        <td class="px-4 py-3">
-                            @if($appointment->appointment_status != 'Approved')
-                            <div class="flex items-center space-x-4 text-sm">
-                                <a href="{{ route('appointment.approve', $appointment->id) }}" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-1 focus:ring-green-300 font-medium rounded-lg text-sm px-3 py-2 mr-1 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Approve</a>
-                                <a href="{{ route('appointment.cancel', $appointment->id) }}" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-1 focus:ring-red-300 font-medium rounded-lg text-sm px-3 py-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Cancel</a>
-                            </div>
-                            @endif
-                        </td>
-                    </tr>
+                <tbody class="fw-bold text-gray-600">
+                    @forelse($appointments as $appointment)
+                        <tr class="text-gray-800 text-hover-primary mb-0">
+                            <td>{{ $appointment->patient_id }}</td>
+                            <td>{{ $appointment->patient->firstname }}</td>
+                            <td>{{ Str::words($appointment->patient->address, 5, $end = '...') }}</td>
+                            <td>{{ $appointment->patient->contact }}</td>
+                            <td>{{ $appointment?->appointment_date?->format('F d, Y') ?? '' }}</td>
+                            @php
+                                $appointment_time = new DateTime($appointment->appointment_time);
+                                $formattedTime = $appointment_time->format('H:i A');
+                            @endphp
+                            <td class="text-end">{{ $formattedTime ?? '' }}</td>
+                            <td>
+                                @if ($appointment->appointment_status == 'Approved')
+                                    <span class="badge badge-light-primary">{{ $appointment->appointment_status }}</span>
+                                @elseif($appointment->appointment_status == 'Pending')
+                                    <span class="badge badge-light-warning">{{ $appointment->appointment_status }}</span>
+                                @else
+                                    <span class="badge badge-light-danger">{{ $appointment->appointment_status }}</span>
+                                @endif
+                            </td>
+                        </tr>
                     @empty
-                    <tr>
-                       <td colspan="5" class="text-left text-gray-500 dark:text-gray-400 text-center py-3">No available data</td>
-                    </tr>
-                   @endforelse
+                        <tr>
+                            <td class="text-center">No Appointments</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
     </div>
-</div>
 @endsection

@@ -10,7 +10,7 @@ use App\Notifications\ApprovedNotif;
 class AppointmentController extends Controller
 {
 
-    public function Appoint()
+    public function appoint()
     {
         $appointments = Appointment::all();
 
@@ -19,7 +19,7 @@ class AppointmentController extends Controller
         return view('appointment.reserve', compact('appointments', 'patient'));
     }
 
-    public function Appointment()
+    public function appointment()
     {
 
         $appointments = Appointment::whereIn('appointment_status', ['Pending', 'Approved'])
@@ -28,10 +28,22 @@ class AppointmentController extends Controller
             ->orderBy('appointment_time', 'asc')
             ->get();
 
+        // dd($appointments);
+
+
         return view('appointment.index', compact('appointments'));
     }
 
-    public function ReserveAppointmentStore(Request $request)
+    public function newAppointments()
+    {
+        $appointments = Appointment::where('appointment_status', 'Pending')->where('appointment_date', '==', date('Y-m-d'))->get();
+
+        // dd($appointments);
+
+        return view('appointment.new-appointment' , compact('appointments'));
+    }
+
+    public function reserveAppointmentStore(Request $request)
     {
         $fname = $request->input('fname');
 

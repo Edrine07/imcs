@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
             BusinessHourSeeder::class
         ]);
         $this->call(UsersTableSeeder::class);
-        \App\Models\User::factory(5)->create();
+        // \App\Models\User::factory(5)->create();
 
     }
 }
