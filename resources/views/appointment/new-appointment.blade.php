@@ -13,7 +13,7 @@
                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
                         <thead>
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                <th class="min-w-100px">Patient Id</th>
+                                <th>Patient Id</th>
                                 <th class="min-w-120px">Patient Name</th>
                                 <th class="min-w-120px">Address</th>
                                 <th class="min-w-100px">Contact No.</th>
@@ -23,30 +23,25 @@
                             </tr>
                         </thead>
                         <tbody class="fw-bold text-gray-600">
-                            <tr>
-                                <td class="text-gray-800 text-hover-primary mb-1">
-                                    0001
-                                </td>
-                                <td class="text-gray-800 text-hover-primary mb-1">
-                                    Edrine B. Hagosojos
-                                </td>
-                                <td class="text-gray-800 mb-1">
-                                    Gubat, Sorsogon
-                                </td>
-                                <td class="text-gray-800 mb-1">
-                                    09384734793
-                                </td>
-                                <td class="text-gray-800 mb-1">
-                                    October 20, 2023
-                                </td>
-                                <td class="text-gray-800 mb-1">
-                                    9:00 AM
-                                </td>
-                                <td class="text-end">
-                                    <a href="#" class="btn btn-sm btn-success">Approve</a>
-                                    <a href="#" class="btn btn-sm  btn-danger">Cancel</a>
-                                </td>
-                            </tr>
+                            @forelse ($appointments as $item)
+                                <tr class="text-gray-800">
+                                    <td>{{ $item->patient_id }}</td>
+                                    <td>{{ $item->patient->full_name }}</td>
+                                    <td>{{ Str::words($item->patient->address, 5, '...') }}</td>
+                                    <td>{{ $item->patient->contact }}</td>
+                                    <td>{{ $item->appointment_date->format('F d, Y') }}</td>
+                                    <td>{{ date('H:i A', strtotime($item->appointment_time)) }}</td>
+                                    <td class="d-flex justify-content-center align-items-end">
+                                        <a href="{{ route('appointment.approve') }}"
+                                            class="btn btn-sm btn-success">Approve</a>
+                                        <a href="{{ route('appointment.cancel') }}" class="btn btn-sm btn-danger">Cancel</a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="text-center">No appointments found.</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

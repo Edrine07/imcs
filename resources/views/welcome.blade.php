@@ -170,7 +170,7 @@
 
                         <li class="md:ml-6 mt-3 md:mt-0">
                             <a class="inline-block font-semibold px-5 py-3 text-white bg-blue-600 md:text-white-800 border border-blue-100 rounded hover:bg-blue-500 md:hover:bg-blue-100 hover:text-white md:hover:text-blue-800 transition duration-300 ease-in-out"
-                                href="{{ route('appointment') }}">Book Appointment</a>
+                                href="{{ route('appointment.appointment') }}">Book Appointment</a>
                         </li>
                         <li class="md:ml-4"><a
                                 class="py-2 inline-block md:text-black-100 md:px-2 font-semibold nav__link link-no-border-hover"
@@ -466,7 +466,7 @@
             <h2 class="text-xl font-bold text-black lg:pr-12">Get in touch with us today! <br
                     class="block md:hidden">Call
                 us on: +639192771777</h2>
-            <a href="{{-- route('admin.appointment') --}}"
+            <a href="{{ route('appointment.appointment') }}"
                 class="inline-block font-semibold lg:ml-12 px-5 py-3 text-white bg-blue-600 md:text-white-800 border border-blue-100 rounded hover:bg-blue-500 md:hover:bg-blue-100 hover:text-white md:hover:text-blue-800 transition duration-300 ease-in-out">Book
                 Appointment</a>
         </div>

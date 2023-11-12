@@ -1,46 +1,65 @@
 @extends('layouts.admin')
+
+@section('styles')
+    <style>
+        #calendar .unselectable-date {
+            background-color: rgb(202, 200, 200);
+        }
+
+        #calendar .unselectable-date a {
+            color: rgb(136, 133, 133);
+        }
+
+        #calendar .selectable-date {
+            background-color: rgb(214, 250, 214);
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="container px-6 mx-auto">
-        <h2 class="my-6 text-xl font-semibold text-gray-700 dark:text-gray-200">
+        <h2 class="my-4 fs-5 fw-semibold text-gray-700">
             BUSINESS SCHEDULE
         </h2>
 
-        <div class="grid gap-6 mb-6 md:grid-cols-2">
-            <div class="card bg-white">
-                <div class="card-body p-5">
-                    <div id='calendar'></div>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <div id='calendar'></div>
+                        <input type="hidden" id="selectedDate">
+                    </div>
                 </div>
             </div>
-            <div class="card bg-white">
-                <div class="card-body p-5">
-                    <div>
-                        <label for="from" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">From</label>
-                        <input type="date" id="from" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Flowbite" required>
-                    </div>
-                    <div class="mt-3">
-                        <label for="from" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">To</label>
-                        <input type="date" id="from" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Flowbite" required>
-                    </div>
-                    <div>
-                        <button class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 mt-4 w-full focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                            SAVE
-                        </button>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <div>
+                            <label for="from" class="form-label">From</label>
+                            <input type="time" id="from" class="form-control rounded-lg" placeholder="From"
+                                required>
+                        </div>
+                        <div class="mt-3">
+                            <label for="to" class="form-label">To</label>
+                            <input type="time" id="to" class="form-control rounded-lg" placeholder="To" required>
+                        </div>
+                        <div class="mt-4">
+                            <button class="btn btn-primary w-100">SAVE</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 @endsection
-@push('scripts')
-<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+
+@section('scripts')
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             const selectedDateInput = document.getElementById('selectedDate');
             var calendar = new FullCalendar.Calendar(calendarEl, {
-                height: 450,
-                contentHeight: 600,
                 initialView: 'dayGridMonth',
                 selectable: true,
                 select: function(info) {
@@ -85,4 +104,4 @@
             calendar.render();
         });
     </script>
-@endpush
+@endsection

@@ -7,21 +7,22 @@ use App\Models\Medicine;
 use App\Models\MedicineList;
 use Illuminate\Http\Request;
 use App\Models\Patient;
+
 class PatientController extends Controller
 {
-    public function Patient ()
+    public function Patient()
     {
         $patients = Patient::orderBy('lastname', 'asc')->get();
 
-        return view ('patient.index', compact('patients'));
+        return view('patient.index', compact('patients'));
     }
 
-    public function CreatePatient ()
+    public function CreatePatient()
     {
-        return view ('patient.create');
+        return view('patient.create');
     }
 
-    public function StorePatient (Request $request)
+    public function StorePatient(Request $request)
     {
 
         $validate = $request->validate([
@@ -72,18 +73,17 @@ class PatientController extends Controller
 
         notify()->emotify('success', 'Your data was successfully created');
         return redirect(route('patient.index'));
-
     }
 
 
-    public function ShowPatient ($id)
+    public function ShowPatient($id)
     {
         $patient = Patient::find($id);
         return view('patient.show', compact('patient'));
     }
 
 
-    public function EditPatient ($id)
+    public function EditPatient($id)
     {
         return view('patient.edit', [
             'patients' => Patient::where('id', $id)->first()
@@ -118,15 +118,15 @@ class PatientController extends Controller
     {
 
         $appointments = Appointment::where('patient_id', $patient->id)
-        ->where('appointment_status', 'Completed')
-        ->orderBy('appointment_date', 'asc')
-        ->get();
+            ->where('appointment_status', 'Completed')
+            ->orderBy('appointment_date', 'asc')
+            ->get();
 
         $medicines = MedicineList::all();
 
         // dd($appointments);
 
-        return view('patient.med-history', compact('medicines','patient', 'appointments'));
+        return view('patient.med-history', compact('medicines', 'patient', 'appointments'));
     }
 
     public function storeMedToTake(Request $request, Appointment $app)
@@ -150,9 +150,5 @@ class PatientController extends Controller
 
 
         return redirect()->route('patient.med-history', $app->patient_id)->with('success', 'Medicine added!');
-
     }
-
-
-
 }

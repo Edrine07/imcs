@@ -7,11 +7,10 @@
             </div>
             <div class="card-toolbar">
                 <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#kt_modal_add_customer">
+                    <a href="{{ route('walkin.create-patient') }}" class="btn btn-sm btn-primary">
                         <span class="svg-icon svg-icon-3">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px"
+                                height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                     <polygon points="0 0 24 0 24 24 0 24" />
                                     <path
@@ -23,7 +22,7 @@
                                 </g>
                             </svg>
                         </span>
-                        Add Patient</button>
+                        Add Walk In Patient</a>
                 </div>
                 <div class="d-flex justify-content-end align-items-center d-none" data-kt-customer-table-toolbar="selected">
                     <div class="fw-bolder me-5">
@@ -70,11 +69,11 @@
             </table>
         </div>
     </div>
-    <div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered mw-650px">
+    <div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
-                <form class="form" action="#" id="kt_modal_add_customer_form"
-                    data-kt-redirect="../../demo1/dist/apps/customers/list.html">
+                <form class="form" action="{{ route('walkin.store-patient') }}" method="POST">
+                    @csrf
                     <div class="modal-header" id="kt_modal_add_customer_header">
                         <h2 class="fw-bolder">Add Walk in Patient</h2>
                         <div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary"
@@ -96,98 +95,124 @@
                             data-kt-scroll-dependencies="#kt_modal_add_customer_header"
                             data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
                             <div class="row mb-5">
-                                <div class="col-md-6 fv-row">
+                                <div class="col-md-6">
                                     <label class="fs-5 fw-bold mb-2">First name</label>
                                     <input type="text" class="form-control form-control-solid" placeholder=""
-                                        name="" />
+                                        name="firstname" />
                                 </div>
-                                <div class="col-md-6 fv-row">
+                                <div class="col-md-6">
                                     <label class="fs-5 fw-bold mb-2">Last name</label>
                                     <input type="text" class="form-control form-control-solid" placeholder=""
-                                        name="" />
+                                        name="lastname" />
                                 </div>
-                            </div>
-                            <div class="row mb-5">
-                                <div class="col-md-6 fv-row">
+                                <div class="col-md-4">
                                     <label class="fs-6 fw-bold mb-2">Sex</label>
                                     <select class="form-select form-select-solid" data-control="select2"
-                                        data-hide-search="true" data-placeholder="Select sex" name="target_assign">
+                                        data-hide-search="true" data-placeholder="Select sex" name="gender">
                                         <option value="">Select sex...</option>
-                                        <option value="1">Male</option>
-                                        <option value="2">Female</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6 fv-row">
+                                <div class="col-md-4">
                                     <label class=" fs-5 fw-bold mb-2">Age</label>
+                                    <input type="number" class="form-control form-control-solid" placeholder=""
+                                        name="age" />
+                                </div>
+                                <div class="col-md-4">
+                                    <label class="fs-6 fw-bold mb-2">Contact</label>
                                     <input type="text" class="form-control form-control-solid" placeholder=""
-                                        name="" />
+                                        name="contact" />
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="fs-6 fw-bold mb-2">Address</label>
+                                    <input type="text" class="form-control form-control-solid" placeholder=""
+                                        name="address" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="fw-bolder fs-3 rotate collapsible mb-7" data-bs-toggle="collapse"
+                                        href="#kt_modal_add_vital_info" role="button" aria-expanded="false"
+                                        aria-controls="kt_customer_view_details">Vital Signs Information
+                                        <span class="ms-2 rotate-180">
+                                            <span class="svg-icon svg-icon-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none">
+                                                    <path
+                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
+                                                        fill="black" />
+                                                </svg>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div id="kt_modal_add_vital_info" class="collapse show">
+                                        <div class="row mb-5">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="fs-5 fw-bold mb-2">Blood Pressure</label>
+                                                <input type="text" class="form-control form-control-solid"
+                                                    placeholder="" name="patient_bp" />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="fs-5 fw-bold mb-2">Cardiac Rate</label>
+                                                <input type="text" class="form-control form-control-solid"
+                                                    placeholder="" name="patient_cr" />
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label class="fs-5 fw-bold mb-2">Respiratory Rate</label>
+                                                <input type="text" class="form-control form-control-solid"
+                                                    placeholder="" name="patient_rr" />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="fs-5 fw-bold mb-2">Temperature</label>
+                                                <input type="text" class="form-control form-control-solid"
+                                                    placeholder="" name="patient_t" />
+                                            </div>
+
+                                            <div class="col-md-6 mb-3">
+                                                <label class="fs-5 fw-bold mb-2">Height</label>
+                                                <input type="text" class="form-control form-control-solid"
+                                                    placeholder="" name="patient_ht" />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class=" fs-5 fw-bold mb-2">Weight</label>
+                                                <input type="text" class="form-control form-control-solid"
+                                                    placeholder="" name="patient_wt" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="fw-bolder fs-3 rotate collapsible mb-7" data-bs-toggle="collapse"
+                                        href="#kt_modal_add_symptoms" role="button" aria-expanded="false"
+                                        aria-controls="kt_customer_view_details">Symptoms and Diagnosis
+                                        <span class="ms-2 rotate-180">
+                                            <span class="svg-icon svg-icon-3">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none">
+                                                    <path
+                                                        d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
+                                                        fill="black" />
+                                                </svg>
+                                            </span>
+                                        </span>
+                                    </div>
+                                    <div id="kt_modal_add_symptoms" class="collapse show">
+                                        <div class="row mb-5">
+                                            <div class="col-md-12">
+                                                <label class="fs-5 fw-bold mb-2">Symptoms</label>
+                                                <textarea name="symptoms" rows="4" class="form-control border-active-dark" placeholder="Type  here..."></textarea>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <label class="fs-5 fw-bold mb-2">Diagnosis</label>
+                                                <textarea name="diagnosis" rows="4" class="form-control border-active-dark" placeholder="Type  here..."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="fv-row mb-15">
-                                <label class="fs-6 fw-bold mb-2">Contact</label>
-                                <input type="text" class="form-control form-control-solid" placeholder=""
-                                    name="description" />
-                            </div>
-
-                            <div class="fv-row mb-15">
-                                <label class="fs-6 fw-bold mb-2">Address</label>
-                                <input type="text" class="form-control form-control-solid" placeholder=""
-                                    name="description" />
-                            </div>
-                            <div class="fw-bolder fs-3 rotate collapsible mb-7" data-bs-toggle="collapse"
-                                href="#kt_modal_add_customer_billing_info" role="button" aria-expanded="false"
-                                aria-controls="kt_customer_view_details">Vital Signs Information
-                                <span class="ms-2 rotate-180">
-                                    <span class="svg-icon svg-icon-3">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                            viewBox="0 0 24 24" fill="none">
-                                            <path
-                                                d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z"
-                                                fill="black" />
-                                        </svg>
-                                    </span>
-                                </span>
-                            </div>
-                            <div id="kt_modal_add_customer_billing_info" class="collapse show">
-                                <div class="row mb-5">
-                                    <div class="col-md-6 fv-row">
-                                        <label class="fs-5 fw-bold mb-2">Blood Pressure</label>
-                                        <input type="text" class="form-control form-control-solid" placeholder=""
-                                            name="patient_bp" />
-                                    </div>
-                                    <div class="col-md-6 fv-row">
-                                        <label class="fs-5 fw-bold mb-2">Cardiac Rate</label>
-                                        <input type="text" class="form-control form-control-solid" placeholder=""
-                                            name="patient_cr" />
-                                    </div>
-                                </div>
-                                <div class="row mb-5">
-                                    <div class="col-md-6 fv-row">
-                                        <label class="fs-5 fw-bold mb-2">Respiratory Rate</label>
-                                        <input type="text" class="form-control form-control-solid" placeholder=""
-                                            name="patient_rr" />
-                                    </div>
-                                    <div class="col-md-6 fv-row">
-                                        <label class="fs-5 fw-bold mb-2">Temperature</label>
-                                        <input type="text" class="form-control form-control-solid" placeholder=""
-                                            name="patient_t" />
-                                    </div>
-                                </div>
-                                <div class="row mb-5">
-                                    <div class="col-md-6 fv-row">
-                                        <label class="fs-5 fw-bold mb-2">Height</label>
-                                        <input type="text" class="form-control form-control-solid" placeholder=""
-                                            name="patient_ht" />
-                                    </div>
-                                    <div class="col-md-6 fv-row">
-                                        <label class=" fs-5 fw-bold mb-2">Weight</label>
-                                        <input type="text" class="form-control form-control-solid" placeholder=""
-                                            name="patient_wt" />
-                                    </div>
-                                </div>
-
-                            </div>
                         </div>
                     </div>
                     <div class="modal-footer flex-center">

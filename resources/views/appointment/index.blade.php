@@ -45,7 +45,7 @@
             <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
                 <thead>
                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                        <th class="min-w-100px">Patient Id</th>
+                        <th>Patient Id</th>
                         <th class="min-w-120px">Patient Name</th>
                         <th class="min-w-120px">Address</th>
                         </th>
@@ -59,7 +59,7 @@
                     @forelse($appointments as $appointment)
                         <tr class="text-gray-800 text-hover-primary mb-0">
                             <td>{{ $appointment->patient_id }}</td>
-                            <td>{{ $appointment->patient->firstname }}</td>
+                            <td>{{ $appointment->patient->full_name }}</td>
                             <td>{{ Str::words($appointment->patient->address, 5, $end = '...') }}</td>
                             <td>{{ $appointment->patient->contact }}</td>
                             <td>{{ $appointment?->appointment_date?->format('F d, Y') ?? '' }}</td>
@@ -70,17 +70,23 @@
                             <td class="text-end">{{ $formattedTime ?? '' }}</td>
                             <td>
                                 @if ($appointment->appointment_status == 'Approved')
-                                    <span class="badge badge-light-primary">{{ $appointment->appointment_status }}</span>
+                                    <span class="badge badge-success">{{ $appointment->appointment_status }}</span>
+                                @elseif($appointment->appointment_status == 'Completed')
+                                    <span class="badge badge-primary">{{ $appointment->appointment_status }}</span>
                                 @elseif($appointment->appointment_status == 'Pending')
-                                    <span class="badge badge-light-warning">{{ $appointment->appointment_status }}</span>
+                                    @if ($appointment->appointment_date->format('Y-m-d') <= date('Y-m-d'))
+                                        <span class="badge badge-danger">Expired</span>
+                                    @else
+                                        <span class="badge badge-warning">{{ $appointment->appointment_status }}</span>
+                                    @endif
                                 @else
-                                    <span class="badge badge-light-danger">{{ $appointment->appointment_status }}</span>
+                                    <span class="badge badge-danger">{{ $appointment->appointment_status }}</span>
                                 @endif
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td class="text-center">No Appointments</td>
+                            <td colspan="7" class="text-center">No Appointments</td>
                         </tr>
                     @endforelse
                 </tbody>

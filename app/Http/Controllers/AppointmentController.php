@@ -22,7 +22,7 @@ class AppointmentController extends Controller
     public function appointment()
     {
 
-        $appointments = Appointment::whereIn('appointment_status', ['Pending', 'Approved'])
+        $appointments = Appointment::whereIn('appointment_status', ['Pending', 'Approved', 'Completed', 'Cancelled'])
             ->orderByRaw("FIELD(appointment_status, 'Pending') DESC")
             ->orderBy('appointment_date', 'asc')
             ->orderBy('appointment_time', 'asc')
@@ -37,10 +37,7 @@ class AppointmentController extends Controller
     public function newAppointments()
     {
         $appointments = Appointment::where('appointment_status', 'Pending')->where('appointment_date', '==', date('Y-m-d'))->get();
-
-        // dd($appointments);
-
-        return view('appointment.new-appointment' , compact('appointments'));
+        return view('appointment.new-appointment', compact('appointments'));
     }
 
     public function reserveAppointmentStore(Request $request)
@@ -100,7 +97,7 @@ class AppointmentController extends Controller
         ]);
 
         $patient = Patient::where('id', $appointment->patient_id)
-        ->first();
+            ->first();
 
         $patient->notify(new ApprovedNotif());
 
@@ -125,14 +122,11 @@ class AppointmentController extends Controller
         ]);
 
         Appointment::create([
-            'patient_id'=>$patient->id,
+            'patient_id' => $patient->id,
             'appointment_date' => $validated['selectedDate'],
             'appointment_time' => $validated['time_appointment'],
         ]);
 
         return redirect()->route('admin.appointment')->with('success', 'Appointment successfully submitted, wait for an SMS Notification!');
-
     }
-
-
 }

@@ -16,6 +16,12 @@
         type="text/css" />
     <link href="{{ asset('metro-assets/assets/css/style.bundle.css') }}" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="{{ asset('images/imcs.svg') }}" type="image/x-icon">
+    <style>
+        body::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+    @yield('styles')
 </head>
 
 <body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed aside-enabled aside-fixed">
@@ -80,6 +86,8 @@
     <script src="{{ asset('assets/js/custom/apps/customers/list/list.js') }}"></script>
     {{-- <script src="{{ asset('assets/js/custom/apps/customers/add.js') }}"></script> --}}
     {{-- <script src="{{ asset('assets/js/custom/modals/new-target.js') }}"></script>    --}}
+
+    @yield('scripts')
 </body>
 
 </html>

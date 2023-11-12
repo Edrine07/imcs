@@ -70,7 +70,12 @@
                                 <a href="{{ route('admin.profile') }}" class="menu-link px-5">My Profile</a>
                             </div>
                             <div class="menu-item px-5">
-                                <a href="{{ route('admin.logout') }}" class="menu-link px-5">Sign Out</a>
+                                {{-- <form method="POST" action="{{ route('admin.logout') }}" class="menu-link px-5">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-link">Logout</button>
+                                </form> --}}
+                                <a href="{{ route('admin.logout') }}" class="menu-link px-5">Logout</a>
                             </div>
                         </div>
                     </div>
