@@ -19,12 +19,22 @@ class AdminController extends Controller
     public function adminDashboard()
     {
         notify()->success('Welcome to Immaculate Clinic');
-        return view('admin.dashboard', [
-            'appointments' => Appointment::count(),
-            'patients' => Patient::count(),
-            'todayAppointments' => Appointment::where('appointment_date', '==', date('Y-m-d'))->where('appointment_status', '==', 'Approved')->count(),
-            'pendingAppointments' => Appointment::where('appointment_status', 'Pending')->where('appointment_date', '==', date('Y-m-d'))->orderBy('appointment_time', 'asc')->get(),
-        ]);
+
+        $appointments = Appointment::count();
+        $patients = Patient::count();
+        $todayAppointments = Appointment::where('appointment_date', '=', date('Y-m-d'))
+            ->where('appointment_status', '=', 'Approved')
+            ->count();
+
+        $pendingAppointments = Appointment::where('appointment_status', '=', 'Pending')
+            ->where('appointment_date', '=', date('Y-m-d'))
+            ->orderBy('appointment_time', 'asc')
+            ->get();
+
+
+        // dd($appointments);
+
+        return view('admin.dashboard', compact('appointments', 'patients', 'todayAppointments', 'pendingAppointments'));
     }
 
     // Login

@@ -5,172 +5,160 @@
             CONSULTATION | {{ $appointment->patient->fullname }}
         </h2>
 
-        <div class="w-full mb-8 overflow-hidden rounded-lg shadow-xs border border-solid border-black">
-            <div class="grid gap-6 md:grid-cols-2 pt-5 pb-5  px-5">
-                <div>
-                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First
+        <div class="w-100 mb-4 overflow-hidden rounded shadow border border-solid border-dark">
+            <div class="row row-cols-md-2 pt-4 pb-4 px-4">
+                <div class="col-md-6">
+                    <label for="first_name" class="form-label mb-2 text-sm fw-bold text-gray-900 dark:text-white">First
                         name</label>
                     <input type="text" name="firstname" value="{{ $appointment->patient->firstname }}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required>
+                        class="form-control form-control-sm bg-light border border-secondary text-dark rounded-lg focus-ring-blue-500 focus-border-blue-500"
+                        placeholder="" readonly>
                 </div>
-                <div>
-                    <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last
+                <div class="col-md-6">
+                    <label for="last_name" class="form-label mb-2 text-sm fw-bold text-gray-900 dark:text-white">Last
                         name</label>
                     <input type="text" name="lastname" value="{{ $appointment->patient->lastname }}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="" required>
+                        class="form-control form-control-sm bg-light border border-secondary text-dark rounded-lg focus-ring-blue-500 focus-border-blue-500"
+                        placeholder="" readonly>
                 </div>
-                <!-- Modal toggle -->
             </div>
-            <div class="gap-6  pb-5 px-5 flex justify-start">
-                <div>
-                    <button data-modal-target="staticModal" data-modal-toggle="staticModal"
-                        class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            <div class="row pb-4 px-4">
+                <div class="col-md-6">
+                    <button data-bs-toggle="modal" data-bs-target="#staticModal"
+                        class="btn btn-primary btn-sm text-white bg-primary hover-bg-primary-dark focus-ring-4 focus-ring-blue font-weight-bold text-sm px-3 py-2 text-center"
                         type="button">
                         VIEW PATIENT INFORMATION
                     </button>
                 </div>
             </div>
-            <!-- Main modal -->
-            <div id="staticModal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
-                class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                <div class="relative w-full max-w-2xl max-h-full">
-                    <!-- Modal content -->
-                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                        <!-- Modal header -->
-                        <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            <div class="modal fade" id="staticModal" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content bg-white rounded-lg shadow">
+                        <div class="modal-header">
+                            <h3 class="modal-title text-xl font-weight-bold text-dark">
                                 PATIENT INFORMATION
                             </h3>
-                            <button type="button"
-                                class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                data-modal-hide="staticModal">
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                </svg>
-                                <span class="sr-only">Close modal</span>
+                            <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                <span class="visually-hidden">Close modal</span>
                             </button>
                         </div>
-                        <div class="grid gap-6 md:grid-cols-3 px-5 py-2">
-                            <div>
-                                <label for="last_name"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</label>
-                                <input type="text" name="lastname" value="{{ $appointment->patient->gender }}"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="" required>
-                            </div>
-                            <div>
-                                <label for="first_name"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Birthdate</label>
-                                <input type="date" name="firstname"
-                                    value="{{ $appointment->patient->birthdate->format('Y-m-d') }}"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="" required>
-                            </div>
-                            <div>
-                                <label for="last_name"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Age</label>
-                                <input type="text" name="lastname" value="{{ $appointment->patient->gender }}"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="" required>
-                            </div>
-                        </div>
+                        <div class="modal-body">
+                            <div class="row row-cols-md-3">
+                                <div class="col-md-6 mb-5">
+                                    <label for="last_name"
+                                        class="form-label mb-2 text-sm fw-bold text-gray-900 dark:text-white">Gender</label>
+                                    <input type="text" name="lastname" value="{{ $appointment->patient->gender }}"
+                                        class="form-control form-control-sm bg-light border border-secondary text-dark rounded-lg focus-ring-blue-500 focus-border-blue-500"
+                                        placeholder="" readonly>
+                                </div>
+                                <div class="col-md-6 mb-5">
+                                    <label for="first_name"
+                                        class="form-label mb-2 text-sm fw-bold text-gray-900 dark:text-white">Birthdate</label>
+                                    <input type="date" name="firstname"
+                                        value="{{ $appointment->patient->birthdate->format('Y-m-d') }}"
+                                        class="form-control form-control-sm bg-light border border-secondary text-dark rounded-lg focus-ring-blue-500 focus-border-blue-500"
+                                        placeholder="" readonly>
+                                </div>
+                                <div class="col-md-6 mb-5">
+                                    <label for="last_name"
+                                        class="form-label mb-2 text-sm fw-bold text-gray-900 dark:text-white">Age</label>
+                                    <input type="text" name="lastname" value="{{ $appointment->patient->age }}"
+                                        class="form-control form-control-sm bg-light border border-secondary text-dark rounded-lg focus-ring-blue-500 focus-border-blue-500"
+                                        placeholder="" readonly>
+                                </div>
 
-                        <div class="grid gap-6 md:grid-cols-2 px-5 py-5">
-                            <div>
-                                <label for="last_name"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact
-                                    No.</label>
-                                <input type="text" name="lastname" value="{{ $appointment->patient->contact }}"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="" required>
-                            </div>
-                            <div>
-                                <label for="first_name"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
-                                <input type="text" name="firstname" value="{{ $appointment->patient->address }}"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="" required>
+                                <div class="col-md-6 mb-5">
+                                    <label for="last_name"
+                                        class="form-label mb-2 text-sm fw-bold text-gray-900 dark:text-white">Contact
+                                        No.</label>
+                                    <input type="text" name="lastname" value="{{ $appointment->patient->contact }}"
+                                        class="form-control form-control-sm bg-light border border-secondary text-dark rounded-lg focus-ring-blue-500 focus-border-blue-500"
+                                        placeholder="" readonly>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="first_name"
+                                        class="form-label mb-2 text-sm fw-bold text-gray-900 dark:text-white">Address</label>
+                                    <input type="text" name="firstname" value="{{ $appointment->patient->address }}"
+                                        class="form-control form-control-sm bg-light border border-secondary text-dark rounded-lg focus-ring-blue-500 focus-border-blue-500"
+                                        placeholder="" readonly>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <form action="{{ route('checkup.store-consult', $appointment->id) }}" method="POST">
-            @csrf
-            <div class=" mb-8 overflow-hidden rounded-lg shadow-xs border border-solid border-black">
-                <div class="grid gap-2 xl:grid-cols-6 pt-5 pb-2  px-5">
-                    <div>
-                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">BP
-                        </label>
-                        <input type="text" name="bp" value="{{--  --}}"
-                            class="w-32 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="" required>
+        <div class="w-100 mb-4 overflow-hidden rounded shadow border border-solid border-dark">
+            <div class="p-5">
+                <form action="{{ route('checkup.store-consult', $appointment->id) }}" method="POST" autocomplete="off">
+                    @csrf
+                    <div class="mb-5">
+                        <div class="row row-cols-1 row-cols-md-6">
+                            <div class="col">
+                                <label for="bp"
+                                    class="form-label mb-2 text-sm fw-bold text-gray-900 dark:text-white">BP</label>
+                                <input type="text" name="bp" value="{{--  --}}"
+                                    class="form-control bg-light border border-secondary rounded-lg text-dark"
+                                    placeholder="" required>
+                            </div>
+                            <div class="col">
+                                <label for="cr"
+                                    class="form-label mb-2 text-sm fw-bold text-gray-900 dark:text-white">CR</label>
+                                <input type="text" name="cr" value="{{--  --}}"
+                                    class="form-control bg-light border border-secondary rounded-lg text-dark"
+                                    placeholder="" required>
+                            </div>
+                            <div class="col">
+                                <label for="rr"
+                                    class="form-label mb-2 text-sm fw-bold text-gray-900 dark:text-white">RR</label>
+                                <input type="text" name="rr" value="{{--  --}}"
+                                    class="form-control bg-light border border-secondary rounded-lg text-dark"
+                                    placeholder="" required>
+                            </div>
+                            <div class="col">
+                                <label for="t"
+                                    class="form-label mb-2 text-sm fw-bold text-gray-900 dark:text-white">T</label>
+                                <input type="text" name="t" value="{{--  --}}"
+                                    class="form-control bg-light border border-secondary rounded-lg text-dark"
+                                    placeholder="" required>
+                            </div>
+                            <div class="col">
+                                <label for="wt"
+                                    class="form-label mb-2 text-sm fw-bold text-gray-900 dark:text-white">WT</label>
+                                <input type="text" name="wt" value="{{--  --}}"
+                                    class="form-control bg-light border border-secondary rounded-lg text-dark"
+                                    placeholder="" required>
+                            </div>
+                            <div class="col">
+                                <label for="ht"
+                                    class="form-label mb-2 text-sm fw-bold text-gray-900 dark:text-white">HT</label>
+                                <input type="text" name="ht" value="{{--  --}}"
+                                    class="form-control bg-light border border-secondary rounded-lg text-dark"
+                                    placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="pt-3 pb-3">
+                            <label for="symptoms"
+                                class="form-label mb-2 text-sm fw-bold text-gray-900 dark:text-white">SYMPTOMS</label>
+                            <textarea name="symptoms" rows="4"
+                                class="form-control form-control-sm bg-light rounded-lg border border-secondary text-dark"
+                                placeholder="Type here..."></textarea>
+                        </div>
+                        <div class="pt-3 pb-3">
+                            <label for="diagnosis"
+                                class="form-label mb-2 text-sm fw-bold text-gray-900 dark:text-white">DIAGNOSE</label>
+                            <textarea name="diagnosis" rows="4"
+                                class="form-control form-control-sm bg-light rounded-lg border border-secondary text-dark"
+                                placeholder="Type here..."></textarea>
+                        </div>
+                        <div class="pt-3 pb-3">
+                            <button type="submit"
+                                class="btn btn-primary btn-sm rounded-lg text-white px-4 py-2 me-2 mb-2">SAVE
+                                CONSULTATION</button>
+                        </div>
                     </div>
-                    <div>
-                        <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">CR
-                        </label>
-                        <input type="text" name="cr" value="{{--  --}}"
-                            class="w-32 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="" required>
-                    </div>
-                    <div>
-                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">RR
-                        </label>
-                        <input type="text" name="rr" value="{{--  --}}"
-                            class="w-32 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="" required>
-                    </div>
-                    <div>
-                        <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">T
-                        </label>
-                        <input type="text" name="t" value="{{--  --}}"
-                            class="w-32 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="" required>
-                    </div>
-                    <div>
-                        <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">WT
-                        </label>
-                        <input type="text" name="wt" value="{{--  --}}"
-                            class="w-32 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="" required>
-                    </div>
-                    <div>
-                        <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">HT
-                        </label>
-                        <input type="text" name="ht" value="{{--  --}}"
-                            class="w-32 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            placeholder="" required>
-                    </div>
-                </div>
-                <div class="grid gap-2 xl:grid-cols-1 pt-5 pb-2  px-5">
-                    <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">SYMPTOMS
-                    </label>
-                    <textarea name="symptoms" rows="4"
-                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Type here..."></textarea>
-
-                </div>
-                <div class="grid gap-2 xl:grid-cols-1 pt-2 pb-2  px-5">
-                    <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">DIAGNOSE
-                    </label>
-                    <textarea name="diagnosis" rows="4"
-                        class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Type here..."></textarea>
-                </div>
-
-                <div class="pt-2 pb-5 px-5 flex justify-end">
-                    <div>
-                        <button type="submit"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">SAVE
-                            CONSULTATION</button>
-                    </div>
-                </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 @endsection

@@ -39,7 +39,11 @@
                                             class="btn btn-sm me-2 btn-primary">
                                             Edit
                                         </button>
-                                        <a href="#{{-- route('med-list.delete',$med->id) --}}" class="btn btn-sm btn-danger">Delete</a>
+                                        <form action="{{ route('med-list.delete', $med->id) }}" method="post">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 <div id="defaultModal{{ $med->id }}" class="modal fade">
@@ -50,7 +54,7 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
-                                            <form action="#{{-- route('med-list.update',$med->id) --}}" method="post">
+                                            <form action="{{ route('med-list.update', $med->id) }}" method="post">
                                                 @csrf
                                                 <div class="modal-body">
                                                     <div class="mb-3">
@@ -69,7 +73,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-primary">Update</button>
+                                                    <button type="submit" class="btn btn-primary">Update</button>
                                                     <button type="button" class="btn btn-secondary"
                                                         data-bs-dismiss="modal">Decline</button>
                                                 </div>

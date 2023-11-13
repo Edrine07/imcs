@@ -23,6 +23,9 @@
                 </div>
                 <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
                     <div class="w-full">
+                        <a href="/" class="flex items-center justify-center">
+                            <x-application-logo class="w-20 h-40 fill-current text-gray-500" />
+                        </a>
                         <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
                             Login
                         </h1>

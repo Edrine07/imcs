@@ -74,7 +74,7 @@
                                 @elseif($appointment->appointment_status == 'Completed')
                                     <span class="badge badge-primary">{{ $appointment->appointment_status }}</span>
                                 @elseif($appointment->appointment_status == 'Pending')
-                                    @if ($appointment->appointment_date->format('Y-m-d') <= date('Y-m-d'))
+                                    @if ($appointment->appointment_date->format('Y-m-d') < date('Y-m-d'))
                                         <span class="badge badge-danger">Expired</span>
                                     @else
                                         <span class="badge badge-warning">{{ $appointment->appointment_status }}</span>

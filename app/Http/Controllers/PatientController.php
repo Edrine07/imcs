@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
+use App\Models\Patient;
 use App\Models\Medicine;
+use App\Models\Appointment;
+use Illuminate\Support\Arr;
 use App\Models\MedicineList;
 use Illuminate\Http\Request;
-use App\Models\Patient;
 
 class PatientController extends Controller
 {
-    public function Patient()
+    public function patient()
     {
         $patients = Patient::orderBy('lastname', 'asc')->get();
 
         return view('patient.index', compact('patients'));
     }
 
-    public function CreatePatient()
+    public function createPatient()
     {
         return view('patient.create');
     }
@@ -139,16 +140,27 @@ class PatientController extends Controller
             'duration' => 'required'
         ]);
 
+
         Medicine::create([
             'appointment_id' => $validated['app_id'],
             'medicine_id' => $validated['medicine_id'],
             'medicine_dose' => $validated['medicine_dose'],
             'medicine_unit' => $validated['medicine_unit'],
             'duration' => $validated['duration'],
-
         ]);
 
 
         return redirect()->route('patient.med-history', $app->patient_id)->with('success', 'Medicine added!');
+    }
+
+    public function updateMedTotake(Request $request, Appointment $app)
+    {
+        $validated = $request->validate([
+            'app_id' => 'required',
+            'medicine_id' => 'required',
+            'medicine_dose' => 'required',
+            'medicine_unit' => 'required',
+            'duration' => 'required'
+        ]);
     }
 }

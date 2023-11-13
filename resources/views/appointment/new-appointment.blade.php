@@ -19,7 +19,7 @@
                                 <th class="min-w-100px">Contact No.</th>
                                 <th class="min-w-100px">Date</th>
                                 <th class="min-w-120px">Time</th>
-                                <th class="text-end min-w-70px">Actions</th>
+                                <th class="text-center min-w-70px">Status</th>
                             </tr>
                         </thead>
                         <tbody class="fw-bold text-gray-600">
@@ -31,11 +31,23 @@
                                     <td>{{ $item->patient->contact }}</td>
                                     <td>{{ $item->appointment_date->format('F d, Y') }}</td>
                                     <td>{{ date('H:i A', strtotime($item->appointment_time)) }}</td>
-                                    <td class="d-flex justify-content-center align-items-end">
-                                        <a href="{{ route('appointment.approve') }}"
-                                            class="btn btn-sm btn-success">Approve</a>
-                                        <a href="{{ route('appointment.cancel') }}" class="btn btn-sm btn-danger">Cancel</a>
+                                    <td>
+                                        @if ($item->appointment_status == 'Approved')
+                                            <span class="badge badge-success">{{ $item->appointment_status }}</span>
+                                        @elseif($item->appointment_status == 'Completed')
+                                            <span class="badge badge-primary">{{ $item->appointment_status }}</span>
+                                        @elseif($item->appointment_status == 'Pending')
+                                            <span class="badge badge-warning">{{ $item->appointment_status }}</span>
+                                        @else
+                                            <span class="badge badge-danger">{{ $item->appointment_status }}</span>
+                                        @endif
                                     </td>
+                                    {{-- <td class="d-flex justify-content-center align-items-end">
+                                        <a href="{{ route('appointment.approve', $item->id) }}"
+                                            class="btn btn-sm btn-success">Approve</a>
+                                        <a href="{{ route('appointment.cancel', $item->id) }}"
+                                            class="btn btn-sm btn-danger">Cancel</a>
+                                    </td> --}}
                                 </tr>
                             @empty
                                 <tr>

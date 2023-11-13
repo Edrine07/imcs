@@ -36,7 +36,7 @@ class AppointmentController extends Controller
 
     public function newAppointments()
     {
-        $appointments = Appointment::where('appointment_status', 'Pending')->where('appointment_date', '==', date('Y-m-d'))->get();
+        $appointments = Appointment::whereIn('appointment_status', ['Pending', 'Approved'])->where('appointment_date', '=', date('Y-m-d'))->get();
         return view('appointment.new-appointment', compact('appointments'));
     }
 
