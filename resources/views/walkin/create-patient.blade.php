@@ -107,7 +107,7 @@
                                             </tr>
                                         </thead>
                                         <tbody class="table-group-divider">
-                                            @forelse ($app->medToTake as $med)
+                                            {{-- @forelse ($app->medToTake as $med)
                                                 <tr class="text-center">
                                                     <td>{{ $med->medName->medicine_name }}</td>
                                                     <td>{{ $med->medName->medicine_type }}</td>
@@ -194,7 +194,7 @@
                                                 <tr>
                                                     <td colspan="3" class="text-center">No Medicine to Take</td>
                                                 </tr>
-                                            @endforelse
+                                            @endforelse --}}
                                         </tbody>
                                     </table>
                                 </div>
@@ -210,10 +210,10 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                             </div>
-                                            <form action="{{ route('patient.med-store', $app->id) }}" method="post">
+                                            <form action="{{-- route('patient.med-store',$app->id) --}}" method="post">
                                                 @csrf
                                                 <div class="modal-body">
-                                                    <input type="hidden" name="app_id" value="{{ $app->id }}">
+                                                    <input type="hidden" name="app_id" value="{{-- $app->id --}}">
                                                     <div class="row">
                                                         <div class="form-group mb-2 col-md-6">
                                                             <label>Choose a Medicine</label>
