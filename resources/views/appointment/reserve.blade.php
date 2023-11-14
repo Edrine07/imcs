@@ -280,63 +280,63 @@
                         <div class="d-flex flex-wrap">
                             <div class="form-check me-2">
                                 <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="02:00">
+                                    value="14:00">
                                 <label class="form-check-label">
                                     02:00
                                 </label>
                             </div>
                             <div class="form-check me-2">
                                 <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="02:30">
+                                    value="14:30">
                                 <label class="form-check-label">
                                     02:30
                                 </label>
                             </div>
                             <div class="form-check me-2">
                                 <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="03:00">
+                                    value="15:00">
                                 <label class="form-check-label">
                                     03:00
                                 </label>
                             </div>
                             <div class="form-check me-2">
                                 <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="03:30">
+                                    value="15:30">
                                 <label class="form-check-label">
                                     03:30
                                 </label>
                             </div>
                             <div class="form-check me-2">
                                 <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="04:00">
+                                    value="16:00">
                                 <label class="form-check-label">
                                     04:00
                                 </label>
                             </div>
                             <div class="form-check me-2">
                                 <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="04:30">
+                                    value="16:30">
                                 <label class="form-check-label">
                                     04:30
                                 </label>
                             </div>
                             <div class="form-check me-2">
                                 <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="05:00">
+                                    value="17:00">
                                 <label class="form-check-label">
                                     05:00
                                 </label>
                             </div>
                             <div class="form-check me-2">
                                 <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="05:30">
+                                    value="17:30">
                                 <label class="form-check-label">
                                     05:30
                                 </label>
                             </div>
                             <div class="form-check me-2">
                                 <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="06:00">
+                                    value="18:00">
                                 <label class="form-check-label">
                                     06:00
                                 </label>

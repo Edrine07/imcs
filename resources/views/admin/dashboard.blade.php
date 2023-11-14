@@ -70,7 +70,7 @@
             <div class="card card-xxl-stretch mb-5 mb-xl-8">
                 <div class="card-header border-0 pt-5">
                     <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bolder fs-3 mb-1">Pending Appointments Today</span>
+                        <span class="card-label fw-bolder fs-3 mb-1">Pending Appointments</span>
                     </h3>
                 </div>
                 <div class="card-body py-3">
@@ -105,7 +105,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="7" class="text-center">No Pending Appointments Listed Today</td>
+                                        <td colspan="7" class="text-center">No Pending Appointments Listed</td>
                                     </tr>
                                 @endforelse
                             </tbody>
