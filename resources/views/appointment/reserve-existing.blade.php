@@ -49,7 +49,7 @@
             </div>
         </div>
 
-        <div class="container mt-5">
+        <div class="container mt-5 d-flex justify-content-center align-items-center">
             <div class="row bg-white rounded rounded-3 shadow p-4">
                 <x-success></x-success>
                 <x-error></x-error>
@@ -210,11 +210,14 @@
                     console.log('Date input changed');
                 },
                 headerToolbar: {
-                    left: 'prev',
+                    start: 'prev',
                     center: 'title',
-                    right: 'next'
+                    end: 'next'
                 },
                 selectOverlap: false,
+                aspectRatio: 1,
+                handleWindowResize: true,
+                contentHeight: 400,
                 selectAllow: function(info) {
                     var today = new Date();
                     var yesterday = new Date(today);
@@ -234,6 +237,7 @@
 
                 },
                 unselectAuto: false,
+                selectMirror: false,
                 longPressDelay: 100,
                 dayRender: function(arg) {
                     var today = new Date();

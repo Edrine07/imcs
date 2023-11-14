@@ -2,15 +2,43 @@
 
 @section('styles')
     <style>
+        /* .fc-toolbar-title {
+                                            font-size: 15px !important;
+                                        }
+
+                                        .fc-button {
+                                            font-size: 10px !important;
+                                        }
+
+                                        .fc-toolbar {
+                                            display: flex;
+                                            justify-content: space-between;
+                                            align-items: center;
+                                        }
+
+                                        /* Media queries for smaller screens */
+        /* @media (max-width: 576px) {
+                                        .fc-toolbar {
+                                            flex-direction: column;
+                                            text-align: center;
+                                        }
+
+                                        /* Style the title in the center */
         .fc-toolbar-title {
-            font-size: 15px !important;
+            order: 2;
+            /* Move the title to the center */
+            margin-bottom: 10px;
+            /* Adjust spacing if needed */
         }
 
-        .fc-button {
-            font-size: 10px !important;
+        /* Style the buttons */
+        .fc-button-group {
+            order: 1;
+            /* Move the buttons to the top */
+        }
         }
 
-        #calendar a {
+        */ */ #calendar a {
             color: #303030;
             text-decoration: none;
         }
@@ -235,11 +263,14 @@
                     console.log('Date input changed');
                 },
                 headerToolbar: {
-                    left: 'prev',
+                    start: 'prev',
                     center: 'title',
-                    right: 'next'
+                    end: 'next'
                 },
                 selectOverlap: false,
+                aspectRatio: 1,
+                handleWindowResize: true,
+                contentHeight: 400,
                 selectAllow: function(info) {
                     var today = new Date();
                     var yesterday = new Date(today);
@@ -259,6 +290,7 @@
 
                 },
                 unselectAuto: false,
+                selectMirror: false,
                 longPressDelay: 100,
                 dayRender: function(arg) {
                     var today = new Date();
