@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="age" class="form-label">Age</label>
-                                    <input type="text" name="age" value="{{ $patient->gender }}" class="form-control"
+                                    <input type="text" name="age" value="{{ $patient->age }}" class="form-control"
                                         placeholder="" readonly>
                                 </div>
                             </div>

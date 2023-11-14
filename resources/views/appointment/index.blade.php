@@ -63,11 +63,9 @@
                             <td>{{ Str::words($appointment->patient->address, 5, $end = '...') }}</td>
                             <td>{{ $appointment->patient->contact }}</td>
                             <td>{{ $appointment?->appointment_date?->format('F d, Y') ?? '' }}</td>
-                            @php
-                                $appointment_time = new DateTime($appointment->appointment_time);
-                                $formattedTime = $appointment_time->format('H:i A');
-                            @endphp
-                            <td class="text-end">{{ $formattedTime ?? '' }}</td>
+                            <td class="text-end">
+                                {{ \Carbon\Carbon::createFromFormat('H:i:s', $appointment->appointment_time)->format('h:i A') }}
+                            </td>
                             <td>
                                 @if ($appointment->appointment_status == 'Approved')
                                     <span class="badge badge-success">{{ $appointment->appointment_status }}</span>

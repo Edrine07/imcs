@@ -43,6 +43,8 @@ class WalkinController extends Controller
             'diagnosis' => 'required'
         ]);
 
+        // dd($validated);
+
         $patient = Patient::create([
             'firstname' => $validated['firstname'],
             'lastname' => $validated['lastname'],

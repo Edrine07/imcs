@@ -95,7 +95,10 @@
                                         <td>{{ Str::words($pending->patient->address, 5, $end = '...') }}</td>
                                         <td>{{ $pending->patient->contact }}</td>
                                         <td>{{ $pending->appointment_date->format('F d, Y') }}</td>
-                                        <td>{{ date('H:i A', strtotime($pending->appointment_time)) }}</td>
+                                        <td>
+                                            {{-- display time in H:i A format --}}
+                                            {{ \Carbon\Carbon::createFromFormat('H:i:s', $pending->appointment_time)->format('h:i A') }}
+                                        </td>
                                         <td class="text-end">
                                             <a href="{{ route('appointment.approve', $pending->id) }}"
                                                 class="btn btn-sm btn-success">Approve</a>
