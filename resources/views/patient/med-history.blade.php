@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="col-md-4 mb-3">
                                     <label for="age" class="form-label">Age</label>
-                                    <input type="text" name="age" value="{{ $patient->gender }}" class="form-control"
+                                    <input type="text" name="age" value="{{ $patient->age }}" class="form-control"
                                         placeholder="" readonly>
                                 </div>
                             </div>
@@ -75,7 +75,7 @@
                     <h2 class="accordion-header">
                         <button class="accordion-button" type="button" data-bs-toggle="collapse"
                             data-bs-target="#collapseItem{{ $app->id }}">
-                            <span class="text-uppercase fw-bold fs-5">APPOINTMENT DATE:
+                            <span class="text-uppercase fw-bold fs-5">WALK IN DATE:
                                 {{ $app->appointment_date->format('F d, Y') }}</span>
                         </button>
                     </h2>
