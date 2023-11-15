@@ -1,15 +1,16 @@
 <?php
 
+use App\Http\Livewire\FindPatient;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\WalkinController;
 use App\Http\Controllers\MedicalController;
 use App\Http\Controllers\PatientController;
-use App\Http\Controllers\PrescriptionController;
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\BusinessHourController;
-use App\Http\Controllers\TodayCheckupController;
-use App\Http\Controllers\WalkinController;
 use App\Http\Controllers\MedicineListController;
+use App\Http\Controllers\PrescriptionController;
+use App\Http\Controllers\TodayCheckupController;
 
 Route::middleware(['guest', 'web'])->group(function () {
     Route::get('/', function () {
@@ -19,9 +20,11 @@ Route::middleware(['guest', 'web'])->group(function () {
     Route::prefix('appointment')->group(function () {
         Route::get('/', [AppointmentController::class, 'makeAppointment'])->name('appointment.reserve');
         Route::post('/store', [AppointmentController::class, 'reserveAppointmentStore'])->name('appointment.reserve_appointment');
-        Route::get('/find-patient', [AppointmentController::class, 'findPatient'])->name('appointment.find');
+        Route::post('/existing-store', [AppointmentController::class, 'existingPatientStore'])->name('appointment.existing-store');
+        Route::post('/find-patient', [AppointmentController::class, 'findPatient'])->name('appointment.find');
         Route::post('/appointment/patient-find-store/{patient}', [AppointmentController::class, 'findPatient'])->name('appointment.findPatient');
         Route::get('/appointment', [AppointmentController::class, 'appoint'])->name('appointment.appointment');
+        Route::get('/appointment/existing', [AppointmentController::class, 'existingPatient'])->name('appointment.existing');
     });
 
     Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');

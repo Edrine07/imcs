@@ -8,18 +8,18 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\VonageMessage;
 
-class ApprovedNotif extends Notification
+class CancelledNotif extends Notification
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      */
-    protected $app;
+    protected $reason;
 
-    public function __construct($app)
+    public function __construct($reason)
     {
-        $this->app = $app;
+        $this->reason = $reason;
     }
 
     /**
@@ -38,7 +38,7 @@ class ApprovedNotif extends Notification
     public function toVonage(object $notifiable): VonageMessage
     {
         return (new VonageMessage)
-        ->content('Appointment Confirmation: Mr/Mrs/Ms '. $this->app['name'] .', thank you for making an appointment with IMMACULATE MEDICO-SURGICAL CLINIC on ' . $this->app['date'] . ' at ' . $this->app['time'] . '. Please arrive 10 minutes before the scheduled time. Have a nice day!');
+        ->content('Dear ' . $this->reason['name'] . ', We regret to inform you that your appointment scheduled at IMMACULATE MEDICO-SURGICAL CLINIC on ' .  $this->reason['date'] . ' at ' .  $this->reason['time'] . ' has been canceled due to: ' . $this->reason['reason'] . '. We apologize for any inconvenience this may cause. Thank you for your understanding.');
 
     }
 

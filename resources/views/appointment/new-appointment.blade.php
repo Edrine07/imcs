@@ -30,7 +30,9 @@
                                     <td>{{ Str::words($item->patient->address, 5, '...') }}</td>
                                     <td>{{ $item->patient->contact }}</td>
                                     <td>{{ $item->appointment_date->format('F d, Y') }}</td>
-                                    <td>{{ date('H:i A', strtotime($item->appointment_time)) }}</td>
+                                    <td class="text-end">
+                                        {{ \Carbon\Carbon::createFromFormat('H:i:s', $item->appointment_time)->format('h:i A') }}
+                                    </td>
                                     <td>
                                         @if ($item->appointment_status == 'Approved')
                                             <span class="badge badge-success">{{ $item->appointment_status }}</span>

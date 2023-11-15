@@ -70,7 +70,7 @@
             <div class="card card-xxl-stretch mb-5 mb-xl-8">
                 <div class="card-header border-0 pt-5">
                     <h3 class="card-title align-items-start flex-column">
-                        <span class="card-label fw-bolder fs-3 mb-1">Pending Appointments Today</span>
+                        <span class="card-label fw-bolder fs-3 mb-1">Pending Appointments</span>
                     </h3>
                 </div>
                 <div class="card-body py-3">
@@ -95,17 +95,53 @@
                                         <td>{{ Str::words($pending->patient->address, 5, $end = '...') }}</td>
                                         <td>{{ $pending->patient->contact }}</td>
                                         <td>{{ $pending->appointment_date->format('F d, Y') }}</td>
-                                        <td>{{ date('H:i A', strtotime($pending->appointment_time)) }}</td>
+                                        <td>
+                                            {{-- display time in H:i A format --}}
+                                            {{ \Carbon\Carbon::createFromFormat('H:i:s', $pending->appointment_time)->format('h:i A') }}
+                                        </td>
                                         <td class="text-end">
                                             <a href="{{ route('appointment.approve', $pending->id) }}"
                                                 class="btn btn-sm btn-success">Approve</a>
-                                            <a href="{{ route('appointment.cancel', $pending->id) }}"
-                                                class="btn btn-sm  btn-danger">Cancel</a>
+                                            {{-- <a href="{{ route('appointment.cancel', $pending->id) }}"
+                                                class="btn btn-sm  btn-danger">Cancel</a> --}}
+
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                data-bs-target="#backDropModal">
+                                                Cancel
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="backDropModal" data-bs-backdrop="static"
+                                                tabindex="-1">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <form class="modal-content" action="{{ route('appointment.cancel', $pending->id) }}" method="">
+                                                        @csrf
+                                                        <div class="modal-header text-center">
+                                                            <h5 class="modal-title text-center" id="backDropModalTitle">REASON FOR
+                                                                CANCELATION</h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col mb-3">
+                                                                    <textarea placeholder="" name="reason" class="form-control" id="" rows="3">Type here... </textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-danger">SEND</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="7" class="text-center">No Pending Appointments Listed Today</td>
+                                        <td colspan="7" class="text-center">No Pending Appointments Listed</td>
                                     </tr>
                                 @endforelse
                             </tbody>

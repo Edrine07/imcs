@@ -162,5 +162,8 @@ class PatientController extends Controller
             'medicine_unit' => 'required',
             'duration' => 'required'
         ]);
+
+        // find the medicine
+
     }
 }

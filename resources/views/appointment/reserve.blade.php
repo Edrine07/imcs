@@ -1,24 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.guest')
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Appointment</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+@section('styles')
     <style>
+        /* .fc-toolbar-title {
+                                            font-size: 15px !important;
+                                        }
+
+                                        .fc-button {
+                                            font-size: 10px !important;
+                                        }
+
+                                        .fc-toolbar {
+                                            display: flex;
+                                            justify-content: space-between;
+                                            align-items: center;
+                                        }
+
+                                        /* Media queries for smaller screens */
+        /* @media (max-width: 576px) {
+                                        .fc-toolbar {
+                                            flex-direction: column;
+                                            text-align: center;
+                                        }
+
+                                        /* Style the title in the center */
         .fc-toolbar-title {
-            font-size: 15px !important;
+            order: 2;
+            /* Move the title to the center */
+            margin-bottom: 10px;
+            /* Adjust spacing if needed */
         }
 
-        .fc-button {
-            font-size: 10px !important;
+        /* Style the buttons */
+        .fc-button-group {
+            order: 1;
+            /* Move the buttons to the top */
+        }
         }
 
-        #calendar a {
+        */ */ #calendar a {
             color: #303030;
             text-decoration: none;
         }
@@ -27,28 +47,8 @@
             display: none;
         }
 
-        .fc .fc-highlight {
-            background: rgb(1 34 255 / 30%);
-        }
-
-        .card-header {
-            background-color: #7e3af200 !important;
-            border-bottom: none !important;
-        }
-
-        .form-group {
-            margin-bottom: 10px;
-        }
-
-        .form-label {
-            font-weight: 500;
-            margin-bottom: 5px;
-            color: #303030;
-            text-transform: uppercase;
-        }
-
-        .card {
-            height: 550px;
+        .fc-highlight {
+            background: rgb(78, 145, 239) !important;
         }
 
         #calendar .unselectable-date {
@@ -63,304 +63,193 @@
             background-color: rgb(214, 250, 214);
         }
     </style>
-</head>
+@endsection
 
-<body>
-    <div class="container-fluid" style="height: 100vh;">
-        @if ($patient)
-            <form action="{{ route('appointment.findPatient', [$patient]) }}" method="post">
-                @csrf
-            @else
-                <form action="{{ route('appointment.reserve_appointment') }}" method="post">
-                    @csrf
-        @endif
-        <div class="d-flex flex-wrap justify-content-center align-items-center" style="height: 100vh;">
-            <div class="col-md-12">
-                <x-success></x-success>
-            </div>
-            <div class="col-md-4 me-3">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-title">
-                            <h5 class="">MAKE APPOINTMENT</h5>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <ul class="nav nav-tabs" id="myTab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link  {{ !$patient ? 'active' : '' }}" id="home-tab"
-                                    data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab"
-                                    aria-controls="home-tab-pane" aria-selected="true">New Patient</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link  {{ $patient ? ' active' : '' }}" id="profile-tab"
-                                    data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button"
-                                    role="tab" aria-controls="profile-tab-pane" aria-selected="false">Existing
-                                    Patient</button>
-                            </li>
-                        </ul>
-                        <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade {{ !$patient ? 'show active' : '' }} " id="home-tab-pane"
-                                role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-                                <div class="row mt-4">
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label">First Name</label>
-                                        <input type="text" name="firstname"
-                                            class="form-control text-capitalize @error('firstname') is-invalid @enderror"
-                                            value="{{ old('firstname') }}">
-                                        @error('firstname')
-                                            <span class="small text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label">Last Name</label>
-                                        <input type="text" name="lastname"
-                                            class="form-control text-capitalize @error('lastname') is-invalid @enderror"
-                                            placeholder="" value="{{ old('lastname') }}">
-                                        @error('lastname')
-                                            <span class="small text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group">
-                                        <label class="form-label">Gender</label>
-                                        <select name="gender"
-                                            class="form-control @error('gender') is-invalid @enderror">
-                                            <option value="">Please Select</option>
-                                            <option value="Male" @selected(old('gender') == 'Male')>Male</option>
-                                            <option value="Female" @selected(old('gender') == 'Female')>Female</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="row ">
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label">Birthdate</label>
-                                        <input type="date" name="birthdate" value="{{ old('birthdate') }}"
-                                            class="form-control @error('birthdate') is-invalid @enderror"
-                                            placeholder="First Name">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="form-label">Age</label>
-                                        <input type="number" name="age" value="{{ old('age') }}"
-                                            class="form-control @error('age') is-invalid @enderror" placeholder="0">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">Contact Number </label>
-                                        <input type="text" name="contact" pattern="[0-9]{11}"
-                                            value="{{ old('contact') }}"
-                                            class="form-control @error('contact') is-invalid @enderror"
-                                            placeholder="CP No. (09XX-XXX-XXXX)">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">Address</label>
-                                        <input type="text" name="address" value="{{ old('address') }}"
-                                            class="form-control @error('address') is-invalid @enderror"
-                                            placeholder="">
-                                    </div>
-                                </div>
-                            </div>
-                            <form action="{{ route('appointment.find') }}">
-                                <div class="tab-pane fade  {{ $patient ? 'show active' : '' }}" id="profile-tab-pane"
-                                    role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-                                    <div class="row mt-4">
-                                        <div class="form-group col-md-6">
-                                            <label class="form-label">First Name</label>
-                                            <input type="text" name="fname" value="{{ old('fname') }}"
-                                                class="form-control text-capitalize @error('fname') is-invalid @enderror"
-                                                placeholder="">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label class="form-label">Last Name</label>
-                                            <input type="text" name="lname" value="{{ old('lname') }}"
-                                                class="form-control text-capitalize @error('lname') is-invalid @enderror"
-                                                placeholder="">
-                                        </div>
-                                        <div class="form-group col-md-12">
-                                            <label class="form-label">BIRTHDATE</label>
-                                            <input type="date" name="bdate" value="{{ old('bdate') }}"
-                                                class="form-control @error('bdate') is-invalid @enderror"
-                                                placeholder="">
-                                        </div>
-                                        <div class="form-group col-md-12">
-                                            <button class="btn btn-primary col-md-12">FIND MY RECORD</button>
-                                        </div>
-                                    </div>
-                            </form>
-                            <hr>
-                            <div class="row">
-                                @if ($patient)
-                                    <div class="col-md-12">
-                                        <div class="card" style="height: 150px; padding: 10px;">
-                                            <h5>FOUND YOUR RECORD!</h5>
-                                            <div class="row">
-                                                <input type="text" name="{{ $patient->id }}" value="01">
-                                                <p class="text-uppercase mb-2">NAME: {{ $patient->full_name }}</p>
-                                                <p class="txt-uppercase">BIRTHDATE: {{ $patient->birthdate }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
+@section('content')
+    <div class="container-fluid">
+        <div class="d-flex flex-wrap align-items-center justify-content-between mb-5 pb-4">
+            <div class="flex-shrink-0">
+                <a href="/"
+                    class="text-italic font-light h1 display-6 font-serif text-violet-400 text-poppins cursor-pointer mb-5">
+                    Immaculate Medico-Surgical Clinic
+                </a>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div id='calendar'></div>
-                        <input type="hidden" name="selectedDate" id="selectedDate"
-                            value="{{ old('selectedDate') }}"
+
+        <div class="container mt-5">
+            <form action="{{ route('appointment.reserve_appointment') }}" method="post" class="my-auto">
+                @csrf
+                <div class="row bg-white rounded rounded-3 shadow p-4">
+                    <x-success></x-success>
+                    <x-error></x-error>
+                    <div class="col-md-4">
+                        <h2 class="text-center my-5">Make Appointment</h2>
+                        <h3 class="text-center">Are you an Existing Patient? <br> If yes, <a
+                                href="{{ route('appointment.existing') }}">Click
+                                Here</a> </h3>
+                        <div class="row mt-5">
+                            <div class="form-group mb-4 col-md-12">
+                                <div class="form-floating">
+                                    <input type="text" name="firstname" class="form-control" placeholder="Firstname"
+                                        value="{{ old('firstname') }}" required>
+                                    <label for="floatingPassword">First Name</label>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4 col-md-12">
+                                <div class="form-floating">
+                                    <input type="text" name="lastname" class="form-control" placeholder="lastname"
+                                        value="{{ old('lastname') }}" required>
+                                    <label for="floatingPassword">Last Name</label>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4 col-md-12">
+                                <div class="form-floating">
+                                    <select class="form-select" name="gender">
+                                        <option selected>Select Gender</option>
+                                        <option value="Male" @selected(old('gender') == 'Male')>Male</option>
+                                        <option value="Female" @selected(old('gender') == 'Female')>Female</option>
+                                    </select>
+                                    <label>Gender</label>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4 col-md-6">
+                                <div class="form-floating">
+                                    <input type="date" name="birthdate" class="form-control" id="birthdate"
+                                        value="{{ old('birthdate') }}" max="{{ date('Y-m-d') }}" placeholder="birthdate"
+                                        required>
+                                    <label for="floatingPassword">Birthdate</label>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4 col-md-6">
+                                <div class="form-floating">
+                                    <input type="number" name="age" class="form-control" id="age"
+                                        value="{{ old('age') ?? 0 }}" placeholder="age" readonly>
+                                    <label for="floatingPassword">Age</label>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4 col-md-12">
+                                <div class="form-floating">
+                                    <input type="text" name="contact" class="form-control" pattern="[0-9]{12}"
+                                        value="{{ old('contact') }}" placeholder="639123456789" required>
+                                    <label for="floatingPassword">Contact No.</label>
+                                </div>
+                            </div>
+                            <div class="form-group mb-4 col-md-12">
+                                <div class="form-floating">
+                                    <input type="text" name="address" class="form-control" placeholder="address"
+                                        value="{{ old('address') }}" required>
+                                    <label for="floatingPassword">Address No.</label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-5 my-5 p-3">
+                        <h4 class="text-center mb-3">Select Date</h4>
+
+                        <div class="px-2" id='calendar'></div>
+                        <input type="hidden" name="selectedDate" id="selectedDate" value="{{ old('selectedDate') }}"
                             class="form-control @error('selectedDate') is-invalid @enderror" required>
                         @error('selectedDate')
-                            <span class="small text-danger">{{ $message }}</span>
-                        @enderror
-
-                    </div>
-                    <div class="row mt-2">
-                        <h6>MORNING APPOINTMENT</h6>
-                        <div class="d-flex flex-wrap">
-                            <div class="form-check me-2">
-                                <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="09:00">
-                                <label class="form-check-label">
-                                    09:00
-                                </label>
-                            </div>
-                            <div class="form-check me-2">
-                                <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="09:30">
-                                <label class="form-check-label">
-                                    09:30
-                                </label>
-                            </div>
-                            <div class="form-check me-2">
-                                <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="10:00">
-                                <label class="form-check-label">
-                                    10:00
-                                </label>
-                            </div>
-                            <div class="form-check me-2">
-                                <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="10:30">
-                                <label class="form-check-label">
-                                    10:30
-                                </label>
-                            </div>
-                            <div class="form-check me-2">
-                                <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="11:00">
-                                <label class="form-check-label">
-                                    11:00
-                                </label>
-                            </div>
-                            <div class="form-check me-2">
-                                <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="11:30">
-                                <label class="form-check-label">
-                                    11:30
-                                </label>
-                            </div>
-                            <div class="form-check me-2">
-                                <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="12:00">
-                                <label class="form-check-label">
-                                    12:00
-                                </label>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row mt-2">
-                        <h6>AFTERNOON APPOINTMENT</h6>
-                        <div class="d-flex flex-wrap">
-                            <div class="form-check me-2">
-                                <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="02:00">
-                                <label class="form-check-label">
-                                    02:00
-                                </label>
-                            </div>
-                            <div class="form-check me-2">
-                                <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="02:30">
-                                <label class="form-check-label">
-                                    02:30
-                                </label>
-                            </div>
-                            <div class="form-check me-2">
-                                <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="03:00">
-                                <label class="form-check-label">
-                                    03:00
-                                </label>
-                            </div>
-                            <div class="form-check me-2">
-                                <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="03:30">
-                                <label class="form-check-label">
-                                    03:30
-                                </label>
-                            </div>
-                            <div class="form-check me-2">
-                                <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="04:00">
-                                <label class="form-check-label">
-                                    04:00
-                                </label>
-                            </div>
-                            <div class="form-check me-2">
-                                <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="04:30">
-                                <label class="form-check-label">
-                                    04:30
-                                </label>
-                            </div>
-                            <div class="form-check me-2">
-                                <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="05:00">
-                                <label class="form-check-label">
-                                    05:00
-                                </label>
-                            </div>
-                            <div class="form-check me-2">
-                                <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="05:30">
-                                <label class="form-check-label">
-                                    05:30
-                                </label>
-                            </div>
-                            <div class="form-check me-2">
-                                <input class="form-check-input" type="radio" name="time_appointment"
-                                    value="06:00">
-                                <label class="form-check-label">
-                                    06:00
-                                </label>
-                            </div>
-                        </div>
-                        @error('time_appointment')
-                            <span class="small text-danger">{{ $message }}</span>
+                            <span class=" mt-2 text-danger text-center fw-bolder">
+                                Please select a date for your appointment!
+                            </span>
                         @enderror
                     </div>
-                </div>
-                <div class="row mt-2">
-                    <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary col-12">SUBMIT APPOINTMENT</button>
+                    <div class="col-md-3 my-5">
+                        <h4 class="text-center mb-3">Select Time</h4>
+
+                        <h5 class="fw-bold mt-5 text-center">Morning Appointments</h5>
+                        <div class="row px-2">
+                            <div class="form-check col-6 mb-3">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="09:00">
+                                <label class="form-check-label">09:00 AM</label>
+                            </div>
+                            <div class="form-check col-6 mb-3">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="09:30">
+                                <label class="form-check-label">09:30 AM</label>
+                            </div>
+                            <div class="form-check col-6 mb-3">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="10:00">
+                                <label class="form-check-label">10:00 AM</label>
+                            </div>
+                            <div class="form-check col-6 mb-3">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="10:30">
+                                <label class="form-check-label">10:30 AM</label>
+                            </div>
+                            <div class="form-check col-6 mb-3">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="11:00">
+                                <label class="form-check-label">11:00 AM</label>
+                            </div>
+                            <div class="form-check col-6 mb-3">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="11:30">
+                                <label class="form-check-label">11:30 AM</label>
+                            </div>
+                            <div class="form-check col-6 mb-3">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="12:00">
+                                <label class="form-check-label">12:00 AM</label>
+                            </div>
+                        </div>
+                        <h5 class="fw-bold mt-4 text-center">Afternoon Appointments</h5>
+                        <div class="row px-2">
+                            <div class="form-check col-6 mb-3">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="02:00">
+                                <label class="form-check-label">02:00 PM</label>
+                            </div>
+                            <div class="form-check col-6 mb-3">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="02:30">
+                                <label class="form-check-label">02:30 PM</label>
+                            </div>
+                            <div class="form-check col-6 mb-3">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="03:00">
+                                <label class="form-check-label">03:00 PM</label>
+                            </div>
+                            <div class="form-check col-6 mb-3">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="03:30">
+                                <label class="form-check-label">03:30 PM</label>
+                            </div>
+                            <div class="form-check col-6 mb-3">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="04:00">
+                                <label class="form-check-label">04:00 PM</label>
+                            </div>
+                            <div class="form-check col-6 mb-3">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="04:30">
+                                <label class="form-check-label">04:30 PM</label>
+                            </div>
+                            <div class="form-check col-6 mb-3">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="05:00">
+                                <label class="form-check-label">05:00 PM</label>
+                            </div>
+                            <div class="form-check col-6 mb-3">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="05:30">
+                                <label class="form-check-label">05:30 PM</label>
+                            </div>
+                            <div class="form-check col-6 mb-3">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="06:00">
+                                <label class="form-check-label">06:00 PM</label>
+                            </div>
+
+                            @error('time_appointment')
+                                <span class="text-danger text-center fw-bolder">
+                                    Please select a time for your appointment!
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-primary col-12">SUBMIT APPOINTMENT</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
+        </form>
     </div>
     </div>
-    </form>
+@endsection
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
+@section('scripts')
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -374,11 +263,14 @@
                     console.log('Date input changed');
                 },
                 headerToolbar: {
-                    left: 'prev',
+                    start: 'prev',
                     center: 'title',
-                    right: 'next'
+                    end: 'next'
                 },
                 selectOverlap: false,
+                aspectRatio: 1,
+                handleWindowResize: true,
+                contentHeight: 400,
                 selectAllow: function(info) {
                     var today = new Date();
                     var yesterday = new Date(today);
@@ -398,6 +290,8 @@
 
                 },
                 unselectAuto: false,
+                selectMirror: false,
+                longPressDelay: 100,
                 dayRender: function(arg) {
                     var today = new Date();
                     if (info.date.getDate() === today.getDate() && info.date.getMonth() === today
@@ -411,6 +305,15 @@
             calendar.render();
         });
     </script>
-</body>
 
-</html>
+    <script>
+        $(document).ready(function() {
+            $('#birthdate').change(function() {
+                var dob = new Date(this.value);
+                var today = new Date();
+                var age = Math.floor((today - dob) / (365.25 * 24 * 60 * 60 * 1000));
+                $('#age').val(age);
+            });
+        });
+    </script>
+@endsection

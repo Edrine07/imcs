@@ -26,9 +26,9 @@ class AdminController extends Controller
             ->where('appointment_status', '=', 'Approved')
             ->count();
 
-        $pendingAppointments = Appointment::where('appointment_status', '=', 'Pending')
-            ->where('appointment_date', '=', date('Y-m-d'))
-            ->orderBy('appointment_time', 'asc')
+
+        // get all pending appointments equal or greater than today
+        $pendingAppointments = Appointment::where('appointment_date', '>=', date('Y-m-d'))->where('appointment_status', '=', 'Pending')
             ->get();
 
 

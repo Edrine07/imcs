@@ -2,17 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Appointment;
 use App\Models\Patient;
+use App\Models\Appointment;
+use App\Models\MedicineList;
 use App\Models\Prescription;
+use Illuminate\Http\Request;
 
 class WalkinController extends Controller
 {
-    public function createPatient()
+    public function createPatient(Patient $patient)
     {
 
-        return view("walkin.create-patient");
+        $appointments = Appointment::where('patient_id', $patient->id)
+            ->where('appointment_status', 'Completed')
+            ->orderBy('appointment_date', 'asc')
+            ->get();
+
+        $medicines = MedicineList::all();
+
+        return view("walkin.create-patient", compact('patient', 'appointments', 'medicines'));
     }
 
     public function store(Request $request)
@@ -34,6 +42,8 @@ class WalkinController extends Controller
             'symptoms' => 'required',
             'diagnosis' => 'required'
         ]);
+
+        // dd($validated);
 
         $patient = Patient::create([
             'firstname' => $validated['firstname'],

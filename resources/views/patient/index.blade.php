@@ -21,7 +21,6 @@
                             </tr>
                         </thead>
                         <tbody class="fw-bold text-gray-600">
-
                             @forelse ($patients as $patient)
                                 <tr class="text-gray-800 text-hover-primary">
                                     <td class="text-gray-400">{{ $loop->iteration }}</td>
@@ -38,6 +37,9 @@
                                     </td>
                                 </tr>
                             @empty
+                                <tr>
+                                    <td colspan="5" class="text-center">No patients found.</td>
+                                </tr>
                             @endforelse
                         </tbody>
                     </table>

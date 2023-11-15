@@ -13,8 +13,9 @@
         "laravel/scout": "^10.3",
         "laravel/tinker": "^2.8",
         "laravel/vonage-notification-channel": "^3.2",
+        "livewire/livewire": "^3.1",
         "mckenziearts/laravel-notify": "^2.4",
-        "phpoffice/phpword": "^0.18.3",
+        "phpoffice/phpword": "^1.1",
         "vonage/client": "^4.0"
     },
     "require-dev": {

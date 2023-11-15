@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Appointment;
+use Carbon\Carbon;
 use App\Models\Patient;
+use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Notifications\ApprovedNotif;
+use App\Notifications\CancelledNotif;
 
 class AppointmentController extends Controller
 {
@@ -13,10 +15,16 @@ class AppointmentController extends Controller
     public function appoint()
     {
         $appointments = Appointment::all();
+        // $patients = Patient::all();
 
-        $patient = null;
+        return view('appointment.reserve', compact('appointments'));
+    }
 
-        return view('appointment.reserve', compact('appointments', 'patient'));
+    public function existingPatient()
+    {
+        $patients = Patient::all();
+
+        return view('appointment.reserve-existing', compact('patients'));
     }
 
     public function appointment()
@@ -42,34 +50,27 @@ class AppointmentController extends Controller
 
     public function reserveAppointmentStore(Request $request)
     {
-        $fname = $request->input('fname');
+        $validated = $request->validate([
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'birthdate' => 'required',
+            'age' => 'required',
+            'gender' => 'required',
+            'contact' => 'required',
+            'address' => 'required',
+            'selectedDate' => 'required',
+            'time_appointment' => 'required',
+        ]);
 
-        if ($fname) {
-            $fname = $request->input('fname');
-            $lname = $request->input('lname');
-            $bdate = $request->input('bdate');
+        // check first if patient already exists with the same firstname, lastname, and birthdate, and if exists, return with an error message
+        $patient = Patient::where('firstname', $validated['firstname'])
+            ->where('lastname', $validated['lastname'])
+            ->where('birthdate', $validated['birthdate'])
+            ->first();
 
-            $patient = Patient::where('firstname', $fname)
-                ->where('lastname', $lname)
-                ->whereDate('birthdate', $bdate)
-                ->first();
-
-
-            return view('appointment.reserve', compact('patient'));
+        if ($patient) {
+            return redirect()->back()->with('error', 'Patient already exists.');
         } else {
-            $validated = $request->validate([
-                'firstname' => 'required',
-                'lastname' => 'required',
-                'birthdate' => 'required',
-                'age' => 'required',
-                'gender' => 'required',
-                'contact' => 'required',
-                'address' => 'required',
-                'selectedDate' => 'required',
-                'time_appointment' => 'required',
-            ]);
-
-            // dd($validated);
             $patient = Patient::create([
                 'firstname' => $validated['firstname'],
                 'lastname' => $validated['lastname'],
@@ -80,10 +81,46 @@ class AppointmentController extends Controller
                 'address' => $validated['address'],
             ]);
 
+            $timestamp = Carbon::createFromFormat('H:i', $validated['time_appointment'])->toTimeString();
+
             $appointment = Appointment::create([
                 'patient_id' => $patient->id,
                 'appointment_date' => $validated['selectedDate'],
-                'appointment_time' => $validated['time_appointment'],
+                'appointment_time' => $timestamp,
+            ]);
+
+            return redirect()->back()->with('success', 'Appointment set successfully. Please wait for confirmation.');
+        }
+    }
+
+    public function existingPatientStore(Request $request)
+    {
+        $patient_id = $request->input('patientId');
+
+        // find patient with the patient_id
+        $patient = Patient::where('id', $patient_id)->first();
+
+        $validated = $request->validate([
+            'patientId' => 'required',
+            'selectedDate' => 'required',
+            'time_appointment' => 'required',
+        ]);
+        $timestamp = Carbon::createFromFormat('H:i', $validated['time_appointment'])->toTimeString();
+
+        // check first if the patient already has an appointment with the same date and time
+        $appointment = Appointment::where('patient_id', $patient_id)
+            ->where('appointment_date', $validated['selectedDate'])
+            ->where('appointment_time', $timestamp)->where('appointment_status', 'Pending')
+            ->first();
+
+        // if appointment exists, return with an error message, else create new appointment
+        if ($appointment) {
+            return redirect()->back()->with('error', 'Patient already has a pending appointment with the same date and time. Please wait for an sms approval.');
+        } else {
+            $appointment = Appointment::create([
+                'patient_id' => $patient->id,
+                'appointment_date' => $validated['selectedDate'],
+                'appointment_time' => $timestamp,
             ]);
 
             return redirect()->back()->with('success', 'Appointment set successfully. Please wait for confirmation.');
@@ -97,18 +134,42 @@ class AppointmentController extends Controller
         ]);
 
         $patient = Patient::where('id', $appointment->patient_id)
-            ->first();
+        ->first();
 
-        $patient->notify(new ApprovedNotif());
+        $appointmentTime = Carbon::parse($appointment->appointment_time);
+
+        $app = [
+            'name' => $patient->full_name,
+            'date' => $appointment->appointment_date->format('F d, Y'),
+            'time' => $appointmentTime->format('H:i a')
+        ];
+
+        $patient->notify(new ApprovedNotif($app));
 
         return redirect()->back()->with('success', 'Appointment successfully approved!');
     }
 
-    public function cancel(Appointment $appointment)
+    public function cancel(Appointment $appointment, Request $request)
     {
+        $reason = $request->input('reason');
+
         $appointment->update([
             'appointment_status' => "Cancelled"
         ]);
+
+        $patient = Patient::where('id', $appointment->patient_id)
+        ->first();
+
+        $appointmentTime = Carbon::parse($appointment->appointment_time);
+
+        $reason = [
+            'reason' => $reason,
+            'name' => $patient->full_name,
+            'date' => $appointment->appointment_date->format('F d, Y'),
+            'time' => $appointmentTime->format('H:i a')
+        ];
+
+        $patient->notify(new CancelledNotif($reason));
 
         return redirect()->back()->with('success', 'Appointment successfully cancelled!');
     }
