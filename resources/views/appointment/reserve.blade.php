@@ -129,8 +129,8 @@
                             </div>
                             <div class="form-group mb-4 col-md-12">
                                 <div class="form-floating">
-                                    <input type="text" name="contact" class="form-control" pattern="[0-9]{11}"
-                                        value="{{ old('contact') }}" placeholder="contact" required>
+                                    <input type="text" name="contact" class="form-control" pattern="[0-9]{12}"
+                                        value="{{ old('contact') }}" placeholder="639123456789" required>
                                     <label for="floatingPassword">Contact No.</label>
                                 </div>
                             </div>

@@ -15,9 +15,11 @@ class ApprovedNotif extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    protected $app;
+
+    public function __construct($app)
     {
-        //
+        $this->app = $app;
     }
 
     /**
@@ -36,7 +38,7 @@ class ApprovedNotif extends Notification
     public function toVonage(object $notifiable): VonageMessage
     {
         return (new VonageMessage)
-        ->content('Your appointment have been approved!');
+        ->content('Appointment Confirmation: Thank you for making an appointment with IMMACULATE MEDICO-SURGICAL CLINIC on ' . $this->app['date'] . ' at ' . $this->app['time'] . '. Please arrive 10 minutes before the scheduled time. Have a nice day!');
 
     }
 

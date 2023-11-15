@@ -133,9 +133,16 @@ class AppointmentController extends Controller
         ]);
 
         $patient = Patient::where('id', $appointment->patient_id)
-            ->first();
+                ->first();
 
-        $patient->notify(new ApprovedNotif());
+        $appointmentTime = Carbon::parse($appointment->appointment_time);
+
+        $app = [
+            'date' => $appointment->appointment_date->format('F d, Y'),
+            'time' => $appointmentTime->format('H:i a')
+        ]; 
+
+        $patient->notify(new ApprovedNotif($app));
 
         return redirect()->back()->with('success', 'Appointment successfully approved!');
     }
