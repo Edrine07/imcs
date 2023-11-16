@@ -46,6 +46,8 @@ Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->group(functio
     Route::get('appointments', [AppointmentController::class, 'appointment'])->name('appointment.index');
     Route::get('appointment/approve/{appointment}', [AppointmentController::class, 'approve'])->name('appointment.approve');
     Route::get('appointment/cancel/{appointment}', [AppointmentController::class, 'cancel'])->name('appointment.cancel');
+    Route::post('/consult-store', [PatientController::class, 'newConsultation'])->name('appointment.new-consult');
+
 
     Route::resource('checkup', TodayCheckupController::class)->except(['create', 'store', 'edit', 'update', 'destroy']);
     Route::get('checkup/consult/{appointment}', [TodayCheckupController::class, 'consult'])->name('checkup.consult');

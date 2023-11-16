@@ -2,18 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Patient;
 use App\Models\Medicine;
 use App\Models\Appointment;
 use Illuminate\Support\Arr;
 use App\Models\MedicineList;
+use App\Models\Prescription;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
 {
-    public function patient()
+    public function patient(Request $request)
     {
-        $patients = Patient::orderBy('lastname', 'asc')->get();
+
+        $search = $request->input('search');
+
+        $query = Patient::query()->orderBy('lastname', 'asc');
+
+        if ($search) {
+            $query->where('lastname', 'like', '%' . $search . '%')
+                ->orWhere('firstname', 'like', '%' . $search . '%')
+                ->orWhere('birthdate', 'like', '%' . $search . '%')
+                ->orWhere('gender', 'like', '%' . $search . '%')
+                ->orWhere('age', 'like', '%' . $search . '%')
+                ->orWhere('contact', 'like', '%' . $search . '%')
+                ->orWhere('address', 'like', '%' . $search . '%');
+        }
+
+        $patients = $query->paginate(7);
 
         return view('patient.index', compact('patients'));
     }
@@ -39,20 +56,6 @@ class PatientController extends Controller
             'patient_t' => 'required|string|max:220',
             'patient_ht' => 'required|string|max:220',
             'patient_wt' => 'required|string|max:202',
-            // 'patient_first_name' => 'required|string|max:255',
-            // 'patient_last_name' => 'required|string|max:255',
-            // 'patient_gender' => 'required|string|in:Male,Female,Other',
-            // 'patient_age' => 'required|integer|min:0',
-            // 'patient_contact' => 'required|regex:/^(09|\+639|639)[0-9]{10}$/',
-
-            // 'patient_address' => 'required|string|max:255',
-            // 'patient_bp' => 'required|regex:/^\d{2,3}[-\/]\d{2,3}$/',
-
-            // 'patient_cr' => 'required|numeric|min:0|max:300',
-            // 'patient_rr' => 'required|numeric|min:0|max:100',
-            // 'patient_t' => 'required|numeric|min:0|max:50',
-            // 'patient_ht' => 'required|numeric|min:0|max:300',
-            // 'patient_wt' => 'required|numeric|min:0|max:300',
         ]);
 
         Patient::create([
@@ -74,6 +77,50 @@ class PatientController extends Controller
 
         notify()->emotify('success', 'Your data was successfully created');
         return redirect(route('patient.index'));
+    }
+
+    public function newConsultation(Request $request)
+    {
+        $validated = $request->validate([
+            'patient_id' => 'required',
+            'bp' => 'required',
+            'cr' => 'required',
+            'rr' => 'required',
+            't' => 'required',
+            'wt' => 'required',
+            'ht' => 'required',
+            'symptoms' => 'required',
+            'diagnosis' => 'required'
+        ]);
+
+        // dd($validated);
+
+        $patient = Patient::find($validated['patient_id']);
+
+        // get the time now in format of H:i:s
+        $currentTime = Carbon::now()->format('H:i:s');
+
+        $appointment =  Appointment::create([
+            'patient_id' => $patient->id,
+            'appointment_date' => date('Y-m-d'),
+            'appointment_time' => $currentTime,
+            'appointment_status' => 'Completed',
+        ]);
+
+        Prescription::create([
+            'appointment_id' => $appointment->id,
+            'bp' => $validated['bp'],
+            'cr' => $validated['cr'],
+            'rr' => $validated['rr'],
+            't' => $validated['t'],
+            'wt' => $validated['wt'],
+            'ht' => $validated['ht'],
+            'symptoms' => $validated['symptoms'],
+            'diagnosis' => $validated['diagnosis']
+        ]);
+        // dd($patient);
+
+        return redirect()->route('patient.med-history', $appointment->patient_id)->with('success', 'Consultation completed!');
     }
 
 
@@ -122,6 +169,8 @@ class PatientController extends Controller
             ->where('appointment_status', 'Completed')
             ->orderBy('appointment_date', 'asc')
             ->get();
+
+        // dd($appointments);
 
         $medicines = MedicineList::all();
 
