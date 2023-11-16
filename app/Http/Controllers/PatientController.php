@@ -123,6 +123,8 @@ class PatientController extends Controller
             ->orderBy('appointment_date', 'asc')
             ->get();
 
+        // dd($appointments);
+
         $medicines = MedicineList::all();
 
         // dd($appointments);

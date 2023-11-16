@@ -117,7 +117,7 @@ class AppointmentController extends Controller
             return redirect()->back()->with('error', 'Patient already has a pending appointment with the same date and time. Please wait for an sms approval.');
         } else {
             $appointment = Appointment::create([
-                'patient_id' => $patient->id,
+                'patient_id' => $patient_id,
                 'appointment_date' => $validated['selectedDate'],
                 'appointment_time' => $timestamp,
             ]);
