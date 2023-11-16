@@ -8,6 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     {{-- <link href="{{ asset('metro-assets/assets/plugins/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" --}}
     {{-- type="text/css" /> --}}
     <link href="{{ asset('metro-assets/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css') }}" rel="stylesheet"
@@ -55,6 +58,9 @@
         var hostUrl = "assets/";
     </script>
     <script src="{{ asset('metro-assets/assets/plugins/global/plugins.bundle.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"
+        integrity="sha512-uKQ39gEGiyUJl4AI6L+ekBdGKpGw4xJ55+xyJG7YFlJokPNYegn9KwQ3P8A7aFQAUtUsAQHep+d/lrGqrbPIDQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('metro-assets/assets/js/scripts.bundle.js') }}"></script>
     <script src="{{ asset('metro-assets/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js') }}"></script>
     {{-- <script src="{{ asset('metro-assets/assets/js/custom/widgets.js') }}"></script>

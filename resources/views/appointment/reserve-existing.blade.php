@@ -51,8 +51,8 @@
 
         <div class="container mt-5 d-flex justify-content-center align-items-center">
             <div class="row bg-white rounded rounded-3 shadow p-4">
-                <x-success></x-success>
-                <x-error></x-error>
+                <x-app-success></x-app-success>
+                <x-app-error></x-app-error>
                 <div class="col-md-4">
                     <h2 class="text-center my-5">Make Appointment</h2>
                     <h3 class="text-center">Are you a New Patient? <br> If yes, <a
@@ -291,6 +291,12 @@
             } else {
                 this.classList.remove('is-invalid');
             }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            $('.custom-modal').modal('show');
         });
     </script>
 @endsection
