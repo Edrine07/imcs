@@ -1,5 +1,8 @@
 @if ($paginator->hasPages())
     <nav>
+        <p class="text-muted text-center">
+            Showing {{ $paginator->firstItem() }} to {{ $paginator->lastItem() }} of {{ $paginator->total() }} results
+        </p>
         <ul class="pagination">
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
@@ -8,7 +11,8 @@
                 </li>
             @else
                 <li>
-                    <a href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
+                    <a href="{{ $paginator->previousPageUrl() }}" rel="prev"
+                        aria-label="@lang('pagination.previous')">&lsaquo;</a>
                 </li>
             @endif
 

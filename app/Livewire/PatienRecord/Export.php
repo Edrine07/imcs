@@ -27,25 +27,23 @@ class Export extends Component
 
         $templateProcessor->setValue('bp', $this->app->prescription->bp);
         $templateProcessor->setValue('cr', $this->app->prescription->cr);
-        $templateProcessor->setValue('rr', $this->app->prescription->rr);
+        $templateProcessor->setValue('rr', $this->app->prescription->rr ?? '');
         $templateProcessor->setValue('t', $this->app->prescription->t);
         $templateProcessor->setValue('wt', $this->app->prescription->wt);
-        $templateProcessor->setValue('ht', $this->app->prescription->ht);
+        $templateProcessor->setValue('ht', $this->app->prescription->ht ?? '');
         $templateProcessor->setValue('sypmtoms', $this->app->prescription->symptoms);
         $templateProcessor->setValue('diagnosis', $this->app->prescription->diagnosis);
 
         $medTake = Medicine::where('appointment_id', $this->app->id)
-        ->get();
+            ->get();
 
         $templateProcessor->cloneRow('medname', count($medTake));
 
-        foreach( $medTake as $index => $code)
-        {
+        foreach ($medTake as $index => $code) {
             $templateProcessor->setValue('medname#' . ($index + 1), $code->medName->medicine_name);
             $templateProcessor->setValue('dosage#' . ($index + 1), $code->medicine_dose);
             $templateProcessor->setValue('qty#' . ($index + 1), $code->medicine_unit);
             $templateProcessor->setValue('duration#' . ($index + 1), $code->duration);
-
         }
 
         $filename = 'Medical Record_' . $this->app->patient->lastname;

@@ -20,6 +20,32 @@
         body::-webkit-scrollbar {
             display: none;
         }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            list-style: none;
+        }
+
+        .pagination li {
+            margin: 0 5px;
+        }
+
+        .pagination a {
+            display: block;
+            padding: 5px 10px;
+            text-decoration: none;
+            color: #333;
+            background-color: #eee;
+            border-radius: 5px;
+        }
+
+        .pagination a:hover,
+        .pagination .active a {
+            background-color: #007bff;
+            color: #fff;
+        }
     </style>
     @yield('styles')
 </head>

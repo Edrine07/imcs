@@ -1,5 +1,8 @@
 @if ($paginator->hasPages())
     <nav>
+        <p class="text-muted text-center">
+            Showing {{ $paginator->firstItem() }} to {{ $paginator->lastItem() }} of {{ $paginator->total() }} results
+        </p>
         <ul class="pagination">
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())

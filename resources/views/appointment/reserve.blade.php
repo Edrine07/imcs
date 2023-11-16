@@ -2,47 +2,20 @@
 
 @section('styles')
     <style>
+        /* Style the title in the center */
         /* .fc-toolbar-title {
-                                                                                                                                                                                                                                                                                                                                            font-size: 15px !important;
-                                                                                                                                                                                                                                                                                                                                        }
+                            order: 2;
+                            margin-bottom: 10px;
+                        }
 
-                                                                                                                                                                                                                                                                                                                                        .fc-button {
-                                                                                                                                                                                                                                                                                                                                            font-size: 10px !important;
-                                                                                                                                                                                                                                                                                                                                        }
+                        .fc-button-group {
+                            order: 1;
+                        }
 
-                                                                                                                                                                                                                                                                                                                                        .fc-toolbar {
-                                                                                                                                                                                                                                                                                                                                            display: flex;
-                                                                                                                                                                                                                                                                                                                                            justify-content: space-between;
-                                                                                                                                                                                                                                                                                                                                            align-items: center;
-                                                                                                                                                                                                                                                                                                                                        }
-
-                                                                                                                                                                                                                                                                                                                                        /* Media queries for smaller screens */
-        /* @media (max-width: 576px) {
-                                                                                                                                                                                                                                                                                                                                        .fc-toolbar {
-                                                                                                                                                                                                                                                                                                                                            flex-direction: column;
-                                                                                                                                                                                                                                                                                                                                            text-align: center;
-                                                                                                                                                                                                                                                                                                                                        }
-
-                                                                                                                                                                                                                                                                                                                                        /* Style the title in the center */
-        .fc-toolbar-title {
-            order: 2;
-            /* Move the title to the center */
-            margin-bottom: 10px;
-            /* Adjust spacing if needed */
-        }
-
-        /* Style the buttons */
-        .fc-button-group {
-            order: 1;
-            /* Move the buttons to the top */
-        }
-        }
-
-        */ */ #calendar a {
-            color: #303030;
-            text-decoration: none;
-        }
-
+                       #calendar a {
+                            color: #303030;
+                            text-decoration: none;
+                        } */
         .fc-daygrid-day-events {
             display: none;
         }
@@ -140,9 +113,6 @@
                                             title="Please use this format: 9123456789" required>
                                         <label for="contactInput">Contact No.</label>
                                     </div>
-                                    <span class="text-danger" id="cNumWarn" style="display:none;">Please enter valid
-                                        numbers
-                                        only</span>
                                 </div>
                             </div>
                             <div class="form-group mb-4 col-md-12">
@@ -174,70 +144,70 @@
                         <h5 class="fw-bold mt-5 text-center">Morning Appointments</h5>
                         <div class="row px-2">
                             <div class="form-check col-6 mb-3">
-                                <input class="form-check-input" type="radio" name="time_appointment" value="09:00">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="09:00:00">
                                 <label class="form-check-label">09:00 AM</label>
                             </div>
                             <div class="form-check col-6 mb-3">
-                                <input class="form-check-input" type="radio" name="time_appointment" value="09:30">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="09:30:00">
                                 <label class="form-check-label">09:30 AM</label>
                             </div>
                             <div class="form-check col-6 mb-3">
-                                <input class="form-check-input" type="radio" name="time_appointment" value="10:00">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="10:00:00">
                                 <label class="form-check-label">10:00 AM</label>
                             </div>
                             <div class="form-check col-6 mb-3">
-                                <input class="form-check-input" type="radio" name="time_appointment" value="10:30">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="10:30:00">
                                 <label class="form-check-label">10:30 AM</label>
                             </div>
                             <div class="form-check col-6 mb-3">
-                                <input class="form-check-input" type="radio" name="time_appointment" value="11:00">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="11:00:00">
                                 <label class="form-check-label">11:00 AM</label>
                             </div>
                             <div class="form-check col-6 mb-3">
-                                <input class="form-check-input" type="radio" name="time_appointment" value="11:30">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="11:30:00">
                                 <label class="form-check-label">11:30 AM</label>
                             </div>
                             <div class="form-check col-6 mb-3">
-                                <input class="form-check-input" type="radio" name="time_appointment" value="12:00">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="12:00:00">
                                 <label class="form-check-label">12:00 AM</label>
                             </div>
                         </div>
                         <h5 class="fw-bold mt-4 text-center">Afternoon Appointments</h5>
                         <div class="row px-2">
                             <div class="form-check col-6 mb-3">
-                                <input class="form-check-input" type="radio" name="time_appointment" value="02:00">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="14:00:00">
                                 <label class="form-check-label">02:00 PM</label>
                             </div>
                             <div class="form-check col-6 mb-3">
-                                <input class="form-check-input" type="radio" name="time_appointment" value="02:30">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="14:30:00">
                                 <label class="form-check-label">02:30 PM</label>
                             </div>
                             <div class="form-check col-6 mb-3">
-                                <input class="form-check-input" type="radio" name="time_appointment" value="03:00">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="15:00:00">
                                 <label class="form-check-label">03:00 PM</label>
                             </div>
                             <div class="form-check col-6 mb-3">
-                                <input class="form-check-input" type="radio" name="time_appointment" value="03:30">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="15:30:00">
                                 <label class="form-check-label">03:30 PM</label>
                             </div>
                             <div class="form-check col-6 mb-3">
-                                <input class="form-check-input" type="radio" name="time_appointment" value="04:00">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="16:00:00">
                                 <label class="form-check-label">04:00 PM</label>
                             </div>
                             <div class="form-check col-6 mb-3">
-                                <input class="form-check-input" type="radio" name="time_appointment" value="04:30">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="16:30:00">
                                 <label class="form-check-label">04:30 PM</label>
                             </div>
                             <div class="form-check col-6 mb-3">
-                                <input class="form-check-input" type="radio" name="time_appointment" value="05:00">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="17:00:00">
                                 <label class="form-check-label">05:00 PM</label>
                             </div>
                             <div class="form-check col-6 mb-3">
-                                <input class="form-check-input" type="radio" name="time_appointment" value="05:30">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="17:30:00">
                                 <label class="form-check-label">05:30 PM</label>
                             </div>
                             <div class="form-check col-6 mb-3">
-                                <input class="form-check-input" type="radio" name="time_appointment" value="06:00">
+                                <input class="form-check-input" type="radio" name="time_appointment" value="18:00:00">
                                 <label class="form-check-label">06:00 PM</label>
                             </div>
 
@@ -341,10 +311,10 @@
         contactInput.addEventListener('keyup', function() {
             if (this.value.length != 10 || isNaN(this.value)) {
                 this.classList.add('is-invalid');
-                cNumWarn.style.display = 'block';
+                // cNumWarn.style.display = 'block';
             } else {
                 this.classList.remove('is-invalid');
-                cNumWarn.style.display = 'none';
+                // cNumWarn.style.display = 'none';
             }
         });
 

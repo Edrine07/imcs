@@ -30,11 +30,10 @@ class AppointmentController extends Controller
     public function appointment()
     {
 
-        $appointments = Appointment::whereIn('appointment_status', ['Pending', 'Approved', 'Completed', 'Cancelled'])
-            ->orderByRaw("FIELD(appointment_status, 'Pending') DESC")
+        $appointments = Appointment::orderByRaw("FIELD(appointment_status, 'Pending') DESC")
             ->orderBy('appointment_date', 'asc')
             ->orderBy('appointment_time', 'asc')
-            ->get();
+            ->paginate(10);
 
         // dd($appointments);
 
@@ -44,7 +43,7 @@ class AppointmentController extends Controller
 
     public function newAppointments()
     {
-        $appointments = Appointment::whereIn('appointment_status', ['Pending', 'Approved'])->where('appointment_date', '=', date('Y-m-d'))->get();
+        $appointments = Appointment::whereIn('appointment_status', ['Pending', 'Approved'])->where('appointment_date', '=', date('Y-m-d'))->paginate(10);
         return view('appointment.new-appointment', compact('appointments'));
     }
 
@@ -70,27 +69,25 @@ class AppointmentController extends Controller
 
         if ($patient) {
             return redirect()->back()->with('error', 'Patient already exists.');
-        } else {
-            $patient = Patient::create([
-                'firstname' => $validated['firstname'],
-                'lastname' => $validated['lastname'],
-                'birthdate' => $validated['birthdate'],
-                'age' => $validated['age'],
-                'gender' => $validated['gender'],
-                'contact' => $validated['contact'],
-                'address' => $validated['address'],
-            ]);
-
-            $timestamp = Carbon::createFromFormat('H:i', $validated['time_appointment'])->toTimeString();
-
-            $appointment = Appointment::create([
-                'patient_id' => $patient->id,
-                'appointment_date' => $validated['selectedDate'],
-                'appointment_time' => $timestamp,
-            ]);
-
-            return redirect()->back()->with('success', 'Appointment set successfully. Please wait for an sms confirmation of your appointment.');
         }
+
+        $patient = Patient::create([
+            'firstname' => $validated['firstname'],
+            'lastname' => $validated['lastname'],
+            'birthdate' => $validated['birthdate'],
+            'age' => $validated['age'],
+            'gender' => $validated['gender'],
+            'contact' => '63' . $validated['contact'],
+            'address' => $validated['address'],
+        ]);
+
+        $appointment = Appointment::create([
+            'patient_id' => $patient->id,
+            'appointment_date' => $validated['selectedDate'],
+            'appointment_time' => $validated['time_appointment'],
+        ]);
+
+        return redirect()->back()->with('success', 'Appointment set successfully. Please wait for an sms confirmation of your appointment.');
     }
 
     public function existingPatientStore(Request $request)
@@ -105,12 +102,13 @@ class AppointmentController extends Controller
             'selectedDate' => 'required',
             'time_appointment' => 'required',
         ]);
-        $timestamp = Carbon::createFromFormat('H:i', $validated['time_appointment'])->toTimeString();
+
+        // $timestamp = Carbon::createFromFormat('H:i', $validated['time_appointment'])->toTimeString();
 
         // check first if the patient already has an appointment with the same date and time
         $appointment = Appointment::where('patient_id', $patient_id)
             ->where('appointment_date', $validated['selectedDate'])
-            ->where('appointment_time', $timestamp)->where('appointment_status', 'Pending')
+            ->where('appointment_time', $validated['time_appointment'])->where('appointment_status', 'Pending')
             ->first();
 
         // if appointment exists, return with an error message, else create new appointment
@@ -120,7 +118,7 @@ class AppointmentController extends Controller
             $appointment = Appointment::create([
                 'patient_id' => $patient_id,
                 'appointment_date' => $validated['selectedDate'],
-                'appointment_time' => $timestamp,
+                'appointment_time' => $validated['time_appointment'],
             ]);
 
             return redirect()->back()->with('success', 'Appointment set successfully. Please wait for an sms confirmation of your appointment.');
@@ -141,7 +139,7 @@ class AppointmentController extends Controller
         $app = [
             'name' => $patient->full_name,
             'date' => $appointment->appointment_date->format('F d, Y'),
-            'time' => $appointmentTime->format('H:i a')
+            'time' => $appointmentTime->format('H:i A')
         ];
 
         $patient->notify(new ApprovedNotif($app));

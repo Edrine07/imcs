@@ -35,10 +35,10 @@ class TodayCheckupController extends Controller
         $validated = $request->validate([
             'bp' => 'required',
             'cr' => 'required',
-            'rr' => 'required',
+            'rr' => 'nullable',
             't' => 'required',
             'wt' => 'required',
-            'ht' => 'required',
+            'ht' => 'nullable',
             'symptoms' => 'required',
             'diagnosis' => 'required'
         ]);

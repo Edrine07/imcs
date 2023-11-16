@@ -84,11 +84,12 @@ class PatientController extends Controller
         $validated = $request->validate([
             'patient_id' => 'required',
             'bp' => 'required',
+            'bp2' => 'required',
             'cr' => 'required',
-            'rr' => 'required',
+            'rr' => 'nullable',
             't' => 'required',
             'wt' => 'required',
-            'ht' => 'required',
+            'ht' => 'nullable',
             'symptoms' => 'required',
             'diagnosis' => 'required'
         ]);
@@ -109,7 +110,7 @@ class PatientController extends Controller
 
         Prescription::create([
             'appointment_id' => $appointment->id,
-            'bp' => $validated['bp'],
+            'bp' => $validated['bp'] . '/' . $validated['bp2'],
             'cr' => $validated['cr'],
             'rr' => $validated['rr'],
             't' => $validated['t'],

@@ -91,37 +91,37 @@
                                 <div class="row px-2">
                                     <div class="form-check col-6 mb-3">
                                         <input class="form-check-input" type="radio" name="time_appointment"
-                                            value="09:00">
+                                            value="09:00:00">
                                         <label class="form-check-label">09:00 AM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
                                         <input class="form-check-input" type="radio" name="time_appointment"
-                                            value="09:30">
+                                            value="09:30:00">
                                         <label class="form-check-label">09:30 AM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
                                         <input class="form-check-input" type="radio" name="time_appointment"
-                                            value="10:00">
+                                            value="10:00:00">
                                         <label class="form-check-label">10:00 AM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
                                         <input class="form-check-input" type="radio" name="time_appointment"
-                                            value="10:30">
+                                            value="10:30:00">
                                         <label class="form-check-label">10:30 AM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
                                         <input class="form-check-input" type="radio" name="time_appointment"
-                                            value="11:00">
+                                            value="11:00:00">
                                         <label class="form-check-label">11:00 AM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
                                         <input class="form-check-input" type="radio" name="time_appointment"
-                                            value="11:30">
+                                            value="11:30:00">
                                         <label class="form-check-label">11:30 AM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
                                         <input class="form-check-input" type="radio" name="time_appointment"
-                                            value="12:00">
+                                            value="12:00:00">
                                         <label class="form-check-label">12:00 AM</label>
                                     </div>
                                 </div>
@@ -129,47 +129,47 @@
                                 <div class="row px-2">
                                     <div class="form-check col-6 mb-3">
                                         <input class="form-check-input" type="radio" name="time_appointment"
-                                            value="02:00">
+                                            value="14:00:00">
                                         <label class="form-check-label">02:00 PM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
                                         <input class="form-check-input" type="radio" name="time_appointment"
-                                            value="02:30">
+                                            value="12:30:00">
                                         <label class="form-check-label">02:30 PM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
                                         <input class="form-check-input" type="radio" name="time_appointment"
-                                            value="03:00">
+                                            value="15:00:00">
                                         <label class="form-check-label">03:00 PM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
                                         <input class="form-check-input" type="radio" name="time_appointment"
-                                            value="03:30">
+                                            value="15:30:00">
                                         <label class="form-check-label">03:30 PM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
                                         <input class="form-check-input" type="radio" name="time_appointment"
-                                            value="04:00">
+                                            value="16:00:00">
                                         <label class="form-check-label">04:00 PM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
                                         <input class="form-check-input" type="radio" name="time_appointment"
-                                            value="04:30">
+                                            value="16:30:00">
                                         <label class="form-check-label">04:30 PM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
                                         <input class="form-check-input" type="radio" name="time_appointment"
-                                            value="05:00">
+                                            value="17:00:00">
                                         <label class="form-check-label">05:00 PM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
                                         <input class="form-check-input" type="radio" name="time_appointment"
-                                            value="05:30">
+                                            value="17:30:00">
                                         <label class="form-check-label">05:30 PM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
                                         <input class="form-check-input" type="radio" name="time_appointment"
-                                            value="06:00">
+                                            value="18:00:00">
                                         <label class="form-check-label">06:00 PM</label>
                                     </div>
 

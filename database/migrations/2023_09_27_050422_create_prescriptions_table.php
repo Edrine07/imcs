@@ -16,9 +16,9 @@ return new class extends Migration
             $table->foreignId('appointment_id')->references('id')->on('appointments')->constrained()->onDelete('cascade');
             $table->string('bp');
             $table->string('cr');
-            $table->string('rr');
+            $table->string('rr')->nullable();
             $table->string('t');
-            $table->string('ht');
+            $table->string('ht')->nullable();
             $table->string('wt');
             $table->string('symptoms');
             $table->string('diagnosis');

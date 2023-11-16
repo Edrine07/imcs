@@ -34,16 +34,25 @@ class WalkinController extends Controller
             'contact' => 'required',
             'address' => 'required',
             'bp' => 'required',
+            'bp2' => 'required',
             'cr' => 'required',
-            'rr' => 'required',
+            'rr' => 'nullable',
             't' => 'required',
             'wt' => 'required',
-            'ht' => 'required',
+            'ht' => 'nullable',
             'symptoms' => 'required',
             'diagnosis' => 'required'
         ]);
-
         // dd($validated);
+
+        $patient = Patient::where('firstname', $validated['firstname'])
+            ->where('lastname', $validated['lastname'])
+            ->where('birthdate', $validated['birthdate'])
+            ->first();
+
+        if ($patient) {
+            return redirect()->back()->with('error', 'Patient already exists.');
+        }
 
         $patient = Patient::create([
             'firstname' => $validated['firstname'],
@@ -51,7 +60,7 @@ class WalkinController extends Controller
             'birthdate' => $validated['birthdate'],
             'age' => $validated['age'],
             'gender' => $validated['gender'],
-            'contact' => $validated['contact'],
+            'contact' => '63' . $validated['contact'],
             'address' => $validated['address'],
         ]);
 
@@ -64,7 +73,7 @@ class WalkinController extends Controller
 
         Prescription::create([
             'appointment_id' => $appointment->id,
-            'bp' => $validated['bp'],
+            'bp' => $validated['bp'] . '/' . $validated['bp2'],
             'cr' => $validated['cr'],
             'rr' => $validated['rr'],
             't' => $validated['t'],

@@ -346,75 +346,68 @@
         <div class="md:flex md:flex-wrap mt-8 text-center md:-mx-4">
             <div class="md:w-1/2 md:px-4 lg:w-1/4">
                 <div class="flex flex-col bg-white rounded-lg border border-gray-300 p-8 h-full">
-                    <img src="../assets/img/surgical.jpg" alt="" class="h-32 w-32 mx-auto mb-4 rounded-full">
+                    <img src="../assets/img/surgical.jpg" alt="" class="h-32 mx-auto mb-4">
                     <h4 class="text-xl font-bold flex-1">Surgical Procedures</h4>
-                    <a href="#" class="block mt-4 text-blue-500 hover:underline">Read More</a>
+                    {{-- <a href="#" class="block mt-4 text-blue-500 hover:underline">Read More</a> --}}
                 </div>
             </div>
 
             <div class="md:w-1/2 md:px-4 lg:w-1/4">
                 <div class="flex flex-col bg-white rounded-lg border border-gray-300 p-8 h-full">
-                    <img src="../assets/img/services2.jpg" alt=""
-                        class="h-32 w-32 mx-auto mb-4 rounded-full">
+                    <img src="../assets/img/services2.jpg" alt="" class="h-32 mx-auto mb-4">
                     <h4 class="text-xl font-bold flex-1">Specialized Care (e.g., Cardiology, Orthopedics, Gynecology)
                     </h4>
-                    <a href="#" class="block mt-4 text-blue-500 hover:underline">Read More</a>
+                    {{-- <a href="#" class="block mt-4 text-blue-500 hover:underline">Read More</a> --}}
                 </div>
             </div>
 
             <div class="md:w-1/2 md:px-4 lg:w-1/4">
                 <div class="flex flex-col bg-white rounded-lg border border-gray-300 p-8 h-full">
-                    <img src="../assets/img/services3.jpg" alt=""
-                        class="h-32 w-32 mx-auto mb-4 rounded-full">
+                    <img src="../assets/img/services3.jpg" alt="" class="h-32 mx-auto mb-4">
                     <h4 class="text-xl font-bold flex-1">Endoscopic Expertise</h4>
-                    <a href="#" class="block mt-4 text-blue-500 hover:underline">Read More</a>
+                    {{-- <a href="#" class="block mt-4 text-blue-500 hover:underline">Read More</a> --}}
                 </div>
             </div>
 
             <div class="md:w-1/2 md:px-4 lg:w-1/4">
                 <div class="flex flex-col bg-white rounded-lg border border-gray-300 p-8 h-full">
-                    <img src="../assets/img/services4.jpg" alt=""
-                        class="h-32 w-32 mx-auto mb-4 rounded-full">
+                    <img src="../assets/img/services4.jpg" alt="" class="h-32 mx-auto mb-4">
                     <h4 class="text-xl font-bold flex-1">Wound Care and Surgical Management</h4>
-                    <a href="#" class="block mt-4 text-blue-500 hover:underline">Read More</a>
+                    {{-- <a href="#" class="block mt-4 text-blue-500 hover:underline">Read More</a> --}}
                 </div>
             </div>
         </div>
         <div class="md:flex md:flex-wrap mt-8 text-center md:-mx-4">
             <div class="md:w-1/2 md:px-4 lg:w-1/4">
                 <div class="flex flex-col bg-white rounded-lg border border-gray-300 p-8 h-full">
-                    <img src="../assets/img/services5.jpg" alt=""
-                        class="h-32 w-32 mx-auto mb-4 rounded-full">
+                    <img src="../assets/img/services5.jpg" alt="" class="h-32 mx-auto mb-4">
                     <h4 class="text-xl font-bold flex-1">Diagnosis and Treatment</h4>
-                    <a href="#" class="block mt-4 text-blue-500 hover:underline">Read More</a>
+                    {{-- <a href="#" class="block mt-4 text-blue-500 hover:underline">Read More</a> --}}
                 </div>
             </div>
 
             <div class="md:w-1/2 md:px-4 lg:w-1/4">
                 <div class="flex flex-col bg-white rounded-lg border border-gray-300 p-8 h-full">
-                    <img src="../assets/img/services6.jpg" alt=""
-                        class="h-32 w-32 mx-auto mb-4 rounded-full">
+                    <img src="../assets/img/services6.jpg" alt="" class="h-32 mx-auto mb-4">
                     <h4 class="text-xl font-bold flex-1">Chronic Disease Management
                     </h4>
-                    <a href="#" class="block mt-4 text-blue-500 hover:underline">Read More</a>
+                    {{-- <a href="#" class="block mt-4 text-blue-500 hover:underline">Read More</a> --}}
                 </div>
             </div>
 
             <div class="md:w-1/2 md:px-4 lg:w-1/4">
                 <div class="flex flex-col bg-white rounded-lg border border-gray-300 p-8 h-full">
-                    <img src="../assets/img/services7.jpg" alt=""
-                        class="h-32 w-32 mx-auto mb-4 rounded-full">
+                    <img src="../assets/img/services7.jpg" alt="" class="h-32 mx-auto mb-4">
                     <h4 class="text-xl font-bold flex-1">Health Education and Counseling</h4>
-                    <a href="#" class="block mt-4 text-blue-500 hover:underline">Read More</a>
+                    {{-- <a href="#" class="block mt-4 text-blue-500 hover:underline">Read More</a> --}}
                 </div>
             </div>
 
             <div class="md:w-1/2 md:px-4 lg:w-1/4">
                 <div class="flex flex-col bg-white rounded-lg border border-gray-300 p-8 h-full">
-                    <img src="{{ asset('assets/img/services8.png') }}" alt=""
-                        class="h-32 w-32 mx-auto mb-4 rounded-full">
+                    <img src="{{ asset('assets/img/services8.png') }}" alt="" class="h-32 mx-auto mb-4">
                     <h4 class="text-xl font-bold flex-1">Referrals and Collaborative Care</h4>
-                    <a href="#" class="block mt-4 text-blue-500 hover:underline">Read More</a>
+                    {{-- <a href="#" class="block mt-4 text-blue-500 hover:underline">Read More</a> --}}
                 </div>
             </div>
         </div>
@@ -479,7 +472,7 @@
             <div class="w-full sm:w-1/2 lg:w-1/4 xl:w-1/4 lg:pr-8">
                 <h3 class="italic font-bold text-3xl">IMSClinic</h3>
                 <p class="text-gray-400">Your Health, Our Priority.</p>
-                <form class="flex items-center mt-6">
+                {{-- <form class="flex items-center mt-6">
                     <div class="w-full">
                         <label class="block uppercase tracking-wide text-gray-600 text-xs font-bold mb-2"
                             for="grid-last-name">
@@ -494,7 +487,7 @@
                                 class="bg-teal-500 hover:bg-teal-400 text-white px-4 py-2 text-sm font-bold rounded absolute top-0 right-0 my-2 mr-2">Submit</button>
                         </div>
                     </div>
-                </form>
+                </form> --}}
             </div>
 
             <div class="w-full sm:w-1/2 lg:w-1/4 xl:w-1/4 mt-8 lg:mt-0">

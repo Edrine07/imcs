@@ -55,7 +55,7 @@
                             <div class="row g-4">
                                 <div class="col-md-6">
                                     <label for="contact" class="form-label">Contact No.</label>
-                                    <input type="text" name="contact" value="{{ $patient->contact }}"
+                                    <input type="text" name="contact" value="+{{ $patient->contact }}"
                                         class="form-control" placeholder="" readonly>
                                 </div>
                                 <div class="col-md-6">
@@ -92,8 +92,11 @@
                                 </div>
                                 <div class="col-md-2">
                                     <label for="cr" class="form-label">CR</label>
-                                    <input type="text" name="cr" value="{{ $app->prescription->cr }}"
-                                        class="form-control" readonly>
+                                    <div class="input-group">
+                                        <input type="number" name="cr" value="{{ $app->prescription->cr }}"
+                                            class="form-control" readonly>
+                                        <span class="input-group-text">/min</span>
+                                    </div>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="rr" class="form-label">RR</label>
@@ -102,18 +105,27 @@
                                 </div>
                                 <div class="col-md-2">
                                     <label for="t" class="form-label">T</label>
-                                    <input type="text" name="t" value="{{ $app->prescription->t }}"
-                                        class="form-control" readonly>
+                                    <div class="input-group">
+                                        <input type="text" name="t" value="{{ $app->prescription->t }}"
+                                            class="form-control" readonly>
+                                        <span class="input-group-text">°C</span>
+                                    </div>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="wt" class="form-label">WT</label>
-                                    <input type="text" name="wt" value="{{ $app->prescription->wt }}"
-                                        class="form-control" readonly>
+                                    <div class="input-group">
+                                        <input type="text" name="wt" value="{{ $app->prescription->wt }}"
+                                            class="form-control" readonly>
+                                        <span class="input-group-text">kg</span>
+                                    </div>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="ht" class="form-label">HT</label>
-                                    <input type="text" name="ht" value="{{ $app->prescription->ht }}"
-                                        class="form-control" readonly>
+                                    <div class="input-group">
+                                        <input type="text" name="ht" value="{{ $app->prescription->ht }}"
+                                            class="form-control" readonly>
+                                        <span class="input-group-text">cm</span>
+                                    </div>
                                 </div>
                             </div>
 

@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+
 @section('content')
     <div class="card mb-5 mb-xl-8">
         <div class="card-header border-0 pt-5">
@@ -26,7 +27,7 @@
                             <td>{{ $appointment->patient_id }}</td>
                             <td>{{ $appointment->patient->full_name }}</td>
                             <td>{{ Str::words($appointment->patient->address, 5, $end = '...') }}</td>
-                            <td>{{ $appointment->patient->contact }}</td>
+                            <td>+{{ $appointment->patient->contact }}</td>
                             <td>{{ $appointment?->appointment_date?->format('F d, Y') ?? '' }}</td>
                             <td class="text-end">
                                 {{ \Carbon\Carbon::createFromFormat('H:i:s', $appointment->appointment_time)->format('h:i A') }}
@@ -54,6 +55,7 @@
                     @endforelse
                 </tbody>
             </table>
+            {{ $appointments->links() }}
         </div>
     </div>
 @endsection

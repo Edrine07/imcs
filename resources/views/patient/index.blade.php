@@ -1,5 +1,21 @@
 @extends('layouts.admin')
 
+@section('styles')
+    <style>
+        /* For Chrome, Safari, and Opera */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* For Firefox */
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
+@endsection
+
 @section('content')
     <div class="row g-5 g-xxl-8">
         <div class="col-xxl-8">
@@ -69,34 +85,51 @@
                                                     <input type="hidden" name="patient_id" value="{{ $patient->id }}">
                                                     <div class="row">
                                                         <div class="col-md-2">
-                                                            <label for="bp" class="form-label mb-2">BP</label>
-                                                            <input type="text" name="bp" class="form-control"
-                                                                required>
+                                                            <label for="bp" class="form-label mb-2">BP <span class="text-danger">*</span> </label>
+                                                            <div class="input-group">
+                                                                <input type="number" min="1" name="bp"
+                                                                    class="form-control" required>
+                                                                <span class="input-group-text px-1">/</span>
+                                                                <input type="number" min="1" name="bp2"
+                                                                    class="form-control" required>
+                                                            </div>
                                                         </div>
                                                         <div class="col-md-2">
-                                                            <label for="cr" class="form-label mb-2">CR</label>
-                                                            <input type="text" name="cr" class="form-control"
-                                                                required>
+                                                            <label for="cr" class="form-label mb-2">CR <span class="text-danger">*</span></label>
+                                                            <div class="input-group">
+                                                                <input type="number" min="1" step="0.01"
+                                                                    name="cr" class="form-control" required>
+                                                                <span class="input-group-text">/min</span>
+                                                            </div>
                                                         </div>
                                                         <div class="col-md-2">
                                                             <label for="rr" class="form-label mb-2">RR</label>
-                                                            <input type="text" name="rr" class="form-control"
-                                                                required>
+                                                            <input type="number" min="0" step="0.01"
+                                                                name="rr" class="form-control">
                                                         </div>
                                                         <div class="col-md-2">
-                                                            <label for="t" class="form-label mb-2">T</label>
-                                                            <input type="text" name="t" class="form-control"
-                                                                required>
+                                                            <label for="t" class="form-label mb-2">T <span class="text-danger">*</span></label>
+                                                            <div class="input-group">
+                                                                <input type="number" step="0.01" min="1"
+                                                                    name="t" class="form-control" required>
+                                                                <span class="input-group-text">°C</span>
+                                                            </div>
                                                         </div>
                                                         <div class="col-md-2">
-                                                            <label for="wt" class="form-label mb-2">WT</label>
-                                                            <input type="text" name="wt" class="form-control"
-                                                                required>
+                                                            <label for="wt" class="form-label mb-2">WT <span class="text-danger">*</span></label>
+                                                            <div class="input-group">
+                                                                <input type="number" step="0.01" min="1"
+                                                                    name="wt" class="form-control" required>
+                                                                <span class="input-group-text">kg</span>
+                                                            </div>
                                                         </div>
                                                         <div class="col-md-2">
                                                             <label for="ht" class="form-label mb-2">HT</label>
-                                                            <input type="text" name="ht" class="form-control"
-                                                                required>
+                                                            <div class="input-group">
+                                                                <input type="number" step="0.01" min="1"
+                                                                    name="ht" class="form-control">
+                                                                <span class="input-group-text">cm</span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="row">

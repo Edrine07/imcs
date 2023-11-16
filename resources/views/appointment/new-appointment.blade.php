@@ -58,6 +58,7 @@
                             @endforelse
                         </tbody>
                     </table>
+                    {{ $appointments->links() }}
                 </div>
             </div>
         </div>
