@@ -3,27 +3,27 @@
 @section('styles')
     <style>
         /* .fc-toolbar-title {
-                                            font-size: 15px !important;
-                                        }
+                                                font-size: 15px !important;
+                                            }
 
-                                        .fc-button {
-                                            font-size: 10px !important;
-                                        }
+                                            .fc-button {
+                                                font-size: 10px !important;
+                                            }
 
-                                        .fc-toolbar {
-                                            display: flex;
-                                            justify-content: space-between;
-                                            align-items: center;
-                                        }
+                                            .fc-toolbar {
+                                                display: flex;
+                                                justify-content: space-between;
+                                                align-items: center;
+                                            }
 
-                                        /* Media queries for smaller screens */
+                                            /* Media queries for smaller screens */
         /* @media (max-width: 576px) {
-                                        .fc-toolbar {
-                                            flex-direction: column;
-                                            text-align: center;
-                                        }
+                                            .fc-toolbar {
+                                                flex-direction: column;
+                                                text-align: center;
+                                            }
 
-                                        /* Style the title in the center */
+                                            /* Style the title in the center */
         .fc-toolbar-title {
             order: 2;
             /* Move the title to the center */
@@ -105,7 +105,7 @@
                             <div class="form-group mb-4 col-md-12">
                                 <div class="form-floating">
                                     <select class="form-select" name="gender">
-                                        <option selected>Select Gender</option>
+                                        <option value="">Select Gender</option>
                                         <option value="Male" @selected(old('gender') == 'Male')>Male</option>
                                         <option value="Female" @selected(old('gender') == 'Female')>Female</option>
                                     </select>

@@ -8,6 +8,16 @@
                     <h3 class="card-title align-items-start flex-column">
                         <span class="card-label fw-bolder fs-3 mb-1">Patients List</span>
                     </h3>
+                    <div class="card-toolbar">
+                        <form action="{{ route('patient.index') }}" method="get">
+                            @csrf
+                            <div class="form-group pt-3">
+                                <input class="form-control form-control-sm d-none d-md-block me-3" type="search"
+                                    autocomplete="off" autofocus placeholder="Search..." name="search"
+                                    style="width: 300px;">
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="card-body pt-0">
                     <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
@@ -24,18 +34,92 @@
                             @forelse ($patients as $patient)
                                 <tr class="text-gray-800 text-hover-primary">
                                     <td class="text-gray-400">{{ $loop->iteration }}</td>
-                                    <td>{{ $patient->full_name }}</td>
-                                    <td title="{{ $patient->address }}">{{ Str::words($patient->address, 5, $end = '...') }}
+                                    <td>
+                                        <button class="btn btn-link btn-outline-link" data-bs-toggle="modal"
+                                            data-bs-target="#modalAdd{{ $patient->id }}">{{ $patient->full_name }}</button>
+                                    </td>
+                                    <td title="{{ $patient->address }}">
+                                        <button class="btn btn-link" data-bs-toggle="modal"
+                                            data-bs-target="#modalAdd{{ $patient->id }}">
+                                            {{ Str::words($patient->address, 5, $end = '...') }}
+                                        </button>
                                     </td>
                                     <td>{{ $patient->contact }}</td>
                                     <td class="d-flex justify-content-center align-items-end">
                                         <a href="{{ route('patient.med-history', $patient->id) }}"
                                             class="btn btn-sm btn-primary me-2">View Medical History</a>
-                                        {{-- <a href="{{ route('patient.edit', $patient->id) }}"
-                                            class="btn btn-sm btn-warning me-2">Edit</a>
-                                        <a href="" class="btn btn-sm btn-danger">Delete</a> --}}
                                     </td>
                                 </tr>
+
+                                <div id="modalAdd{{ $patient->id }}" class="modal fade" data-bs-backdrop="static"
+                                    tabindex="-1" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Add New Consultation Today ({{ date('F d, Y') }})
+                                                    for
+                                                    {{ $patient->full_name }}
+                                                </h4>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                            </div>
+                                            <form action="{{ route('appointment.new-consult') }}" method="POST">
+                                                @csrf
+                                                <div class="modal-body">
+                                                    <input type="hidden" name="patient_id" value="{{ $patient->id }}">
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                            <label for="bp" class="form-label mb-2">BP</label>
+                                                            <input type="text" name="bp" class="form-control"
+                                                                required>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="cr" class="form-label mb-2">CR</label>
+                                                            <input type="text" name="cr" class="form-control"
+                                                                required>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="rr" class="form-label mb-2">RR</label>
+                                                            <input type="text" name="rr" class="form-control"
+                                                                required>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="t" class="form-label mb-2">T</label>
+                                                            <input type="text" name="t" class="form-control"
+                                                                required>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="wt" class="form-label mb-2">WT</label>
+                                                            <input type="text" name="wt" class="form-control"
+                                                                required>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <label for="ht" class="form-label mb-2">HT</label>
+                                                            <input type="text" name="ht" class="form-control"
+                                                                required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="form-group col-md-12 mb-2">
+                                                            <label for="symptoms" class="form-label mb-2">Symptoms</label>
+                                                            <textarea name="symptoms" rows="4" class="form-control" placeholder="Type here..."></textarea>
+                                                        </div>
+                                                        <div class="form-group col-md-12 mb-2">
+                                                            <label for="diagnosis"
+                                                                class="form-label mb-2">Diagnose</label>
+                                                            <textarea name="diagnosis" rows="4" class="form-control" placeholder="Type here..."></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-light"
+                                                        data-bs-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Add
+                                                        Consultation</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             @empty
                                 <tr>
                                     <td colspan="5" class="text-center">No patients found.</td>
@@ -43,6 +127,9 @@
                             @endforelse
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-center">
+                        {{ $patients->links() }}
+                    </div>
                 </div>
             </div>
         </div>

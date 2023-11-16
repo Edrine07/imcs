@@ -22,7 +22,7 @@
                                 </g>
                             </svg>
                         </span>
-                        Add Walk In Patient</a>
+                        Add New Walk In Patient</a>
                 </div>
                 <div class="d-flex justify-content-end align-items-center d-none" data-kt-customer-table-toolbar="selected">
                     <div class="fw-bolder me-5">
