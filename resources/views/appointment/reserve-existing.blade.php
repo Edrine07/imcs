@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="col-md-8">
-                    <form action="{{ route('appointment.existing-store') }}" method="post">
+                    <form action="{{ route('appointment.existing-store') }}" method="post" autocomplete="off">
                         @csrf
                         <div class="row">
                             <input type="hidden" name="patientId" id="patientId" value=""
@@ -261,6 +261,36 @@
                 const patientId = event.detail;
                 patientIdInput.value = patientId;
             });
+        });
+    </script>
+
+    <script>
+        const firstnameInput = document.getElementById('firstname');
+        const lastNameInput = document.getElementById('lastname');
+
+        firstnameInput.addEventListener('input', function() {
+            var inputValue = this.value;
+            var isValid = /^[A-Za-z\s]+$/.test(inputValue);
+            var isFirstCharSpace = /^\s/.test(inputValue);
+
+            if (!isValid || isFirstCharSpace) {
+                this.classList.add('is-invalid');
+            } else {
+                this.classList.remove('is-invalid');
+            }
+        });
+
+
+        lastNameInput.addEventListener('input', function() {
+            var inputValue = this.value;
+            var isValid = /^[A-Za-z\s]+$/.test(inputValue);
+            var isFirstCharSpace = /^\s/.test(inputValue);
+
+            if (!isValid || isFirstCharSpace) {
+                this.classList.add('is-invalid');
+            } else {
+                this.classList.remove('is-invalid');
+            }
         });
     </script>
 @endsection
