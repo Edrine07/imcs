@@ -207,7 +207,7 @@
                                                                             </div>
                                                                             <div class="col-md-6">
                                                                                 <div class="form-group mb-2">
-                                                                                    <label>Unit</label>
+                                                                                    <label>Quantity</label>
                                                                                     <input type="text"
                                                                                         name="medicine_unit"
                                                                                         value="{{ $med->medicine_unit }}"
@@ -277,7 +277,7 @@
                                                                     class="form-control" placeholder="" required>
                                                             </div>
                                                             <div class="form-group mb-2 col-md-4">
-                                                                <label>Unit</label>
+                                                                <label>Quantity</label>
                                                                 <input type="text" name="medicine_unit"
                                                                     class="form-control" placeholder="" required>
                                                             </div>
