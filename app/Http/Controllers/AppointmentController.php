@@ -7,6 +7,7 @@ use App\Models\Patient;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 use App\Notifications\ApprovedNotif;
+use App\Notifications\CancelledNotif;
 
 class AppointmentController extends Controller
 {
@@ -133,18 +134,42 @@ class AppointmentController extends Controller
         ]);
 
         $patient = Patient::where('id', $appointment->patient_id)
-            ->first();
+        ->first();
 
-        $patient->notify(new ApprovedNotif());
+        $appointmentTime = Carbon::parse($appointment->appointment_time);
+
+        $app = [
+            'name' => $patient->full_name,
+            'date' => $appointment->appointment_date->format('F d, Y'),
+            'time' => $appointmentTime->format('H:i a')
+        ];
+
+        $patient->notify(new ApprovedNotif($app));
 
         return redirect()->back()->with('success', 'Appointment successfully approved!');
     }
 
-    public function cancel(Appointment $appointment)
+    public function cancel(Appointment $appointment, Request $request)
     {
+        $reason = $request->input('reason');
+
         $appointment->update([
             'appointment_status' => "Cancelled"
         ]);
+
+        $patient = Patient::where('id', $appointment->patient_id)
+        ->first();
+
+        $appointmentTime = Carbon::parse($appointment->appointment_time);
+
+        $reason = [
+            'reason' => $reason,
+            'name' => $patient->full_name,
+            'date' => $appointment->appointment_date->format('F d, Y'),
+            'time' => $appointmentTime->format('H:i a')
+        ];
+
+        $patient->notify(new CancelledNotif($reason));
 
         return redirect()->back()->with('success', 'Appointment successfully cancelled!');
     }

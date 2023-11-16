@@ -102,8 +102,41 @@
                                         <td class="text-end">
                                             <a href="{{ route('appointment.approve', $pending->id) }}"
                                                 class="btn btn-sm btn-success">Approve</a>
-                                            <a href="{{ route('appointment.cancel', $pending->id) }}"
-                                                class="btn btn-sm  btn-danger">Cancel</a>
+                                            {{-- <a href="{{ route('appointment.cancel', $pending->id) }}"
+                                                class="btn btn-sm  btn-danger">Cancel</a> --}}
+
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                data-bs-target="#backDropModal">
+                                                Cancel
+                                            </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="backDropModal" data-bs-backdrop="static"
+                                                tabindex="-1">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <form class="modal-content" action="{{ route('appointment.cancel', $pending->id) }}" method="">
+                                                        @csrf
+                                                        <div class="modal-header text-center">
+                                                            <h5 class="modal-title text-center" id="backDropModalTitle">REASON FOR
+                                                                CANCELATION</h5>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="row">
+                                                                <div class="col mb-3">
+                                                                    <textarea placeholder="" name="reason" class="form-control" id="" rows="3">Type here... </textarea>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-danger">SEND</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+
                                         </td>
                                     </tr>
                                 @empty

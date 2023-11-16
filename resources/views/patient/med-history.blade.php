@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+@livewireStyles()
 @section('content')
     <div class="container grid px-6 mx-auto">
         <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
@@ -243,6 +244,7 @@
                                         </table>
                                     </div>
 
+
                                     <div class="modal fade" id="defaultModal{{ $app->id }}" tabindex="-1"
                                         data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
                                         aria-labelledby="modalTitleId" aria-hidden="true">
@@ -298,6 +300,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row mt-2">
+                                <div class="col-md-12 ">
+                                    @livewire('patien-record.export', ['app' => $app], key($app->id))
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -307,3 +314,4 @@
         </div>
     </div>
 @endsection
+@livewireScripts()
