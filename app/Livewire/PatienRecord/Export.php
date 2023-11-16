@@ -16,12 +16,14 @@ class Export extends Component
         $path = storage_path($this->path_export);
         $templateProcessor = new TemplateProcessor($path);
 
+        $templateProcessor->setValue('id', $this->app->patient_id);
         $templateProcessor->setValue('name', $this->app->patient->fullname);
         $templateProcessor->setValue('address', $this->app->patient->address);
         $templateProcessor->setValue('contact', $this->app->patient->contact);
         $templateProcessor->setValue('age', $this->app->patient->age);
         $templateProcessor->setValue('bday', $this->app->patient->birthdate->format('F d, Y'));
         $templateProcessor->setValue('sex', $this->app->patient->gender);
+        $templateProcessor->setValue('date', $this->app->appointment_date->format('F d, Y'));
 
         $templateProcessor->setValue('bp', $this->app->prescription->bp);
         $templateProcessor->setValue('cr', $this->app->prescription->cr);
