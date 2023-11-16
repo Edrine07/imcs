@@ -62,7 +62,8 @@
                                                 </h4>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                             </div>
-                                            <form action="{{ route('appointment.new-consult') }}" method="POST">
+                                            <form action="{{ route('appointment.new-consult') }}" method="POST"
+                                                autocomplete="off">
                                                 @csrf
                                                 <div class="modal-body">
                                                     <input type="hidden" name="patient_id" value="{{ $patient->id }}">

@@ -175,7 +175,7 @@
                                                                         aria-label="Close"></button>
                                                                 </div>
                                                                 <form action="{{ route('patient.med-store', $med->id) }}"
-                                                                    method="post">
+                                                                    method="post" autocomplete="off">
                                                                     @csrf
                                                                     <div class="modal-body">
                                                                         <input type="hidden" name="med_id"
@@ -244,7 +244,6 @@
                                         </table>
                                     </div>
 
-
                                     <div class="modal fade" id="defaultModal{{ $app->id }}" tabindex="-1"
                                         data-bs-backdrop="static" data-bs-keyboard="false" role="dialog"
                                         aria-labelledby="modalTitleId" aria-hidden="true">
@@ -256,7 +255,8 @@
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                                 </div>
-                                                <form action="{{ route('patient.med-store', $app->id) }}" method="post">
+                                                <form action="{{ route('patient.med-store', $app->id) }}" method="post"
+                                                    autocomplete="off">
                                                     @csrf
                                                     <div class="modal-body">
                                                         <input type="hidden" name="app_id"

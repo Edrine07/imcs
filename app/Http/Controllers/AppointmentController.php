@@ -89,7 +89,7 @@ class AppointmentController extends Controller
                 'appointment_time' => $timestamp,
             ]);
 
-            return redirect()->back()->with('success', 'Appointment set successfully. Please wait for confirmation.');
+            return redirect()->back()->with('success', 'Appointment set successfully. Please wait for an sms confirmation of your appointment.');
         }
     }
 
@@ -123,7 +123,7 @@ class AppointmentController extends Controller
                 'appointment_time' => $timestamp,
             ]);
 
-            return redirect()->back()->with('success', 'Appointment set successfully. Please wait for confirmation.');
+            return redirect()->back()->with('success', 'Appointment set successfully. Please wait for an sms confirmation of your appointment.');
         }
     }
 
@@ -134,7 +134,7 @@ class AppointmentController extends Controller
         ]);
 
         $patient = Patient::where('id', $appointment->patient_id)
-        ->first();
+            ->first();
 
         $appointmentTime = Carbon::parse($appointment->appointment_time);
 
@@ -158,7 +158,7 @@ class AppointmentController extends Controller
         ]);
 
         $patient = Patient::where('id', $appointment->patient_id)
-        ->first();
+            ->first();
 
         $appointmentTime = Carbon::parse($appointment->appointment_time);
 

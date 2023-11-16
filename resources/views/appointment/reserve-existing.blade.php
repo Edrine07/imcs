@@ -51,8 +51,8 @@
 
         <div class="container mt-5 d-flex justify-content-center align-items-center">
             <div class="row bg-white rounded rounded-3 shadow p-4">
-                <x-success></x-success>
-                <x-error></x-error>
+                <x-app-success></x-app-success>
+                <x-app-error></x-app-error>
                 <div class="col-md-4">
                     <h2 class="text-center my-5">Make Appointment</h2>
                     <h3 class="text-center">Are you a New Patient? <br> If yes, <a
@@ -66,7 +66,7 @@
                 </div>
 
                 <div class="col-md-8">
-                    <form action="{{ route('appointment.existing-store') }}" method="post">
+                    <form action="{{ route('appointment.existing-store') }}" method="post" autocomplete="off">
                         @csrf
                         <div class="row">
                             <input type="hidden" name="patientId" id="patientId" value=""
@@ -261,6 +261,42 @@
                 const patientId = event.detail;
                 patientIdInput.value = patientId;
             });
+        });
+    </script>
+
+    <script>
+        const firstnameInput = document.getElementById('firstname');
+        const lastNameInput = document.getElementById('lastname');
+
+        firstnameInput.addEventListener('input', function() {
+            var inputValue = this.value;
+            var isValid = /^[A-Za-z\s]+$/.test(inputValue);
+            var isFirstCharSpace = /^\s/.test(inputValue);
+
+            if (!isValid || isFirstCharSpace) {
+                this.classList.add('is-invalid');
+            } else {
+                this.classList.remove('is-invalid');
+            }
+        });
+
+
+        lastNameInput.addEventListener('input', function() {
+            var inputValue = this.value;
+            var isValid = /^[A-Za-z\s]+$/.test(inputValue);
+            var isFirstCharSpace = /^\s/.test(inputValue);
+
+            if (!isValid || isFirstCharSpace) {
+                this.classList.add('is-invalid');
+            } else {
+                this.classList.remove('is-invalid');
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            $('.custom-modal').modal('show');
         });
     </script>
 @endsection

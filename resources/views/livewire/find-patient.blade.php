@@ -1,18 +1,18 @@
 <div>
-    <form wire:submit.prevent="findPatient">
+    <form wire:submit.prevent="findPatient" autocomplete="off">
         @csrf
         <div class="row mt-5">
             <div class="form-group mb-4 col-md-12">
                 <div class="form-floating">
-                    <input wire:model="firstname" type="text" name="firstname" class="form-control"
-                        placeholder="Firstname" required>
+                    <input wire:model="firstname" type="text" name="firstname" class="form-control" id="firstname"
+                        value="{{ old('firstname') }}" placeholder="Firstname" required>
                     <label for="floatingPassword">First Name</label>
                 </div>
             </div>
             <div class="form-group mb-4 col-md-12">
                 <div class="form-floating">
-                    <input wire:model="lastname" type="text" name="lastname" class="form-control"
-                        placeholder="lastname" required>
+                    <input wire:model="lastname" type="text" name="lastname" class="form-control" id="lastname"
+                        value="{{ old('lastname') }}" placeholder="lastname" required>
                     <label for="floatingPassword">Last Name</label>
                 </div>
             </div>
@@ -20,7 +20,7 @@
             <div class="form-group mb-4 col-md-12">
                 <div class="form-floating">
                     <input wire:model="birthdate" type="date" name="birthdate" class="form-control" id="birthdate"
-                        max="{{ date('Y-m-d') }}" placeholder="birthdate" required>
+                        value="{{ old('birthdate') }}" max="{{ date('Y-m-d') }}" placeholder="birthdate" required>
                     <label for="floatingPassword">Birthdate</label>
                 </div>
             </div>

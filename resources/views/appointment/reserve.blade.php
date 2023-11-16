@@ -3,27 +3,27 @@
 @section('styles')
     <style>
         /* .fc-toolbar-title {
-                                                font-size: 15px !important;
-                                            }
+                                                                                                                                                                                                                                                                                                                                            font-size: 15px !important;
+                                                                                                                                                                                                                                                                                                                                        }
 
-                                            .fc-button {
-                                                font-size: 10px !important;
-                                            }
+                                                                                                                                                                                                                                                                                                                                        .fc-button {
+                                                                                                                                                                                                                                                                                                                                            font-size: 10px !important;
+                                                                                                                                                                                                                                                                                                                                        }
 
-                                            .fc-toolbar {
-                                                display: flex;
-                                                justify-content: space-between;
-                                                align-items: center;
-                                            }
+                                                                                                                                                                                                                                                                                                                                        .fc-toolbar {
+                                                                                                                                                                                                                                                                                                                                            display: flex;
+                                                                                                                                                                                                                                                                                                                                            justify-content: space-between;
+                                                                                                                                                                                                                                                                                                                                            align-items: center;
+                                                                                                                                                                                                                                                                                                                                        }
 
-                                            /* Media queries for smaller screens */
+                                                                                                                                                                                                                                                                                                                                        /* Media queries for smaller screens */
         /* @media (max-width: 576px) {
-                                            .fc-toolbar {
-                                                flex-direction: column;
-                                                text-align: center;
-                                            }
+                                                                                                                                                                                                                                                                                                                                        .fc-toolbar {
+                                                                                                                                                                                                                                                                                                                                            flex-direction: column;
+                                                                                                                                                                                                                                                                                                                                            text-align: center;
+                                                                                                                                                                                                                                                                                                                                        }
 
-                                            /* Style the title in the center */
+                                                                                                                                                                                                                                                                                                                                        /* Style the title in the center */
         .fc-toolbar-title {
             order: 2;
             /* Move the title to the center */
@@ -77,11 +77,11 @@
         </div>
 
         <div class="container mt-5">
-            <form action="{{ route('appointment.reserve_appointment') }}" method="post" class="my-auto">
+            <form action="{{ route('appointment.reserve_appointment') }}" method="post" class="my-auto" autocomplete="off">
                 @csrf
                 <div class="row bg-white rounded rounded-3 shadow p-4">
-                    <x-success></x-success>
-                    <x-error></x-error>
+                    <x-app-success></x-app-success>
+                    <x-app-error></x-app-error>
                     <div class="col-md-4">
                         <h2 class="text-center my-5">Make Appointment</h2>
                         <h3 class="text-center">Are you an Existing Patient? <br> If yes, <a
@@ -90,17 +90,21 @@
                         <div class="row mt-5">
                             <div class="form-group mb-4 col-md-12">
                                 <div class="form-floating">
-                                    <input type="text" name="firstname" class="form-control" placeholder="Firstname"
-                                        value="{{ old('firstname') }}" required>
+                                    <input type="text" name="firstname" class="form-control" id="firstname"
+                                        placeholder="Firstname" value="{{ old('firstname') }}" required>
                                     <label for="floatingPassword">First Name</label>
                                 </div>
+                                <span class="text-danger" id="fnameWarn" style="display:none;">Please enter valid
+                                    firstname</span>
                             </div>
                             <div class="form-group mb-4 col-md-12">
                                 <div class="form-floating">
-                                    <input type="text" name="lastname" class="form-control" placeholder="lastname"
-                                        value="{{ old('lastname') }}" required>
+                                    <input type="text" name="lastname" class="form-control" id="lastname"
+                                        placeholder="lastname" value="{{ old('lastname') }}" required>
                                     <label for="floatingPassword">Last Name</label>
                                 </div>
+                                <span class="text-danger" id="lnameWarn" style="display:none;">Please enter valid
+                                    lastname</span>
                             </div>
                             <div class="form-group mb-4 col-md-12">
                                 <div class="form-floating">
@@ -128,21 +132,28 @@
                                 </div>
                             </div>
                             <div class="form-group mb-4 col-md-12">
-                                <div class="form-floating">
-                                    <input type="text" name="contact" class="form-control" pattern="[0-9]{12}"
-                                        value="{{ old('contact') }}" placeholder="639123456789" required>
-                                    <label for="floatingPassword">Contact No.</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">+63</span>
+                                    <div class="form-floating col-10">
+                                        <input type="text" name="contact" id="contactInput" class="form-control"
+                                            pattern="[0-9]{10}" value="{{ old('contact') }}" placeholder="Contact No."
+                                            title="Please use this format: 9123456789" required>
+                                        <label for="contactInput">Contact No.</label>
+                                    </div>
+                                    <span class="text-danger" id="cNumWarn" style="display:none;">Please enter valid
+                                        numbers
+                                        only</span>
                                 </div>
                             </div>
                             <div class="form-group mb-4 col-md-12">
                                 <div class="form-floating">
-                                    <input type="text" name="address" class="form-control" placeholder="address"
-                                        value="{{ old('address') }}" required>
-                                    <label for="floatingPassword">Address No.</label>
+                                    <input type="text" name="address" class="form-control" value="{{ old('address') }}"
+                                        placeholder="Address" required>
+                                    <label for="floatingPassword">Address</label>
                                 </div>
+                                <span class="ms-4 text-muted">Purok, Barangay, Municipality, Province/City</span>
                             </div>
                         </div>
-
                     </div>
 
                     <div class="col-md-5 my-5 p-3">
@@ -314,6 +325,63 @@
                 var age = Math.floor((today - dob) / (365.25 * 24 * 60 * 60 * 1000));
                 $('#age').val(age);
             });
+        });
+    </script>
+
+    <script>
+        const contactInput = document.getElementById('contactInput');
+        const firstnameInput = document.getElementById('firstname');
+        const lastnameInput = document.getElementById('lastname');
+        const fnameWarn = document.getElementById('fnameWarn');
+        const lnameWarn = document.getElementById('lnameWarn');
+        const cNumWarn = document.getElementById('cNumWarn');
+
+
+        // validate while typing, if length is not equal to 10 and if value has non-numeric characters, add is-invalid class
+        contactInput.addEventListener('keyup', function() {
+            if (this.value.length != 10 || isNaN(this.value)) {
+                this.classList.add('is-invalid');
+                cNumWarn.style.display = 'block';
+            } else {
+                this.classList.remove('is-invalid');
+                cNumWarn.style.display = 'none';
+            }
+        });
+
+        firstnameInput.addEventListener('input', function() {
+            var inputValue = this.value;
+            var isValid = /^[A-Za-z\s]+$/.test(inputValue);
+            var isFirstCharSpace = /^\s/.test(inputValue); // Check if the first character is a space
+
+            if (!isValid || isFirstCharSpace) {
+                this.classList.add('is-invalid');
+                fnameWarn.style.display = "block";
+            } else {
+                this.classList.remove('is-invalid');
+                fnameWarn.style.display = "none";
+            }
+        });
+
+
+        lastnameInput.addEventListener('input', function() {
+            var inputValue = this.value;
+            var isValid = /^[A-Za-z\s]+$/.test(inputValue);
+            var isFirstCharSpace = /^\s/.test(inputValue); // Check if the first character is a space
+
+            if (!isValid || isFirstCharSpace) {
+                this.classList.add('is-invalid');
+                lnameWarn.style.display = "block";
+            } else {
+                this.classList.remove('is-invalid');
+                // lnameWarnText.style.display = "none";
+                lnameWarn.style.display = "none";
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            $('.custom-modal').modal('show');
         });
     </script>
 @endsection
