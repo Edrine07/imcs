@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('appointment_id')->references('id')->on('appointments')->constrained()->onDelete('cascade');
             $table->string('medicine_id')->references('id')->on('medicine_lists')->contrained()->onDelete('cascade');
             $table->string('medicine_dose');
+            $table->string('medicine_frequency');
             $table->string('medicine_unit');
             $table->string('duration');
             $table->timestamps();

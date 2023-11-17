@@ -168,7 +168,7 @@ class PatientController extends Controller
 
         $appointments = Appointment::where('patient_id', $patient->id)
             ->where('appointment_status', 'Completed')
-            ->orderBy('appointment_date', 'asc')
+            ->orderBy('appointment_date', 'asc')->orderBy('appointment_time')
             ->get();
 
         // dd($appointments);
@@ -186,6 +186,7 @@ class PatientController extends Controller
             'app_id' => 'required',
             'medicine_id' => 'required',
             'medicine_dose' => 'required',
+            'medicine_frequency' => 'required',
             'medicine_unit' => 'required',
             'duration' => 'required'
         ]);
@@ -195,6 +196,7 @@ class PatientController extends Controller
             'appointment_id' => $validated['app_id'],
             'medicine_id' => $validated['medicine_id'],
             'medicine_dose' => $validated['medicine_dose'],
+            'medicine_frequency' => $validated['medicine_frequency'],
             'medicine_unit' => $validated['medicine_unit'],
             'duration' => $validated['duration'],
         ]);
@@ -209,6 +211,7 @@ class PatientController extends Controller
             'app_id' => 'required',
             'medicine_id' => 'required',
             'medicine_dose' => 'required',
+            'medicine_frequency' => 'required',
             'medicine_unit' => 'required',
             'duration' => 'required'
         ]);

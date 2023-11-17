@@ -8,19 +8,19 @@ use Illuminate\Http\Request;
 
 class PrescriptionController extends Controller
 {
-    public function Prescription () {
+    public function Prescription()
+    {
 
         return view('prescription.index');
-
     }
 
-    public function CreatePrescription ()
+    public function CreatePrescription()
     {
         $data = Patient::all();
-        return view('prescription.create', ['data'=>$data]);
+        return view('prescription.create', ['data' => $data]);
     }
 
-    public function StorePrescription (Request $request)
+    public function StorePrescription(Request $request)
     {
 
         Patient::create([
@@ -30,9 +30,9 @@ class PrescriptionController extends Controller
             'medicine_name' => $request->medicine_name,
             'medicine_type' => $request->medicine_type,
             'medicine_dose' => $request->medicine_dose,
+            'medicine_frequency' => $request->medicine_frequency,
             'medicine_unit' => $request->medicine_unit,
             'duration' => $request->duration
         ]);
     }
-
 }

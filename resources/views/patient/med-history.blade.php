@@ -193,7 +193,7 @@
                                                                         <input type="hidden" name="med_id"
                                                                             value="{{ $med->id }}">
                                                                         <div class="row">
-                                                                            <div class="col-md-6">
+                                                                            <div class="col-md-12">
                                                                                 <div class="form-group mb-2">
                                                                                     <label>Choose a Medicine</label>
                                                                                     <select name="medicine_id"
@@ -209,11 +209,23 @@
                                                                                         @endforeach
                                                                                     </select>
                                                                                 </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
                                                                                 <div class="form-group mb-2">
-                                                                                    <label>Dose</label>
+                                                                                    <label>Dosage</label>
                                                                                     <input type="text"
                                                                                         name="medicine_dose"
                                                                                         value="{{ $med->medicine_dose }}"
+                                                                                        class="form-control"
+                                                                                        placeholder="" required>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group mb-2">
+                                                                                    <label>Frequency</label>
+                                                                                    <input type="text"
+                                                                                        name="medicine_frequency"
+                                                                                        value="{{ $med->medicine_frequency }}"
                                                                                         class="form-control"
                                                                                         placeholder="" required>
                                                                                 </div>
@@ -227,6 +239,8 @@
                                                                                         class="form-control"
                                                                                         placeholder="" required>
                                                                                 </div>
+                                                                            </div>
+                                                                            <div class="col-md-6">
                                                                                 <div class="form-group mb-2">
                                                                                     <label>Duration</label>
                                                                                     <input type="text" name="duration"
@@ -274,7 +288,7 @@
                                                         <input type="hidden" name="app_id"
                                                             value="{{ $app->id }}">
                                                         <div class="row">
-                                                            <div class="form-group mb-2 col-md-6">
+                                                            <div class="form-group mb-2 col-md-12">
                                                                 <label>Choose a Medicine</label>
                                                                 <select name="medicine_id" required class="form-control">
                                                                     <option value="">Select Medicine</option>
@@ -285,18 +299,23 @@
                                                                 </select>
                                                             </div>
                                                             <div class="form-group mb-2 col-md-6">
-                                                                <label>Dose</label>
+                                                                <label>Dosage: </label>
                                                                 <input type="text" name="medicine_dose"
                                                                     class="form-control" placeholder="" required>
                                                             </div>
-                                                            <div class="form-group mb-2 col-md-4">
-                                                                <label>Quantity</label>
-                                                                <input type="text" name="medicine_unit"
+                                                            <div class="form-group mb-2 col-md-6">
+                                                                <label>Frequency: </label>
+                                                                <input type="text" name="medicine_frequency"
                                                                     class="form-control" placeholder="" required>
                                                             </div>
-                                                            <div class="form-group mb-2 col-md-8">
+                                                            <div class="form-group mb-2 col-md-6">
                                                                 <label>Duration</label>
                                                                 <input type="text" name="duration"
+                                                                    class="form-control" placeholder="" required>
+                                                            </div>
+                                                            <div class="form-group mb-2 col-md-6">
+                                                                <label>Quantity</label>
+                                                                <input type="text" name="medicine_unit"
                                                                     class="form-control" placeholder="" required>
                                                             </div>
                                                         </div>
