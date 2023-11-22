@@ -60,14 +60,10 @@ class TodayCheckupController extends Controller
         ]);
 
         return redirect()->route('patient.med-history', $appointment->patient_id)->with('success', 'Consultation completed!');
-
     }
 
     public function noShow(Appointment $appointment)
     {
         $appointment->delete();
-
-
     }
-
 }

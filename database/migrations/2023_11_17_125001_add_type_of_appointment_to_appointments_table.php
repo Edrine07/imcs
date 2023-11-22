@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('business_hours', function (Blueprint $table) {
-            $table->id();
-            $table->string('date')->unique();
-            $table->timestamps();
+        Schema::table('appointments', function (Blueprint $table) {
+            $table->string('appointment_type')->after('appointment_status');
         });
     }
 
@@ -23,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('business_hours');
+        Schema::table('appointments', function (Blueprint $table) {
+            $table->dropColumn('appointment_type');
+        });
     }
 };

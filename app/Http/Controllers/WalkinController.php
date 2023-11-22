@@ -23,6 +23,16 @@ class WalkinController extends Controller
         return view("walkin.create-patient", compact('patient', 'appointments', 'medicines'));
     }
 
+    public function walkins()
+    {
+        $appointments = Appointment::where('appointment_type', '=', 'Walk-in')->orderByRaw("FIELD(appointment_status, 'Pending') DESC")
+            ->orderBy('appointment_date', 'asc')
+            ->orderBy('appointment_time', 'asc')
+            ->paginate(10);
+
+        return view('walkin.index', compact('appointments'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -68,6 +78,7 @@ class WalkinController extends Controller
             'patient_id' => $patient->id,
             'appointment_date' => now()->format('Y-m-d'),
             'appointment_time' => now()->format('h:i'),
+            'appointment_type' => 'Walk-in',
         ]);
 
 

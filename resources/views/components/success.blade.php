@@ -3,7 +3,7 @@
         <div class="alert-icon me-2"><i class="fa fa-check"></i></div>
         <div class="alert-text text-black">{{ session('success') }}</div>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-            <i class="fa fa-times" aria-hidden="true"></i>
+            {{-- <i class="fa fa-times" aria-hidden="true"></i> --}}
         </button>
     </div>
 @endif

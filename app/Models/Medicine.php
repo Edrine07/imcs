@@ -14,6 +14,7 @@ class Medicine extends Model
         'medicine_id',
         'medicine_dose',
         'medicine_unit',
+        'medicine_frequency',
         'duration',
     ];
 

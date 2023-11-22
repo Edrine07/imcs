@@ -70,7 +70,9 @@ Route::middleware(['web', 'auth', 'role:admin'])->prefix('admin')->group(functio
 
     Route::get('schedule', [BusinessHourController::class, 'BusinessHour'])->name('appointment.appointment_hours');
     Route::post('schedule/update', [BusinessHourController::class, 'BusinessHourUpdate'])->name('appointment_hours.update');
+    Route::delete('schedule/delete/{hour}', [BusinessHourController::class, 'destroy'])->name('appointment_hours.destroy');
 
     Route::get('walkin/create-patient', [WalkinController::class, 'createPatient'])->name('walkin.create-patient');
     Route::post('walkin/create-patient', [WalkinController::class, 'store'])->name('walkin.store-patient');
+    Route::get('walkin', [WalkinController::class, 'walkins'])->name('walkin.index');
 });
