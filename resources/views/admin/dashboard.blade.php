@@ -182,9 +182,11 @@
 @section('scripts')
     <script>
         var appointmentsData = @json($appointmentsCountByMonth);
+        var walkInData = @json($appointmentsCountByMonthWalkIn);
 
         var labels = Object.keys(appointmentsData);
-        var data = Object.values(appointmentsData);
+        var appointmentsCount = Object.values(appointmentsData);
+        var walkInCount = Object.values(walkInData);
 
         var ctx = document.getElementById('appointmentsChart').getContext('2d');
         var myChart = new Chart(ctx, {
@@ -192,17 +194,31 @@
             data: {
                 labels: labels,
                 datasets: [{
-                    label: 'Completed Appointments per Month',
-                    data: data,
-                    borderColor: {
-                        gradient: ctx.createLinearGradient(0, 0, 0, 400),
-                        colorStart: 'rgba(75, 192, 192, 0.2)',
-                        colorStop: 'rgba(0, 128, 0, 1)', // You can adjust these values
+                        label: 'Completed Appointments',
+                        data: appointmentsCount,
+                        borderColor: 'rgba(0, 149, 232, 1)',
+                        backgroundColor: 'rgba(0, 149, 232, 0.2)',
+                        borderWidth: 3,
                     },
-                    borderWidth: 3,
-                }]
+                    {
+                        label: 'Completed Walk-ins',
+                        data: walkInCount,
+                        borderColor: 'rgba(0, 128, 0, 1)',
+                        backgroundColor: 'rgba(0, 128, 0, 0.2)',
+                        borderWidth: 3,
+                    }
+                ]
             },
             options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'Total Records for This Year',
+                        font: {
+                            size: 16
+                        }
+                    }
+                },
                 scales: {
                     y: {
                         beginAtZero: true

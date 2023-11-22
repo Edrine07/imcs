@@ -12,7 +12,8 @@ class Appointment extends Model
         'patient_id',
         'appointment_date',
         'appointment_time',
-        'appointment_status'
+        'appointment_status',
+        'appointment_type'
     ];
 
     protected $casts = [

@@ -31,6 +31,10 @@
             color: rgb(136, 133, 133);
         }
 
+        #calendar .doctor-out {
+            background-color: rgba(246, 83, 83, 0.618);
+        }
+
         #calendar .selectable-date {
             background-color: rgb(214, 250, 214);
         }
@@ -202,6 +206,16 @@
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             const selectedDateInput = document.getElementById('selectedDate');
+
+            var businessHours = {!! json_encode($businessHours) !!};
+
+            var disabledDates = businessHours.map(date => {
+                // Convert the Y-m-d formatted date to a Date object
+                return new Date(date);
+            });
+
+            console.log(disabledDates);
+
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 selectable: true,
@@ -223,7 +237,17 @@
                     var yesterday = new Date(today);
                     yesterday.setDate(yesterday.getDate() - 1);
                     var day = info.start.getDay();
-                    return day != 0 && day != 6 && info.start > yesterday;
+                    return day !== 0 && day !== 6 && info.start >= today &&
+                        !disabledDates.some(disabledDate => {
+                            return info.start.getDate() === disabledDate.getDate() &&
+                                info.start.getMonth() === disabledDate.getMonth() &&
+                                info.start.getFullYear() === disabledDate.getFullYear();
+                        }) &&
+                        !disabledDates.some(disabledDate => {
+                            return info.start.getDate() === disabledDate.getDate() &&
+                                info.start.getMonth() === disabledDate.getMonth() &&
+                                info.start.getFullYear() === disabledDate.getFullYear();
+                        });
                 },
                 dayCellClassNames: function(arg) {
                     if (arg.isPast) {
@@ -232,6 +256,15 @@
                     if (arg.date.getDay() == 0 || arg.date.getDay() == 6) {
                         return 'unselectable-date';
                     }
+                    // also check if date is in the array of disabled dates
+                    if (disabledDates.some(disabledDate => {
+                            return arg.date.getDate() === disabledDate.getDate() &&
+                                arg.date.getMonth() === disabledDate.getMonth() &&
+                                arg.date.getFullYear() === disabledDate.getFullYear();
+                        })) {
+                        return 'doctor-out';
+                    }
+
 
                     return 'selectable-date';
 

@@ -106,6 +106,7 @@ class PatientController extends Controller
             'appointment_date' => date('Y-m-d'),
             'appointment_time' => $currentTime,
             'appointment_status' => 'Completed',
+            'appointment_type' => 'Walk-in',
         ]);
 
         Prescription::create([
