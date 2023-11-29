@@ -40,7 +40,7 @@ class Export extends Component
         $templateProcessor->cloneRow('medname', count($medTake));
 
         foreach ($medTake as $index => $code) {
-            $templateProcessor->setValue('medname#' . ($index + 1), $code->medName->medicine_name);
+            $templateProcessor->setValue('medname#' . ($index + 1), $code->medicine_name);
             $templateProcessor->setValue('dosage#' . ($index + 1), $code->medicine_dose);
             $templateProcessor->setValue('frequency#' . ($index + 1), $code->medicine_frequency);
             $templateProcessor->setValue('qty#' . ($index + 1), $code->medicine_unit);

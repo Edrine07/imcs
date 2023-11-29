@@ -18,9 +18,9 @@ class WalkinController extends Controller
             ->orderBy('appointment_date', 'asc')
             ->get();
 
-        $medicines = MedicineList::all();
+        // $medicines = MedicineList::all();
 
-        return view("walkin.create-patient", compact('patient', 'appointments', 'medicines'));
+        return view("walkin.create-patient", compact('patient', 'appointments'));
     }
 
     public function walkins()
@@ -77,7 +77,7 @@ class WalkinController extends Controller
         $appointment = Appointment::create([
             'patient_id' => $patient->id,
             'appointment_date' => now()->format('Y-m-d'),
-            'appointment_time' => now()->format('h:i'),
+            'appointment_time' => now()->format('H:i:s'),
             'appointment_type' => 'Walk-in',
         ]);
 

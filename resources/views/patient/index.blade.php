@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <div class="card-body pt-0">
-                    <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_customers_table">
+                    <table class="table align-middle table-row-dashed fs-6 py-0 table-sm" id="kt_customers_table">
                         <thead>
                             <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                 <th>#</th>
@@ -61,7 +61,7 @@
                                         </button>
                                     </td>
                                     <td>{{ $patient->contact }}</td>
-                                    <td class="d-flex justify-content-center align-items-end">
+                                    <td class="text-center">
                                         <a href="{{ route('patient.med-history', $patient->id) }}"
                                             class="btn btn-sm btn-primary me-2">View Medical History</a>
                                     </td>
@@ -85,7 +85,8 @@
                                                     <input type="hidden" name="patient_id" value="{{ $patient->id }}">
                                                     <div class="row">
                                                         <div class="col-md-2">
-                                                            <label for="bp" class="form-label mb-2">BP <span class="text-danger">*</span> </label>
+                                                            <label for="bp" class="form-label mb-2">BP <span
+                                                                    class="text-danger">*</span> </label>
                                                             <div class="input-group">
                                                                 <input type="number" min="1" name="bp"
                                                                     class="form-control" required>
@@ -95,7 +96,8 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
-                                                            <label for="cr" class="form-label mb-2">CR <span class="text-danger">*</span></label>
+                                                            <label for="cr" class="form-label mb-2">CR <span
+                                                                    class="text-danger">*</span></label>
                                                             <div class="input-group">
                                                                 <input type="number" min="1" step="0.01"
                                                                     name="cr" class="form-control" required>
@@ -108,7 +110,8 @@
                                                                 name="rr" class="form-control">
                                                         </div>
                                                         <div class="col-md-2">
-                                                            <label for="t" class="form-label mb-2">T <span class="text-danger">*</span></label>
+                                                            <label for="t" class="form-label mb-2">T <span
+                                                                    class="text-danger">*</span></label>
                                                             <div class="input-group">
                                                                 <input type="number" step="0.01" min="1"
                                                                     name="t" class="form-control" required>
@@ -116,7 +119,8 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
-                                                            <label for="wt" class="form-label mb-2">WT <span class="text-danger">*</span></label>
+                                                            <label for="wt" class="form-label mb-2">WT <span
+                                                                    class="text-danger">*</span></label>
                                                             <div class="input-group">
                                                                 <input type="number" step="0.01" min="1"
                                                                     name="wt" class="form-control" required>

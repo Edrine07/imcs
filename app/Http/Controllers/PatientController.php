@@ -174,18 +174,18 @@ class PatientController extends Controller
 
         // dd($appointments);
 
-        $medicines = MedicineList::all();
+        // $medicines = MedicineList::all();
 
         // dd($appointments);
 
-        return view('patient.med-history', compact('medicines', 'patient', 'appointments'));
+        return view('patient.med-history', compact('patient', 'appointments'));
     }
 
     public function storeMedToTake(Request $request, Appointment $app)
     {
         $validated = $request->validate([
             'app_id' => 'required',
-            'medicine_id' => 'required',
+            'medicine_name' => 'required',
             'medicine_dose' => 'required',
             'medicine_frequency' => 'required',
             'medicine_unit' => 'required',
@@ -195,7 +195,7 @@ class PatientController extends Controller
 
         Medicine::create([
             'appointment_id' => $validated['app_id'],
-            'medicine_id' => $validated['medicine_id'],
+            'medicine_name' => $validated['medicine_name'],
             'medicine_dose' => $validated['medicine_dose'],
             'medicine_frequency' => $validated['medicine_frequency'],
             'medicine_unit' => $validated['medicine_unit'],
@@ -210,7 +210,7 @@ class PatientController extends Controller
     {
         $validated = $request->validate([
             'app_id' => 'required',
-            'medicine_id' => 'required',
+            'medicine_name' => 'required',
             'medicine_dose' => 'required',
             'medicine_frequency' => 'required',
             'medicine_unit' => 'required',

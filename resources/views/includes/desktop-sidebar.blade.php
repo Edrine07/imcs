@@ -189,7 +189,7 @@
                         <span class="menu-title">Schedule</span>
                     </a>
                 </div>
-                <div class="menu-item">
+                {{-- <div class="menu-item">
                     <div class="menu-content pt-8 pb-0">
                         <span class="menu-section text-muted text-uppercase fs-8 ls-1">Medicine Inventory</span>
                     </div>
@@ -211,7 +211,7 @@
                         </span>
                         <span class="menu-title">Medicine</span>
                     </a>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

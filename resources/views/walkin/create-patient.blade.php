@@ -177,7 +177,7 @@
 
 
         // validate while typing, if length is not equal to 10 and if value has non-numeric characters, add is-invalid class
-        contactInput.addEventListener('keyup', function() {
+        contactInput.addEventListener('input', function() {
             if (this.value.length != 10 || isNaN(this.value)) {
                 this.classList.add('is-invalid');
                 // cNumWarn.style.display = 'block';
