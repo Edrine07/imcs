@@ -129,7 +129,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row mb-2">
                                 <div class="col-md-6">
                                     <div class="mt-5">
                                         <label for="symptoms" class="form-label">SYMPTOMS</label>
@@ -151,19 +151,20 @@
                                     </div>
 
                                     <div class="table-responsive">
-                                        <table class="table table-striped table-hover table-borderless align-middle">
+                                        <table
+                                            class="table table-striped table-hover table-borderless align-middle table-sm">
                                             <thead class="table-light">
                                                 <tr class="thead-dark text-center">
                                                     <th class="fw-bold">Medicine Name</th>
-                                                    <th class="fw-bold">Type</th>
+                                                    <th class="fw-bold">Dosage</th>
                                                     <th class="fw-bold">View</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="table-group-divider">
                                                 @forelse ($app->medToTake as $med)
                                                     <tr class="text-center">
-                                                        <td>{{ $med->medName->medicine_name }}</td>
-                                                        <td>{{ $med->medName->medicine_type }}</td>
+                                                        <td>{{ $med->medicine_name }}</td>
+                                                        <td>{{ $med->medicine_dose }}</td>
                                                         <td>
                                                             <button class="btn btn-primary btn-sm" type="button"
                                                                 data-bs-toggle="modal"
@@ -186,8 +187,7 @@
                                                                         data-bs-dismiss="modal"
                                                                         aria-label="Close"></button>
                                                                 </div>
-                                                                <form action="{{ route('patient.med-store', $med->id) }}"
-                                                                    method="post" autocomplete="off">
+                                                                <form method="post" autocomplete="off">
                                                                     @csrf
                                                                     <div class="modal-body">
                                                                         <input type="hidden" name="med_id"
@@ -195,19 +195,11 @@
                                                                         <div class="row">
                                                                             <div class="col-md-12">
                                                                                 <div class="form-group mb-2">
-                                                                                    <label>Choose a Medicine</label>
-                                                                                    <select name="medicine_id"
-                                                                                        class="form-control">
-                                                                                        <option value="">Please
-                                                                                            Select</option>
-                                                                                        @foreach ($medicines as $medic)
-                                                                                            <option
-                                                                                                value="{{ $medic->id }}"
-                                                                                                @selected($medic->id == $med->medName->id)>
-                                                                                                {{ $medic->medicine_name }}
-                                                                                            </option>
-                                                                                        @endforeach
-                                                                                    </select>
+                                                                                    <label>Medicine Name</label>
+                                                                                    <input name="medicine_name"
+                                                                                        value="{{ $med->medicine_name }}"
+                                                                                        type="text"
+                                                                                        class="form-control" readonly>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
@@ -217,7 +209,7 @@
                                                                                         name="medicine_dose"
                                                                                         value="{{ $med->medicine_dose }}"
                                                                                         class="form-control"
-                                                                                        placeholder="" required>
+                                                                                        placeholder="" readonly>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
@@ -227,7 +219,7 @@
                                                                                         name="medicine_frequency"
                                                                                         value="{{ $med->medicine_frequency }}"
                                                                                         class="form-control"
-                                                                                        placeholder="" required>
+                                                                                        placeholder="" readonly>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
@@ -237,7 +229,7 @@
                                                                                         name="medicine_unit"
                                                                                         value="{{ $med->medicine_unit }}"
                                                                                         class="form-control"
-                                                                                        placeholder="" required>
+                                                                                        placeholder="" readonly>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="col-md-6">
@@ -246,7 +238,7 @@
                                                                                     <input type="text" name="duration"
                                                                                         value="{{ $med->duration }}"
                                                                                         class="form-control"
-                                                                                        placeholder="" required>
+                                                                                        placeholder="" readonly>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -254,8 +246,8 @@
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary"
                                                                             data-bs-dismiss="modal">Close</button>
-                                                                        <button type="submit"
-                                                                            class="btn btn-primary">Save</button>
+                                                                        {{-- <button type="submit"
+                                                                            class="btn btn-primary">Save</button> --}}
                                                                     </div>
                                                                 </form>
                                                             </div>
@@ -289,14 +281,9 @@
                                                             value="{{ $app->id }}">
                                                         <div class="row">
                                                             <div class="form-group mb-2 col-md-12">
-                                                                <label>Choose a Medicine</label>
-                                                                <select name="medicine_id" required class="form-control">
-                                                                    <option value="">Select Medicine</option>
-                                                                    @foreach ($medicines as $med)
-                                                                        <option value="{{ $med->id }}">
-                                                                            {{ $med->medicine_name }}</option>
-                                                                    @endforeach
-                                                                </select>
+                                                                <label>Add a Medicine</label>
+                                                                <input type="text" name="medicine_name"
+                                                                    class="form-control" required>
                                                             </div>
                                                             <div class="form-group mb-2 col-md-6">
                                                                 <label>Dosage: </label>
