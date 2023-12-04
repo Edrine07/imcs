@@ -23,20 +23,30 @@ class AppointmentController extends Controller
             return $item->date;
         });
 
-        return view('appointment.reserve', compact('appointments', 'businessHours'));
+        $existingAppointments = $appointments->map(function ($apps) {
+            return $apps->appointment_date;
+        });
+
+        return view('appointment.reserve', compact('appointments', 'businessHours', 'existingAppointments'));
     }
 
     public function existingPatient()
     {
         $patients = Patient::all();
         $businessHours = BusinessHour::all();
+        $appointments = Appointment::all();
+
 
         // filter the businessHours to get only the date column
         $businessHours = $businessHours->map(function ($item) {
             return $item->date;
         });
 
-        return view('appointment.reserve-existing', compact('patients', 'businessHours'));
+        $existingAppointments = $appointments->map(function ($apps) {
+            return $apps->appointment_date;
+        });
+
+        return view('appointment.reserve-existing', compact('patients', 'businessHours', 'existingAppointments'));
     }
 
     public function appointment()
@@ -118,15 +128,35 @@ class AppointmentController extends Controller
 
         // $timestamp = Carbon::createFromFormat('H:i', $validated['time_appointment'])->toTimeString();
 
-        // check first if the patient already has an appointment with the same date and time
-        $appointment = Appointment::where('patient_id', $patient_id)
-            ->where('appointment_date', $validated['selectedDate'])
-            ->where('appointment_time', $validated['time_appointment'])->where('appointment_status', 'Pending')
+        $selectedDate = Carbon::parse($validated['selectedDate']);
+
+        $startOfWeek = $selectedDate->startOfWeek()->format('Y-m-d');
+        $endOfWeek = $selectedDate->endOfWeek()->subDays(2)->format('Y-m-d');
+
+        // dd($now, $startOfWeek, $endOfWeek);
+
+        // Check if the patient already has a pending appointment within the current week
+        $appointmentWithinWeek = Appointment::where('patient_id', $patient_id)
+            ->where('appointment_date', '>=', $startOfWeek)
+            ->where('appointment_date', '<=', $endOfWeek)
+            ->where('appointment_status', 'Pending')
             ->first();
 
-        // if appointment exists, return with an error message, else create new appointment
+        // If appointment exists within the week, return with an error message
+        if ($appointmentWithinWeek) {
+            return redirect()->back()->with('error', 'Patient already has a pending appointment this week. Please wait for an SMS approval.');
+        }
+
+        // If no appointment within the week, proceed to the next check
+        $appointment = Appointment::where('patient_id', $patient_id)
+            ->where('appointment_date', $validated['selectedDate'])
+            ->where('appointment_time', $validated['time_appointment'])
+            ->where('appointment_status', 'Pending')
+            ->first();
+
+        // If appointment exists for the selected date and time, return with an error message
         if ($appointment) {
-            return redirect()->back()->with('error', 'Patient already has a pending appointment with the same date and time. Please wait for an sms approval.');
+            return redirect()->back()->with('error', 'Patient already has a pending appointment with the same date and time. Please wait for an SMS approval.');
         } else {
             $appointment = Appointment::create([
                 'patient_id' => $patient_id,
