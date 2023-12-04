@@ -25,6 +25,7 @@ Route::middleware(['guest', 'web'])->group(function () {
         Route::post('/appointment/patient-find-store/{patient}', [AppointmentController::class, 'findPatient'])->name('appointment.findPatient');
         Route::get('/appointment', [AppointmentController::class, 'appoint'])->name('appointment.appointment');
         Route::get('/appointment/existing', [AppointmentController::class, 'existingPatient'])->name('appointment.existing');
+        Route::get('/get-appointments', [AppointmentController::class, 'getAppointments'])->name('appointment.get-appointments');
     });
 
     Route::get('/admin/login', [AdminController::class, 'adminLogin'])->name('admin.login');

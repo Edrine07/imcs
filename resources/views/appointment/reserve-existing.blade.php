@@ -96,87 +96,87 @@
                                 <h5 class="fw-bold mt-5 text-center">Morning Appointments</h5>
                                 <div class="row px-2">
                                     <div class="form-check col-6 mb-3">
-                                        <input class="form-check-input" type="radio" name="time_appointment"
+                                        <input class="form-check-input" type="radio" disabled name="time_appointment"
                                             value="09:00:00">
-                                        <label class="form-check-label">09:00 AM</label>
+                                        <label class="form-check-label fw-bolder">09:00 AM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
-                                        <input class="form-check-input" type="radio" name="time_appointment"
+                                        <input class="form-check-input" type="radio" disabled name="time_appointment"
                                             value="09:30:00">
-                                        <label class="form-check-label">09:30 AM</label>
+                                        <label class="form-check-label fw-bolder">09:30 AM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
-                                        <input class="form-check-input" type="radio" name="time_appointment"
+                                        <input class="form-check-input" type="radio" disabled name="time_appointment"
                                             value="10:00:00">
-                                        <label class="form-check-label">10:00 AM</label>
+                                        <label class="form-check-label fw-bolder">10:00 AM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
-                                        <input class="form-check-input" type="radio" name="time_appointment"
+                                        <input class="form-check-input" type="radio" disabled name="time_appointment"
                                             value="10:30:00">
-                                        <label class="form-check-label">10:30 AM</label>
+                                        <label class="form-check-label fw-bolder">10:30 AM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
-                                        <input class="form-check-input" type="radio" name="time_appointment"
+                                        <input class="form-check-input" type="radio" disabled name="time_appointment"
                                             value="11:00:00">
-                                        <label class="form-check-label">11:00 AM</label>
+                                        <label class="form-check-label fw-bolder">11:00 AM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
-                                        <input class="form-check-input" type="radio" name="time_appointment"
+                                        <input class="form-check-input" type="radio" disabled name="time_appointment"
                                             value="11:30:00">
-                                        <label class="form-check-label">11:30 AM</label>
+                                        <label class="form-check-label fw-bolder">11:30 AM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
-                                        <input class="form-check-input" type="radio" name="time_appointment"
+                                        <input class="form-check-input" type="radio" disabled name="time_appointment"
                                             value="12:00:00">
-                                        <label class="form-check-label">12:00 AM</label>
+                                        <label class="form-check-label fw-bolder">12:00 AM</label>
                                     </div>
                                 </div>
                                 <h5 class="fw-bold mt-4 text-center">Afternoon Appointments</h5>
                                 <div class="row px-2">
                                     <div class="form-check col-6 mb-3">
-                                        <input class="form-check-input" type="radio" name="time_appointment"
+                                        <input class="form-check-input" type="radio" disabled name="time_appointment"
                                             value="14:00:00">
-                                        <label class="form-check-label">02:00 PM</label>
+                                        <label class="form-check-label fw-bolder">02:00 PM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
-                                        <input class="form-check-input" type="radio" name="time_appointment"
-                                            value="12:30:00">
-                                        <label class="form-check-label">02:30 PM</label>
+                                        <input class="form-check-input" type="radio" disabled name="time_appointment"
+                                            value="14:30:00">
+                                        <label class="form-check-label fw-bolder">02:30 PM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
-                                        <input class="form-check-input" type="radio" name="time_appointment"
+                                        <input class="form-check-input" type="radio" disabled name="time_appointment"
                                             value="15:00:00">
-                                        <label class="form-check-label">03:00 PM</label>
+                                        <label class="form-check-label fw-bolder">03:00 PM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
-                                        <input class="form-check-input" type="radio" name="time_appointment"
+                                        <input class="form-check-input" type="radio" disabled name="time_appointment"
                                             value="15:30:00">
-                                        <label class="form-check-label">03:30 PM</label>
+                                        <label class="form-check-label fw-bolder">03:30 PM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
-                                        <input class="form-check-input" type="radio" name="time_appointment"
+                                        <input class="form-check-input" type="radio" disabled name="time_appointment"
                                             value="16:00:00">
-                                        <label class="form-check-label">04:00 PM</label>
+                                        <label class="form-check-label fw-bolder">04:00 PM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
-                                        <input class="form-check-input" type="radio" name="time_appointment"
+                                        <input class="form-check-input" type="radio" disabled name="time_appointment"
                                             value="16:30:00">
-                                        <label class="form-check-label">04:30 PM</label>
+                                        <label class="form-check-label fw-bolder">04:30 PM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
-                                        <input class="form-check-input" type="radio" name="time_appointment"
+                                        <input class="form-check-input" type="radio" disabled name="time_appointment"
                                             value="17:00:00">
-                                        <label class="form-check-label">05:00 PM</label>
+                                        <label class="form-check-label fw-bolder">05:00 PM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
-                                        <input class="form-check-input" type="radio" name="time_appointment"
+                                        <input class="form-check-input" type="radio" disabled name="time_appointment"
                                             value="17:30:00">
-                                        <label class="form-check-label">05:30 PM</label>
+                                        <label class="form-check-label fw-bolder">05:30 PM</label>
                                     </div>
                                     <div class="form-check col-6 mb-3">
-                                        <input class="form-check-input" type="radio" name="time_appointment"
+                                        <input class="form-check-input" type="radio" disabled name="time_appointment"
                                             value="18:00:00">
-                                        <label class="form-check-label">06:00 PM</label>
+                                        <label class="form-check-label fw-bolder">06:00 PM</label>
                                     </div>
 
                                     @error('time_appointment')
@@ -208,21 +208,15 @@
         document.addEventListener('DOMContentLoaded', function() {
             var calendarEl = document.getElementById('calendar');
             const selectedDateInput = document.getElementById('selectedDate');
+            const time_appointments = document.getElementsByName('time_appointment');
 
             var businessHours = {!! json_encode($businessHours) !!};
-            var existingAppointments = {!! json_encode($existingAppointments) !!};
-
 
             var disabledDates = businessHours.map(date => {
                 // Convert the Y-m-d formatted date to a Date object
                 return new Date(date);
             });
 
-            var existingDates = existingAppointments.map(appointment_date => {
-                return new Date(appointment_date);
-            });
-
-            console.log(disabledDates, existingDates);
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
@@ -230,7 +224,73 @@
                 select: function(info) {
                     selectedDateInput.value = info.startStr;
                     console.log('Date input changed');
+                    $.ajax({
+                        url: '/appointment/get-appointments',
+                        type: 'GET',
+                        data: {
+                            date: selectedDateInput.value
+                        },
+                        success: function(response) {
+                            console.log('Ajax request successful');
+                            const appointments = JSON.parse(response);
+                            const appointmentTimes = appointments.map(appointment => {
+                                const InputDate = new Date(appointment
+                                    .appointment_date);
+                                InputDate.setDate(InputDate.getDate() + 1);
+                                const formattedDate = InputDate.toISOString().slice(
+                                    0, 10);
+                                return {
+                                    id: appointment.id,
+                                    date_appointment: formattedDate,
+                                    time_appointment: appointment.appointment_time
+                                };
+                            });
+
+                            const morningRadioButtons = document.querySelectorAll(
+                                'input[value^="09:00:00"], input[value^="09:30:00"], input[value^="10:00:00"], input[value^="10:30:00"], input[value^="11:00:00"], input[value^="11:30:00"], input[value^="12:00:00"]'
+                            );
+
+                            const afternoonRadioButtons = document.querySelectorAll(
+                                'input[value^="14:00:00"], input[value^="14:30:00"], input[value^="15:00:00"], input[value^="15:30:00"], input[value^="16:00:00"], input[value^="16:30:00"], input[value^="17:00:00"], input[value^="17:30:00"], input[value^="18:00:00"]'
+                            );
+
+                            // Enable all radio buttons initially
+                            morningRadioButtons.forEach(radioButton => {
+                                radioButton.disabled = false;
+                                radioButton.parentElement.classList.remove(
+                                    'text-danger');
+                            });
+
+                            afternoonRadioButtons.forEach(radioButton => {
+                                radioButton.disabled = false;
+                            });
+
+                            const appointmentsOnSelectedDate = appointmentTimes.filter(
+                                appointment => {
+                                    return appointment.date_appointment ===
+                                        selectedDateInput.value;
+                                });
+
+                            appointmentsOnSelectedDate.forEach(appointment => {
+                                const timeToDisable = appointment.time_appointment;
+                                const matchingRadioButton = document.querySelector(
+                                    `input[value="${timeToDisable}"]`);
+
+                                if (matchingRadioButton) {
+                                    matchingRadioButton.disabled = true;
+                                    matchingRadioButton.parentElement.classList.add(
+                                        'text-danger');
+
+                                }
+                            });
+
+                        },
+                        error: function(xhr, status, error) {
+                            console.log(error);
+                        }
+                    });
                 },
+
                 headerToolbar: {
                     start: 'prev',
                     center: 'title',
@@ -241,25 +301,22 @@
                 handleWindowResize: true,
                 contentHeight: 400,
                 selectAllow: function(info) {
-                    var today = new Date();
-                    var yesterday = new Date(today);
-                    yesterday.setDate(yesterday.getDate() - 1);
-                    var day = info.start.getDay();
-                    return day !== 0 && day !== 6 && info.start >= today &&
+                    var today = new Date(); // Get the current date and time
+                    var yesterday = new Date(
+                        today); // Create a new date object with the current date and time
+                    yesterday.setDate(yesterday.getDate() - 1); // Subtract one day from the date
+
+                    var day = info.start.getDay(); // Get the day of the week for the selected date
+
+                    // Check conditions for allowing the selection
+                    return day !== 0 && day !== 6 && info.start > yesterday &&
                         !disabledDates.some(disabledDate => {
                             return (
                                 info.start.getDate() === disabledDate.getDate() &&
                                 info.start.getMonth() === disabledDate.getMonth() &&
                                 info.start.getFullYear() === disabledDate.getFullYear()
                             );
-                        }) &&
-                        !existingDates.some(existingDate => {
-                            return (
-                                info.start.getDate() === existingDate.getDate() &&
-                                info.start.getMonth() === existingDate.getMonth() &&
-                                info.start.getFullYear() === existingDate.getFullYear()
-                            );
-                        })
+                        });
                 },
                 dayCellClassNames: function(arg) {
                     if (arg.isPast) {
@@ -277,17 +334,7 @@
                         return 'doctor-out';
                     }
 
-                    if (existingDates.some(existingDate => {
-                            return arg.date.getDate() === existingDate.getDate() &&
-                                arg.date.getMonth() === existingDate.getMonth() &&
-                                arg.date.getFullYear() === existingDate.getFullYear();
-                        })) {
-                        return 'doctor-out';
-                    }
-
-
                     return 'selectable-date';
-
                 },
                 unselectAuto: false,
                 selectMirror: false,

@@ -13,21 +13,25 @@ use App\Notifications\CancelledNotif;
 class AppointmentController extends Controller
 {
 
+    public function getAppointments()
+    {
+        $appointments = Appointment::where('appointment_type', '=', 'Appointment')->get();
+        $jsonAppointments = json_encode($appointments);
+
+        return $jsonAppointments;
+    }
+
     public function appoint()
     {
-        $appointments = Appointment::all();
         $businessHours = BusinessHour::all();
+        $appointments = Appointment::all();
 
         // filter the businessHours to get only the date column
         $businessHours = $businessHours->map(function ($item) {
             return $item->date;
         });
 
-        $existingAppointments = $appointments->map(function ($apps) {
-            return $apps->appointment_date;
-        });
-
-        return view('appointment.reserve', compact('appointments', 'businessHours', 'existingAppointments'));
+        return view('appointment.reserve', compact('businessHours', 'appointments'));
     }
 
     public function existingPatient()
@@ -41,12 +45,7 @@ class AppointmentController extends Controller
         $businessHours = $businessHours->map(function ($item) {
             return $item->date;
         });
-
-        $existingAppointments = $appointments->map(function ($apps) {
-            return $apps->appointment_date;
-        });
-
-        return view('appointment.reserve-existing', compact('patients', 'businessHours', 'existingAppointments'));
+        return view('appointment.reserve-existing', compact('patients', 'businessHours', 'appointments'));
     }
 
     public function appointment()
