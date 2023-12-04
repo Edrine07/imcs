@@ -46,6 +46,13 @@
             background-color: #007bff;
             color: #fff;
         }
+
+        .modal{
+            width: 100%;
+        }
+        .modal.show {
+            width: 100%;
+        }
     </style>
     @yield('styles')
 </head>

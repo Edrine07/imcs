@@ -25,6 +25,7 @@
 
         #calendar .unselectable-date {
             background-color: rgb(202, 200, 200);
+            cursor: not-allowed;
         }
 
         #calendar .unselectable-date a {
@@ -33,6 +34,7 @@
 
         #calendar .doctor-out {
             background-color: rgba(246, 83, 83, 0.618);
+            cursor: not-allowed;
         }
 
         #calendar .selectable-date {
@@ -208,13 +210,19 @@
             const selectedDateInput = document.getElementById('selectedDate');
 
             var businessHours = {!! json_encode($businessHours) !!};
+            var existingAppointments = {!! json_encode($existingAppointments) !!};
+
 
             var disabledDates = businessHours.map(date => {
                 // Convert the Y-m-d formatted date to a Date object
                 return new Date(date);
             });
 
-            console.log(disabledDates);
+            var existingDates = existingAppointments.map(appointment_date => {
+                return new Date(appointment_date);
+            });
+
+            console.log(disabledDates, existingDates);
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
@@ -239,15 +247,19 @@
                     var day = info.start.getDay();
                     return day !== 0 && day !== 6 && info.start >= today &&
                         !disabledDates.some(disabledDate => {
-                            return info.start.getDate() === disabledDate.getDate() &&
+                            return (
+                                info.start.getDate() === disabledDate.getDate() &&
                                 info.start.getMonth() === disabledDate.getMonth() &&
-                                info.start.getFullYear() === disabledDate.getFullYear();
+                                info.start.getFullYear() === disabledDate.getFullYear()
+                            );
                         }) &&
-                        !disabledDates.some(disabledDate => {
-                            return info.start.getDate() === disabledDate.getDate() &&
-                                info.start.getMonth() === disabledDate.getMonth() &&
-                                info.start.getFullYear() === disabledDate.getFullYear();
-                        });
+                        !existingDates.some(existingDate => {
+                            return (
+                                info.start.getDate() === existingDate.getDate() &&
+                                info.start.getMonth() === existingDate.getMonth() &&
+                                info.start.getFullYear() === existingDate.getFullYear()
+                            );
+                        })
                 },
                 dayCellClassNames: function(arg) {
                     if (arg.isPast) {
@@ -261,6 +273,14 @@
                             return arg.date.getDate() === disabledDate.getDate() &&
                                 arg.date.getMonth() === disabledDate.getMonth() &&
                                 arg.date.getFullYear() === disabledDate.getFullYear();
+                        })) {
+                        return 'doctor-out';
+                    }
+
+                    if (existingDates.some(existingDate => {
+                            return arg.date.getDate() === existingDate.getDate() &&
+                                arg.date.getMonth() === existingDate.getMonth() &&
+                                arg.date.getFullYear() === existingDate.getFullYear();
                         })) {
                         return 'doctor-out';
                     }
