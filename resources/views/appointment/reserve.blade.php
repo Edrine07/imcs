@@ -337,18 +337,22 @@
                 handleWindowResize: true,
                 contentHeight: 400,
                 selectAllow: function(info) {
-                    var today = new Date();
-                    var yesterday = new Date(today);
-                    yesterday.setDate(yesterday.getDate() - 1);
-                    var day = info.start.getDay();
-                    return day !== 0 && day !== 6 && info.start >= today &&
+                    var today = new Date(); // Get the current date and time
+                    var yesterday = new Date(
+                        today); // Create a new date object with the current date and time
+                    yesterday.setDate(yesterday.getDate() - 1); // Subtract one day from the date
+
+                    var day = info.start.getDay(); // Get the day of the week for the selected date
+
+                    // Check conditions for allowing the selection
+                    return day !== 0 && day !== 6 && info.start > yesterday &&
                         !disabledDates.some(disabledDate => {
                             return (
                                 info.start.getDate() === disabledDate.getDate() &&
                                 info.start.getMonth() === disabledDate.getMonth() &&
                                 info.start.getFullYear() === disabledDate.getFullYear()
                             );
-                        })
+                        });
                 },
                 dayCellClassNames: function(arg) {
                     if (arg.isPast) {
@@ -367,7 +371,6 @@
                     }
 
                     return 'selectable-date';
-
                 },
                 unselectAuto: false,
                 selectMirror: false,
