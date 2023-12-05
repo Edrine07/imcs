@@ -309,7 +309,7 @@
                     var day = info.start.getDay(); // Get the day of the week for the selected date
 
                     // Check conditions for allowing the selection
-                    return day !== 0 && day !== 6 && info.start > yesterday &&
+                    return day !== 0 && day !== 6 && info.start > yesterday && info.start > today &&
                         !disabledDates.some(disabledDate => {
                             return (
                                 info.start.getDate() === disabledDate.getDate() &&
@@ -332,6 +332,13 @@
                                 arg.date.getFullYear() === disabledDate.getFullYear();
                         })) {
                         return 'doctor-out';
+                    }
+
+                    // get today and put unselectabele to it
+                    var today = new Date();
+                    if (arg.date.getDate() === today.getDate() && arg.date.getMonth() === today
+                        .getMonth()) {
+                        return 'unselectable-date';
                     }
 
                     return 'selectable-date';
